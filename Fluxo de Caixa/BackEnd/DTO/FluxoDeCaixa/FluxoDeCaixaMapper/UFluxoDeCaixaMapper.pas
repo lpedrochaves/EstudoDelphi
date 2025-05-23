@@ -1,0 +1,33 @@
+unit UFluxoDeCaixaMapper;
+
+interface
+
+uses
+  FireDAC.Comp.Client, UFluxoDeCaixa;
+
+function MapearFluxoDeCaixa(Qry: TFDQuery): TFluxoDeCaixa;
+
+implementation
+
+function MapearFluxoDeCaixa(Qry: TFDQuery): TFluxoDeCaixa;
+var
+  Fluxo: TFluxoDeCaixa;
+begin
+  Fluxo := TFluxoDeCaixa.Create;
+
+  Fluxo.Id := Qry.FieldByName('id').AsInteger;
+  //Fluxo.Usuario := Qry.FieldByName('usuario').AsString;
+  Fluxo.CategoriaId := Qry.FieldByName('categoria_id').AsInteger;
+  //Fluxo.Categoria := Qry.FieldByName('categoria').AsString;
+  Fluxo.TipoPagamentoId := Qry.FieldByName('tipo_pagamento_id').AsInteger;
+//  Fluxo.TipoPagamento := Qry.FieldByName('tipo_pagamento').AsString;
+  Fluxo.Tipo := Qry.FieldByName('tipo').AsString;
+  Fluxo.Data := Qry.FieldByName('data').AsDateTime;
+  Fluxo.Valor := Qry.FieldByName('valor').AsFloat;
+  Fluxo.Descricao := Qry.FieldByName('descricao').AsString;
+
+  Result := Fluxo;
+end;
+
+end.
+

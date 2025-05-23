@@ -1,0 +1,45 @@
+unit UUsuario;
+
+interface
+
+type
+  TUsuario = class
+
+  private
+    FId: Integer;
+    FNome: String;
+    FSenha: String;
+    function GetId: Integer;
+    procedure SetId(const Value: Integer);
+    function GetNome: String;
+    procedure SetNome(const Value: String);
+  public
+    property Id: Integer read GetId write SetId;
+    property Nome: String read GetNome write SetNome;
+  end;
+
+implementation
+
+{ TUsuario }
+
+function TUsuario.GetId: Integer;
+begin
+  Result := FId;
+end;
+
+function TUsuario.GetNome: String;
+begin
+  Result := FNome;
+end;
+
+procedure TUsuario.SetId(const Value: Integer);
+begin
+  FId := Value;
+end;
+
+procedure TUsuario.SetNome(const Value: String);
+begin
+  FNome := Value;
+end;
+
+end.

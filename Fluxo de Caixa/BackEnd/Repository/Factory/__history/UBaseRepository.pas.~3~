@@ -1,0 +1,22 @@
+unit UBaseRepository;
+
+interface
+
+uses
+  FireDAC.Comp.Client, UDatabaseConfig, FireDAC.Phys.PG;
+
+type
+  TBaseRepository = class
+
+  private
+    // Propriedades que viram parâmetro de acesso ao banco
+    FConnection: TFDConnection;
+    FDriverLink: TFDPhysPgDriverLink;
+    // Propriedade que permite acessar a classe de configuração do banco
+    FConfig: TDatabaseConfig;
+
+  end;
+
+implementation
+
+end.

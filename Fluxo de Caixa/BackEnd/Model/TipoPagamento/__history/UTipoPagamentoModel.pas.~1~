@@ -1,0 +1,17 @@
+unit UTipoPagamentoModel;
+
+interface
+
+type
+  TTipoPagamentoModel = class
+
+  private
+    FId: Integer;
+    FTipoPagamento: string;
+  public
+
+  end;
+
+implementation
+
+end.

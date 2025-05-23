@@ -1,0 +1,17 @@
+unit ULoginController;
+
+interface
+
+uses
+  ULoginService, UBaseRepository, UUsuarioRepository, Generics.Collections,
+  UUsuario;
+
+type
+
+  TLoginController = class
+    FLoginService: TLoginService;
+  end;
+
+implementation
+
+end.

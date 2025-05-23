@@ -1,0 +1,15 @@
+unit UTipoPagamentoService;
+
+interface
+
+uses
+  Generics.Collections, System.SysUtils, UTipoPagamentoRepository, UTipoPagamentoModel;
+
+type
+  TTipoPagamentoService = class
+
+  end;
+
+implementation
+
+end.

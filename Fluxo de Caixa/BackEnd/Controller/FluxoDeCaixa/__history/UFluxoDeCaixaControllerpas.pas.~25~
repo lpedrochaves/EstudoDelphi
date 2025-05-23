@@ -1,0 +1,54 @@
+unit UFluxoDeCaixaControllerpas;
+
+interface
+
+uses
+  UBaseRepository, UFluxoDeCaixaRepository, UFluxoDeCaixaService,
+  Generics.Collections, System.SysUtils, UFluxoDeCaixa;
+
+implementation
+
+type
+  TFluxoDeCaixaController = class
+  private
+    FFluxoDeCaixaService: TFluxoDeCaixaService;
+  public
+    constructor Create(AFluxoDecaixa: TFluxoDeCaixaService);
+    function FindAll(): TList<TFluxoDeCaixa>;
+  end;
+
+  { FFluxoDeCaixaController }
+
+constructor TFluxoDeCaixaController.Create(AFluxoDecaixa: TFluxoDeCaixaService);
+begin
+  FFluxoDeCaixaService := AFluxoDecaixa;
+end;
+
+function TFluxoDeCaixaController.FindAll: TList<TFluxoDeCaixa>;
+var
+  // FluxoDeCaixa: TFluxoDeCaixa;
+  // Fluxos: TList<TFluxoDeCaixa>;
+  BaseRepository: TBaseRepository;
+  FluxoRepository: TFluxoDeCaixaRepository;
+  FluxoService: TFluxoDeCaixaService;
+begin
+  try
+    BaseRepository := BaseRepository.Create();
+    try
+      FluxoRepository := FluxoRepository.Create(BaseRepository);
+      try
+        FluxoService := TFluxoDeCaixaService.Create(FluxoRepository);
+        Result := FluxoService.ListarTodosFluxos();
+      finally
+        FluxoService.Free;
+      end;
+    finally
+      FluxoRepository.Free;
+    end;
+  finally
+    BaseRepository.Free;
+  end;
+
+end;
+
+end.

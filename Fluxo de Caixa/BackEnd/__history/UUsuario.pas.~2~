@@ -1,0 +1,20 @@
+unit UUsuario;
+
+interface
+
+type
+  TUsuario = class
+    FId: Integer;
+    FNome: String;
+    FSenha: String;
+
+  private
+
+  public
+
+
+  end;
+
+implementation
+
+end.

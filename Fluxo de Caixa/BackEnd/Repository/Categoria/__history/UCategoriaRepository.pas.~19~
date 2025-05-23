@@ -1,0 +1,99 @@
+unit UCategoriaRepository;
+
+interface
+
+uses
+  UBaseRepository, FireDAC.Comp.Client, FireDAC.Phys.PG, FireDAC.Stan.Param,
+  FireDAC.Phys.PGDef, System.Generics.Collections, UCategoriaModel,
+  System.SysUtils, System.Variants;
+
+type
+  TCategoriaRepository = class
+  private
+    FDQuery: TFDQuery;
+    FBaseRepository: TBaseRepository;
+  public
+    function FindAll(): TList<TCategoriaModel>;
+    function GetDataSetAll: TFDQuery;
+    function GetDataSetWithFilter: TFDQuery;
+    constructor Create(ABaseRepository: TBaseRepository);
+    function ExistePorId(const Id: Integer): Boolean;
+  end;
+
+implementation
+
+constructor TCategoriaRepository.Create(ABaseRepository: TBaseRepository);
+begin
+  FBaseRepository := ABaseRepository;
+  FDQuery := TFDQuery.Create(nil);
+  FDQuery.Connection := FBaseRepository.Connection;
+end;
+
+function TCategoriaRepository.ExistePorId(const Id: Integer): Boolean;
+begin
+  if FDQuery = nil then
+  begin
+    raise Exception.Create('Erro: FDQuery não foi instanciado.');
+  end;
+
+  FDQuery.SQL.Text := 'SELECT * FROM fin.cateorias WHERE id = :id';
+  FDQuery.ParamByName('id').AsInteger := Id;
+  FDQuery.Open;
+
+  if not(FDQuery.IsEmpty) then
+  begin
+    Result := True;
+  end
+  else
+    Result := False;
+end;
+
+function TCategoriaRepository.FindAll: TList<TCategoriaModel>;
+var
+  Categoria: TCategoriaModel;
+begin
+  if FDQuery = nil then
+  begin
+    raise Exception.Create('Erro: FDQuery não foi instanciado.');
+  end;
+
+  Result := TList<TCategoriaModel>.Create;
+
+  FDQuery.SQL.Text := 'SELECT * FROM fin.cateorias';
+  FDQuery.Open;
+
+  while not FDQuery.Eof do
+  begin
+    try
+      Categoria := TCategoriaModel.Create(FDQuery.FieldByName('id').AsInteger,
+        FDQuery.FieldByName('nomecategoria').AsString);
+      Result.Add(Categoria);
+    Except
+      Categoria.Free;
+      raise
+    end;
+    FDQuery.Next;
+  end;
+
+end;
+
+// TESTANDO METODO PARA UTILIZAR O DB GRID
+function TCategoriaRepository.GetDataSetAll: TFDQuery;
+begin
+  Result := TFDQuery.Create(nil);
+  Result.Connection := FBaseRepository.Connection;
+  Result.SQL.Text := 'SELECT * FROM fin.categorias';
+  Result.Open;
+end;
+
+// TESTANDO METODO PARA UTILIZAR O DB GRID
+function TCategoriaRepository.GetDataSetWithFilter: TFDQuery;
+begin
+  Result := TFDQuery.Create(nil);
+  Result.Connection := FBaseRepository.Connection;
+  Result.SQL.Text := 'SELECT * FROM fin.categorias ' +
+    'WHERE nomecategoria ILIKE :filtro ' + 'ORDER BY nomecategoria';
+  Result.Open;
+end;
+
+end.

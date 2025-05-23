@@ -1,0 +1,133 @@
+unit UFluxoDeCaixaDTOPost;
+
+interface
+
+uses
+  UFluxoDeCaixa;
+
+type
+  TFluxoDeCaixaDTOPost = class
+  private
+    FId: Integer;
+    FCategoriaId: Integer;
+    FTipoPagamentoId: Integer;
+    FTipo: String;
+    FData: TDate;
+    FValor: Double;
+    FDescricao: String;
+
+    function GetId: Integer;
+    procedure SetId(const Value: Integer);
+    function GetCategoriaId: Integer;
+    procedure SetCategoriaId(const Value: Integer);
+    function GetTipoPagamentoId: Integer;
+    procedure SetTipoPagamentoId(const Value: Integer);
+    function GetTipo: String;
+    procedure SetTipo(const Value: String);
+    function GetData: TDate;
+    procedure SetData(const Value: TDate);
+    function GetValor: Double;
+    procedure SetValor(const Value: Double);
+    function GetDescricao: String;
+    procedure SetDescricao(const Value: String);
+
+  public
+    // constructor Create(AID, ACategoriaId, ATipoPagamentoId: Integer;
+    // ATipo, ADescricao: String; AData: TDate; AValor: Double); overload;
+    constructor Create(AFluxoDeCaixa: TFluxoDeCaixa); overload;
+    property Id: Integer read GetId write SetId;
+    property CategoriaId: Integer read GetCategoriaId write SetCategoriaId;
+    property TipoPagamentoId: Integer read GetTipoPagamentoId
+      write SetTipoPagamentoId;
+    property Tipo: String read GetTipo write SetTipo;
+    property Data: TDate read GetData write SetData;
+    property Valor: Double read GetValor write SetValor;
+    property Descricao: String read GetDescricao write SetDescricao;
+  end;
+
+implementation
+
+{ TFluxoDeCaixaDTOPost }
+
+constructor TFluxoDeCaixaDTOPost.Create(AFluxoDeCaixa: TFluxoDeCaixa);
+begin
+  FId := AFluxoDeCaixa.Id;
+  FCategoriaId := AFluxoDeCaixa.CategoriaId;
+  FTipoPagamentoId := AFluxoDeCaixa.TipoPagamentoId;
+  FTipo := AFluxoDeCaixa.TipoPagamento;
+  FData := AFluxoDeCaixa.Data;
+  FValor := AFluxoDeCaixa.Valor;
+  FDescricao := AFluxoDeCaixa.Descricao;
+end;
+
+function TFluxoDeCaixaDTOPost.GetCategoriaId: Integer;
+begin
+  Result := FCategoriaId;
+end;
+
+function TFluxoDeCaixaDTOPost.GetData: TDate;
+begin
+  Result := FData;
+end;
+
+function TFluxoDeCaixaDTOPost.GetDescricao: String;
+begin
+  Result := FDescricao;
+end;
+
+function TFluxoDeCaixaDTOPost.GetId: Integer;
+begin
+  Result := FId;
+end;
+
+function TFluxoDeCaixaDTOPost.GetTipo: String;
+begin
+  Result := FTipo;
+end;
+
+function TFluxoDeCaixaDTOPost.GetTipoPagamentoId: Integer;
+begin
+  Result := FTipoPagamentoId;
+end;
+
+function TFluxoDeCaixaDTOPost.GetValor: Double;
+begin
+  Result := Valor;
+end;
+
+procedure TFluxoDeCaixaDTOPost.SetCategoriaId(const Value: Integer);
+begin
+  FCategoriaId := Value;
+end;
+
+procedure TFluxoDeCaixaDTOPost.SetData(const Value: TDate);
+begin
+  FData := Value;
+end;
+
+procedure TFluxoDeCaixaDTOPost.SetDescricao(const Value: String);
+begin
+  FDescricao := Value;
+end;
+
+procedure TFluxoDeCaixaDTOPost.SetId(const Value: Integer);
+begin
+  FId := Value;
+end;
+
+procedure TFluxoDeCaixaDTOPost.SetTipo(const Value: String);
+begin
+  FTipo := Value;
+end;
+
+procedure TFluxoDeCaixaDTOPost.SetTipoPagamentoId(const Value: Integer);
+begin
+  FTipoPagamentoId := Value;
+end;
+
+procedure TFluxoDeCaixaDTOPost.SetValor(const Value: Double);
+begin
+  FValor := Value;
+end;
+
+end.

@@ -1,0 +1,29 @@
+unit UUsuarioRepository;
+
+interface
+
+uses
+  UBaseRepository, FireDAC.Comp.Client, FireDAC.Phys.PG, FireDAC.Stan.Param,
+  FireDAC.Phys.PGDef, System.Generics.Collections, UUsuario;
+
+type
+  TUsuarioRepository = class
+
+  private
+    FDQuery: TFDQuery;
+    FBaseRepository: TBaseRepository;
+  public
+    constructor Create(ABaseRepository: TBaseRepository);
+    function FindAll(): TList<TUsuario>;
+  end;
+
+implementation
+
+constructor TUsuarioRepository.Create(ABaseRepository: TBaseRepository);
+begin
+  FBaseRepository := ABaseRepository;
+  FDQuery := TFDQuery.Create(nil);
+  FDQuery.Connection := FBaseRepository.Connection;
+end;
+
+end.

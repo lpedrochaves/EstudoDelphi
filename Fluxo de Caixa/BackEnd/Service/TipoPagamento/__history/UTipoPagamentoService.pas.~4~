@@ -1,0 +1,33 @@
+unit UTipoPagamentoService;
+
+interface
+
+uses
+  Generics.Collections, System.SysUtils, UTipoPagamentoRepository,
+  UTipoPagamentoModel;
+
+type
+  TTipoPagamentoService = class
+  private
+    FTipoPagamentoRepository: TTipoPagamentoRepository;
+  public
+    constructor Create(ATipoPagamentoRepository: TTipoPagamentoRepository);
+    function ListarTodas(): TList<TTipoPagamentoModel>;
+  end;
+
+implementation
+
+{ TTipoPagamentoService }
+
+constructor TTipoPagamentoService.Create(ATipoPagamentoRepository
+  : TTipoPagamentoRepository);
+begin
+  FTipoPagamentoRepository := ATipoPagamentoRepository;
+end;
+
+function TTipoPagamentoService.ListarTodas: TList<TTipoPagamentoModel>;
+begin
+
+end;
+
+end.

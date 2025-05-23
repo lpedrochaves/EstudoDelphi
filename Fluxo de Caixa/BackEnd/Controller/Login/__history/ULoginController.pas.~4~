@@ -1,0 +1,20 @@
+unit ULoginController;
+
+interface
+
+uses
+  ULoginService, UBaseRepository, UUsuarioRepository, Generics.Collections,
+  UUsuario;
+
+type
+
+  TLoginController = class
+  private
+    FLoginService: TLoginService;
+  public
+    function AutenticarSemMensagem(AUsuario: string; ASenha: string): Boolean;
+  end;
+
+implementation
+
+end.

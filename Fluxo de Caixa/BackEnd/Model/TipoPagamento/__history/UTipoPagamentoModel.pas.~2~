@@ -1,0 +1,20 @@
+unit UTipoPagamentoModel;
+
+interface
+
+type
+  TTipoPagamentoModel = class
+
+  private
+    FId: Integer;
+    FTipoPagamento: string;
+  public
+    constructor Create(AID: Integer; ATipoPagamento: String); overload;
+    constructor Create(); overload;
+    property Id: Integer read GetId write SetId;
+    property TipoPagamento: String read GetTipoPagamento write SetTipoPagamento;
+  end;
+
+implementation
+
+end.

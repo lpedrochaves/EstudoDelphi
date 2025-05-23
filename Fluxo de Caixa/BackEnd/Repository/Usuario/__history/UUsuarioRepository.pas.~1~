@@ -1,0 +1,11 @@
+unit UUsuarioRepository;
+
+interface
+
+uses
+  UBaseRepository, FireDAC.Comp.Client, FireDAC.Phys.PG, FireDAC.Stan.Param,
+  FireDAC.Phys.PGDef, System.Generics.Collections, UUsuario;
+
+implementation
+
+end.

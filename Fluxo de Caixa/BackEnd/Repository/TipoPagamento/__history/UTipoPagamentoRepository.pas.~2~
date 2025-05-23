@@ -1,0 +1,17 @@
+unit UTipoPagamentoRepository;
+
+interface
+
+uses
+  UBaseRepository, FireDAC.Comp.Client, FireDAC.Phys.PG, FireDAC.Stan.Param,
+  FireDAC.Phys.PGDef, System.Generics.Collections, UTipoPagamentoModel,
+  System.SysUtils, System.Variants;
+
+type
+  TTipoPagamentoRepository = class
+
+  end;
+
+implementation
+
+end.

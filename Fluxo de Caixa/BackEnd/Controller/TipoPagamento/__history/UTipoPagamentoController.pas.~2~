@@ -1,0 +1,12 @@
+unit UTipoPagamentoController;
+
+interface
+
+type
+  TTipoPagamentoController = class
+
+  end;
+
+implementation
+
+end.

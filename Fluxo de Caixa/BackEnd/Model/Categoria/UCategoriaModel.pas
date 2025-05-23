@@ -1,0 +1,56 @@
+unit UCategoriaModel;
+
+interface
+
+type
+  TCategoriaModel = class
+  private
+    FId: integer;
+    FNomeCategoria: string;
+    function GetId: integer;
+    function GetNomeCategoria: String;
+    procedure SetId(const Value: integer);
+    procedure SetNomeCategoria(const Value: String);
+  public
+    constructor Create(AID: integer; ANomeCategoria: String); overload;
+    constructor Create(); overload;
+    property Id: integer read GetId write SetId;
+    property NomeCategoria: String read GetNomeCategoria write SetNomeCategoria;
+  end;
+
+implementation
+
+{ TCategoriaModel }
+
+constructor TCategoriaModel.Create;
+begin
+
+end;
+
+constructor TCategoriaModel.Create(AID: integer; ANomeCategoria: String);
+begin
+  FId := AID;
+  FNomeCategoria := ANomeCategoria;
+end;
+
+function TCategoriaModel.GetId: integer;
+begin
+  Result := FId;
+end;
+
+function TCategoriaModel.GetNomeCategoria: String;
+begin
+  Result := FNomeCategoria;
+end;
+
+procedure TCategoriaModel.SetId(const Value: integer);
+begin
+  FId := Value;
+end;
+
+procedure TCategoriaModel.SetNomeCategoria(const Value: String);
+begin
+  FNomeCategoria := Value;
+end;
+
+end.

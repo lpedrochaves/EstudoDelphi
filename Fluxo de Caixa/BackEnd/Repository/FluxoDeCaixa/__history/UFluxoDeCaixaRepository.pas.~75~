@@ -1,0 +1,158 @@
+unit UFluxoDeCaixaRepository;
+
+interface
+
+uses
+  UBaseRepository, FireDAC.Comp.Client, FireDAC.Phys.PG, FireDAC.Stan.Param,
+  FireDAC.Phys.PGDef, System.Generics.Collections, UFluxoDeCaixa,
+  System.SysUtils, System.Variants, UFluxoDeCaixaDTOPost;
+
+type
+  TFluxoDeCaixaRepository = class
+  private
+    FDQuery: TFDQuery;
+    FBaseRepository: TBaseRepository;
+  public
+    function FindAllFluxoDeCaixaByName(): TList<TFluxoDeCaixa>;
+    constructor Create(ABaseRepository: TBaseRepository);
+    function Cadastrar(AFluxoDeCaixa: TFluxoDeCaixaDTOPost): Integer;
+    procedure Update(AFluxoDeCaixa: TFluxoDeCaixaDTOPost);
+  end;
+
+implementation
+
+{ TFluxoDeCaixaRepository }
+
+function TFluxoDeCaixaRepository.Cadastrar(AFluxoDeCaixa
+  : TFluxoDeCaixaDTOPost): Integer;
+begin
+  try
+    FDQuery.SQL.Text :=
+      'INSERT INTO fin.fluxo_caixa(categoria_id,tipo_pagamento_id,tipo,data,valor,descricao)'
+      + 'VALUES(:categoria, :tipoPagamentoId, :tipo, :data, :valor, :descricao)'
+      + 'RETURNING id';
+
+    FDQuery.ParamByName('categoria').AsInteger := AFluxoDeCaixa.CategoriaId;
+    FDQuery.ParamByName('tipoPagamentoId').AsInteger :=
+      AFluxoDeCaixa.TipoPagamentoId;
+    FDQuery.ParamByName('tipo').AsString := AFluxoDeCaixa.Tipo;
+    FDQuery.ParamByName('data').AsDate := AFluxoDeCaixa.Data;
+    FDQuery.ParamByName('valor').AsFloat := AFluxoDeCaixa.Valor;
+    FDQuery.ParamByName('descricao').AsString := AFluxoDeCaixa.Descricao;
+
+    FDQuery.Open;
+    Result := FDQuery.FieldByName('id').AsInteger;
+  except
+    on E: Exception do
+      raise Exception.Create('Erro ao salvar Fluxo: ' + E.Message);
+
+  end;
+end;
+
+constructor TFluxoDeCaixaRepository.Create(ABaseRepository: TBaseRepository);
+begin
+  FBaseRepository := ABaseRepository;
+  FDQuery := TFDQuery.Create(nil);
+  FDQuery.Connection := FBaseRepository.Connection;
+end;
+
+function TFluxoDeCaixaRepository.FindAllFluxoDeCaixaByName
+  : TList<TFluxoDeCaixa>;
+var
+  FluxoDeCaixa: TFluxoDeCaixa;
+begin
+  if FDQuery = nil then
+  begin
+    raise Exception.Create('Erro: FDQuery não foi instanciado.');
+  end;
+
+  Result := TList<TFluxoDeCaixa>.Create;
+  FDQuery.SQL.Text := 'SELECT ' + 'c.id AS categoria_id, ' +
+    'f.id,  c.nomecategoria AS categoria, ' +
+    'tp.nomepagamento AS tipos_pagamento, f.tipo, f.data, f.valor, f.descricao '
+    + 'FROM fin.fluxo_caixa f ' +
+    'JOIN fin.categorias c ON f.categoria_id = c.id ' +
+    'JOIN fin.tipos_pagamento tp ON f.tipo_pagamento_id = tp.id ' +
+    'ORDER BY f.data DESC';
+
+  FDQuery.Open;
+
+  while not FDQuery.Eof do
+  begin
+    try
+      FluxoDeCaixa := TFluxoDeCaixa.Create(FDQuery.FieldByName('categoria_id')
+        .AsInteger, FDQuery.FieldByName('id').AsInteger,
+        // FDQuery.FieldByName('usuario').AsString,
+        FDQuery.FieldByName('categoria').AsString,
+        FDQuery.FieldByName('tipos_pagamento').AsString,
+        FDQuery.FieldByName('tipo').AsString, FDQuery.FieldByName('descricao')
+        .AsString, FDQuery.FieldByName('data').AsDateTime,
+        // ESTÁ DANDO ERRO NA BUSCA DA DATA
+        // VarToDateTime(FDQuery.FieldByName('data').Value),
+        FDQuery.FieldByName('valor').AsFloat);
+
+      Result.Add(FluxoDeCaixa);
+    Except
+      FluxoDeCaixa.Free;
+      raise
+    end;
+    FDQuery.Next;
+  end;
+end;
+
+procedure TFluxoDeCaixaRepository.Update(AFluxoDeCaixa: TFluxoDeCaixaDTOPost);
+begin
+  try
+    FDQuery.SQL.Text :=
+      'INSERT INTO fin.fluxo_caixa(id, categoria_id, tipo_pagamento_id, tipo, data, valor, descricao) '
+      + 'VALUES (:id, :categoria, :tipoPagamentoId, :tipo, :data, :valor, :descricao) '
+      + 'ON CONFLICT (id) DO UPDATE SET ' +
+      'categoria_id = EXCLUDED.categoria_id, ' +
+      'tipo_pagamento_id = EXCLUDED.tipo_pagamento_id, ' +
+      'tipo = EXCLUDED.tipo, ' + 'data = EXCLUDED.data, ' +
+      'valor = EXCLUDED.valor, ' + 'descricao = EXCLUDED.descricao';
+
+    // FDQuery.Open;
+    // Garante que o ID esteja presente
+    if AFluxoDeCaixa.Id > 0 then
+      FDQuery.ParamByName('id').AsInteger := AFluxoDeCaixa.Id
+    else
+      raise Exception.Create('ID inválido para atualização.');
+
+    FDQuery.ParamByName('categoria').AsInteger := AFluxoDeCaixa.CategoriaId;
+    FDQuery.ParamByName('tipoPagamentoId').AsInteger :=
+      AFluxoDeCaixa.TipoPagamentoId;
+    FDQuery.ParamByName('tipo').AsString := AFluxoDeCaixa.Tipo;
+    FDQuery.ParamByName('data').AsDate := AFluxoDeCaixa.Data;
+    FDQuery.ParamByName('valor').AsFloat := AFluxoDeCaixa.Valor;
+    FDQuery.ParamByName('descricao').AsString := AFluxoDeCaixa.Descricao;
+
+    FDQuery.ExecSQL;
+  except
+    on E: Exception do
+      raise Exception.Create('Erro ao atualizar no banco de dados: ' +
+        E.Message);
+  end;
+end;
+
+end.
+
+
+// ###########   CONVERTENDO A DATA PARA FORMATO DATE E FICAR IGUAL ##########
+
+// procedure TFluxoRepository.SalvarOuAtualizar(AFluxo: TFluxoDeCaixa);
+// var
+// DataConvertida: TDateTime;
+// FS: TFormatSettings;
+// begin
+// FS := TFormatSettings.Create;
+// FS.DateSeparator := '/';
+// FS.ShortDateFormat := 'dd/mm/yyyy';
+//
+// FDQuery.SQL.Text := 'UPDATE fin.fluxo SET data = :data WHERE id = :id';
+// DataConvertida := StrToDate(AFluxo.DataFormatada, FS); // AFluxo.DataFormatada é '17/04/2025'
+//
+// FDQuery.ParamByName('data').AsDate := DataConvertida;
+// FDQuery.ParamByName('id').AsInteger := AFluxo.Id;
+// FDQuery.ExecSQL;
+// end;

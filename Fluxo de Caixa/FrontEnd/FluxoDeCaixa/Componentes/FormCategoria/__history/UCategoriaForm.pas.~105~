@@ -1,0 +1,189 @@
+unit UCategoriaForm;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
+  System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls, Vcl.Grids,
+  System.Generics.Collections, UCategoriaController, UCategoriaModel, Data.DB,
+  Vcl.DBGrids, FireDAC.Comp.Client;
+
+type
+  TFormCategoria = class(TForm)
+    strTabelaCategoria: TStringGrid;
+    pnlBotoes: TPanel;
+    btnSelecionar: TButton;
+    btnCancelar: TButton;
+    dbGridCategorias: TDBGrid;
+    edtBuscarCategoria: TEdit;
+    procedure FormCreate(Sender: TObject);
+    procedure strTabelaCategoriaClick(Sender: TObject);
+    procedure pnlBotoesClick(Sender: TObject);
+    procedure btnSelecionarClick(Sender: TObject);
+    procedure dbGridCategoriasDblClick(Sender: TObject);
+    procedure edtBuscarCategoriaChange(Sender: TObject);
+
+  private
+    FCategorias: TList<TCategoriaModel>;
+
+    // TESTANDO DBGRID COM METODO GPT
+    FCategoriaController: TCategoriaController;
+    FCategoriaDataSet: TFDQuery;
+    FDSourceCategorias: TDataSource;
+    { Private declarations }
+  public
+    CategoriaSelecionada: TCategoriaModel;
+    procedure PreencherGrid(ALista: TList<TCategoriaModel>);
+    { Public declarations }
+  end;
+
+var
+  FormCategoria: TFormCategoria;
+
+implementation
+
+{$R *.dfm}
+{ TFormCategoria }
+
+procedure TFormCategoria.btnSelecionarClick(Sender: TObject);
+begin
+  if Assigned(CategoriaSelecionada) then
+    ModalResult := mrOk
+  else
+    ShowMessage('Selecione uma categoria primeiro!');
+end;
+
+//procedure TFormCategoria.btnSelecionarClick(Sender: TObject);
+//begin
+//  if dbGridCategorias.Visible and (not FCategoriaDataSet.IsEmpty) then
+//  begin
+//    CategoriaSelecionada := TCategoriaModel.Create;
+//    CategoriaSelecionada.Id := FCategoriaDataSet.FieldByName('id').AsInteger;
+//    CategoriaSelecionada.NomeCategoria := FCategoriaDataSet.FieldByName
+//      ('nomecategoria').AsString;
+//    ModalResult := mrOk;
+//  end
+//  else
+//    ShowMessage('Selecione uma categoria primeiro!');
+//end;
+
+// METODO PARA CAPTURAR COM DOIS CLIQUES
+//procedure TFormCategoria.dbGridCategoriasDblClick(Sender: TObject);
+//begin
+//  if not FCategoriaDataSet.IsEmpty then
+//  begin
+//    CategoriaSelecionada := TCategoriaModel.Create;
+//    CategoriaSelecionada.Id := FCategoriaDataSet.FieldByName('id').AsInteger;
+//    CategoriaSelecionada.NomeCategoria := FCategoriaDataSet.FieldByName
+//      ('nomecategoria').AsString;
+//    ModalResult := mrOk;
+//  end;
+//end;
+
+procedure TFormCategoria.edtBuscarCategoriaChange(Sender: TObject);
+var
+  Filtro: string;
+begin
+  Filtro := Trim(edtBuscarCategoria.Text);
+
+  FCategoriaDataSet.Close;
+  FCategoriaDataSet.SQL.Clear;
+  FCategoriaDataSet.SQL.Text := 'SELECT * FROM fin.categorias ' +
+    'WHERE nomecategoria ILIKE :filtro ' + 'ORDER BY nomecategoria';
+
+  FCategoriaDataSet.ParamByName('filtro').AsString := '%' + Filtro + '%';
+  FCategoriaDataSet.Open;
+end;
+
+procedure TFormCategoria.FormCreate(Sender: TObject);
+var
+  CategoriasController: TCategoriaController;
+begin
+
+  // STRING GRID
+  strTabelaCategoria.ColCount := 2;
+  strTabelaCategoria.Cells[0, 0] := 'Código';
+  strTabelaCategoria.Cells[1, 0] := 'Nome';
+  strTabelaCategoria.ColWidths[0] := 80;
+  strTabelaCategoria.ColWidths[1] := strTabelaCategoria.ClientWidth -
+    strTabelaCategoria.ColWidths[0] - 10;
+
+  try
+
+    CategoriasController := TCategoriaController.Create;
+    FCategorias := CategoriasController.FindAll();
+    PreencherGrid(FCategorias);
+  finally
+  end;
+  // FIM STRINGGRID
+
+  // DBGRID
+
+//  FCategoriaController := TCategoriaController.Create;
+//  FCategoriaDataSet := FCategoriaController.GetDataSetAll;
+//
+//  FDSourceCategorias := TDataSource.Create(Self);
+//  FDSourceCategorias.DataSet := FCategoriaDataSet;
+//
+//  FCategoriaDataSet.FieldByName('id').DisplayLabel := 'Código';
+//  FCategoriaDataSet.FieldByName('nomecategoria').DisplayLabel :=
+//    'Nome da Categoria';
+//
+//  dbGridCategorias.DataSource := FDSourceCategorias;
+//  dbGridCategorias.Visible := True;
+//  strTabelaCategoria.Visible := False;
+//
+//  dbGridCategorias.Columns[0].Width := 70;
+//  dbGridCategorias.Columns[1].Width := 230;
+
+  // FIM DBGRID
+
+end;
+
+procedure TFormCategoria.pnlBotoesClick(Sender: TObject);
+begin
+  FCategorias.Free;
+  ModalResult := mrCancel;
+end;
+
+procedure TFormCategoria.PreencherGrid(ALista: TList<TCategoriaModel>);
+var
+  i: Integer;
+begin
+  strTabelaCategoria.RowCount := ALista.Count + 1;
+  strTabelaCategoria.Cells[0, 0] := 'Código';
+  strTabelaCategoria.Cells[1, 0] := 'Nome';
+
+  for i := 0 to ALista.Count - 1 do
+  begin
+    strTabelaCategoria.Cells[0, i + 1] := ALista[i].Id.ToString;
+    strTabelaCategoria.Cells[1, i + 1] := ALista[i].NomeCategoria;
+  end;
+//var
+//  i: Integer;
+//begin
+//
+//  strTabelaCategoria.RowCount := ALista.Count + 1;
+//
+//  for i := 0 to ALista.Count - 1 do
+//  begin
+//    strTabelaCategoria.Cells[0, i + 1] := ALista[i].Id.ToString;
+//    strTabelaCategoria.Cells[1, i + 1] := ALista[i].NomeCategoria;
+//  end;
+end;
+
+procedure TFormCategoria.strTabelaCategoriaClick(Sender: TObject);
+var
+  Linha: Integer;
+begin
+  Linha := strTabelaCategoria.Row;
+  if Linha > 0 then
+  begin
+    CategoriaSelecionada := FCategorias[Linha - 1];
+    strTabelaCategoria.Options := strTabelaCategoria.Options + [goRowSelect];
+  end;
+
+end;
+
+end.

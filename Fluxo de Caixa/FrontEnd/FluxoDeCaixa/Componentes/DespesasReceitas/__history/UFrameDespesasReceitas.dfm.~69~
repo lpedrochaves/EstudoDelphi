@@ -1,0 +1,296 @@
+object FrameComponenteDespesaReceita: TFrameComponenteDespesaReceita
+  Left = 0
+  Top = 0
+  Width = 839
+  Height = 327
+  Align = alLeft
+  TabOrder = 0
+  object lblTipo: TLabel
+    Left = 32
+    Top = 96
+    Width = 36
+    Height = 15
+    Caption = 'lblTipo'
+    Visible = False
+  end
+  object lblId: TLabel
+    Left = 32
+    Top = 128
+    Width = 20
+    Height = 15
+    Caption = 'lbId'
+    Visible = False
+  end
+  object lblCategoriaId: TLabel
+    Left = 32
+    Top = 160
+    Width = 74
+    Height = 15
+    Caption = 'lblCategoriaId'
+    Visible = False
+  end
+  object lblDescricao: TLabel
+    Left = 32
+    Top = 181
+    Width = 64
+    Height = 15
+    Caption = 'lblDescricao'
+    Visible = False
+  end
+  object pnlFluxo: TPanel
+    Left = 10
+    Top = 0
+    Width = 743
+    Height = 41
+    Margins.Left = 10
+    Margins.Top = 50
+    Margins.Right = 10
+    Margins.Bottom = 0
+    BevelOuter = bvNone
+    Color = clWindow
+    ParentBackground = False
+    TabOrder = 0
+    object pnlBorderTop: TPanel
+      Left = 0
+      Top = 0
+      Width = 743
+      Height = 3
+      Align = alTop
+      Color = clBackground
+      ParentBackground = False
+      TabOrder = 0
+      ExplicitWidth = 41
+    end
+    object pnlData: TPanel
+      Left = 0
+      Top = 3
+      Width = 121
+      Height = 38
+      Align = alLeft
+      BevelOuter = bvNone
+      TabOrder = 1
+      ExplicitHeight = 57
+      object lblDataBanco: TLabel
+        AlignWithMargins = True
+        Left = 3
+        Top = 5
+        Width = 115
+        Height = 20
+        Margins.Top = 5
+        Align = alTop
+        Caption = 'lblDataBanco'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -15
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        ParentFont = False
+        ExplicitLeft = 4
+        ExplicitTop = 27
+        ExplicitWidth = 90
+      end
+    end
+    object pnlCategoria: TPanel
+      AlignWithMargins = True
+      Left = 299
+      Top = 3
+      Width = 139
+      Height = 38
+      Margins.Left = 10
+      Margins.Top = 0
+      Margins.Right = 0
+      Margins.Bottom = 0
+      Align = alLeft
+      BevelOuter = bvNone
+      TabOrder = 2
+      ExplicitHeight = 57
+      object lblCategoriaBanco: TLabel
+        AlignWithMargins = True
+        Left = 3
+        Top = 5
+        Width = 133
+        Height = 20
+        Margins.Top = 5
+        Align = alTop
+        Caption = 'lblCategoriaBanco'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -15
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        ParentFont = False
+        ExplicitLeft = 4
+        ExplicitTop = 27
+        ExplicitWidth = 123
+      end
+    end
+    object pnlPagamento: TPanel
+      AlignWithMargins = True
+      Left = 131
+      Top = 3
+      Width = 158
+      Height = 38
+      Margins.Left = 10
+      Margins.Top = 0
+      Margins.Right = 0
+      Margins.Bottom = 0
+      Align = alLeft
+      BevelOuter = bvNone
+      TabOrder = 3
+      ExplicitHeight = 57
+      object lblPagamentoBanco: TLabel
+        AlignWithMargins = True
+        Left = 3
+        Top = 5
+        Width = 152
+        Height = 20
+        Margins.Top = 5
+        Align = alTop
+        Caption = 'lblPagamentoBanco'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -15
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        ParentFont = False
+        ExplicitLeft = 4
+        ExplicitTop = 27
+        ExplicitWidth = 133
+      end
+    end
+    object pnlValor: TPanel
+      AlignWithMargins = True
+      Left = 448
+      Top = 3
+      Width = 128
+      Height = 38
+      Margins.Left = 10
+      Margins.Top = 0
+      Margins.Right = 0
+      Margins.Bottom = 0
+      Align = alLeft
+      BevelOuter = bvNone
+      TabOrder = 4
+      ExplicitTop = 1
+      ExplicitHeight = 57
+      object lblValorBanco: TLabel
+        AlignWithMargins = True
+        Left = 3
+        Top = 5
+        Width = 122
+        Height = 20
+        Margins.Top = 5
+        Align = alTop
+        Caption = 'lblValorBanco'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -15
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        ParentFont = False
+        ExplicitLeft = 4
+        ExplicitTop = 27
+        ExplicitWidth = 92
+      end
+    end
+    object pnlDeletar: TPanel
+      AlignWithMargins = True
+      Left = 663
+      Top = 6
+      Width = 50
+      Height = 32
+      Cursor = crHandPoint
+      Margins.Left = 20
+      Margins.Right = 30
+      Align = alRight
+      BevelOuter = bvNone
+      TabOrder = 5
+      ExplicitLeft = 727
+      ExplicitHeight = 51
+      object imgDeletar: TImage
+        Left = 0
+        Top = 0
+        Width = 50
+        Height = 32
+        Cursor = crHandPoint
+        Align = alLeft
+        Center = True
+        Picture.Data = {
+          0954506E67496D61676589504E470D0A1A0A0000000D49484452000000200000
+          00200806000000737A7AF40000000473424954080808087C0864880000000970
+          485973000001BA000001BA01E8AB01060000001974455874536F667477617265
+          007777772E696E6B73636170652E6F72679BEE3C1A000001B74944415478DAED
+          973D2C044114C7DF2E2D5792B8E044380AC569153E2A2AAD5A4127BE1212AD90
+          9093A848F45A15958F8292460417C991B8448BD6CDF8ED9D8FBD8BBD5DB74B7C
+          EC24FF99B999B7EFFD6E76F3F6AD21DE5B9788B9C1D8EA627729A286198FBC38
+          35BCC73753740D22FA90513919E11250B9C1A42548800A7C3F11FC00F5B8B8DC
+          47DD0054F2231B34C01EEA7371B98B7ACB0588B2B44AB0FAC2656DD925D023FB
+          A9D22EB575F455E8045B5DB8A7B8357A8CC9AD0380B94C37E9F154CA6DC450D3
+          4E006B742318B4315E041C388EFF73C675FC8FFE588024DD387A100F0FD0271B
+          0FB254A31500261C00A489254EC188316F4619E677FEE2EA5ABA3A74C53C8D38
+          61493B01BCC2F663B8CD6416DA457F00E60CDD02A10638D49DE2DD5F05D089AC
+          DB91B119C6AD33965CFE7F6BE412A941C7410290E3CD7BD6C8727AD0F6EF4EF3
+          00AAC3E6720B912D554472EF8C60001C52B1799D1F55A3CD65512A0E01428010
+          20040801FE0180F5328A7D3580156C09734AEDECA60DE0A5B45249DBB5435C9B
+          78AF7CFF5041F29D00D2CE856792FB82D13ECB73C3AA9AA24EA57E896F43738E
+          6E0A45FC01089594F0FCA8F98F369F01F4F86330BED0ECED0000000049454E44
+          AE426082}
+        OnClick = imgDeletarClick
+        ExplicitLeft = 32
+        ExplicitTop = -16
+        ExplicitHeight = 43
+      end
+    end
+    object pnlEditar: TPanel
+      AlignWithMargins = True
+      Left = 590
+      Top = 6
+      Width = 50
+      Height = 32
+      Cursor = crHandPoint
+      Margins.Left = 30
+      Align = alRight
+      BevelOuter = bvNone
+      TabOrder = 6
+      OnClick = pnlEditarClick
+      ExplicitLeft = 654
+      ExplicitHeight = 51
+      object imgEditar: TImage
+        Left = 0
+        Top = 0
+        Width = 50
+        Height = 32
+        Cursor = crHandPoint
+        Align = alLeft
+        Center = True
+        Picture.Data = {
+          0954506E67496D61676589504E470D0A1A0A0000000D49484452000000200000
+          00200806000000737A7AF40000000473424954080808087C0864880000000970
+          485973000000EE000000EE0106D6B2340000001974455874536F667477617265
+          007777772E696E6B73636170652E6F72679BEE3C1A0000021B4944415478DAED
+          974D4854511886EF111703E2CAB06C931191D026D15591388B8C16810B5D06EE
+          679A9F85B84A703714943A563B176E043732541B75210862092E45A5D9041543
+          384E512082DD9ECF7B06069D9F7BCFBD33B498032FDFFDCECFF73E7386B9738E
+          B26DDB6A54534ADD278CA33C7A8EF7AE2A0230A80837D175492BD43862FE4743
+          F33B846DD4AABB7EA2F0190083619279D45DA38ED0DE65CD9647F3106B8E8933
+          A4B192A1F7F2496FA31DD4221D68451B956B790A2D79341F21BC440F58BB4F9E
+          E639AA87B302B08C86D11013564DB6B786F9A2DEF6EF68108F03FAE7788EC86E
+          08400E1518B85547F362FB2610E8331A95DD547ABB3324C375362FB6AFA80FBF
+          DCD9DCA0016A984B7B8B22B6FEF9050AE0C2FC0D8ADA252F9FC000DC98E311B9
+          B02E080017E6AFA91F2DBBD62F801F73DF002ECCE7A8FBB46A0D530017E6696A
+          C66AD6310108CADC0F409C305D6178965A71D7B5BC0260DEC1DC436282F4951F
+          73CF00FACCB08F9EC8B9E01CC40C7D092FE62600BD96F3D72D8789872510D778
+          4E7A3537019820A4745A40FDACCB1A192B7585D0E9156081706A39879635D6FC
+          3031D7B5DE117AEAF277EC1260BD09D004F86F00FEA20F003C6E30C006E18600
+          ECA12E7415883F0D32BF4CF8823E0980DC5A923A4E01F1ABCEE697082FD0187A
+          2600ED967369948BC96FB46955BE9AF96D727EB88742482EB903C5CB691BC924
+          7A6439376465EE51B5C96B5CBEF20C4AE17DF20FFB9A3BD1519CE46F00000000
+          49454E44AE426082}
+        ExplicitLeft = 2
+        ExplicitTop = 3
+        ExplicitWidth = 48
+        ExplicitHeight = 52
+      end
+    end
+  end
+end

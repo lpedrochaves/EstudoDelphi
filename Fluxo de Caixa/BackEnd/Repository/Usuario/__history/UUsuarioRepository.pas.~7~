@@ -1,0 +1,53 @@
+unit UUsuarioRepository;
+
+interface
+
+uses
+  UBaseRepository, FireDAC.Comp.Client, FireDAC.Phys.PG, FireDAC.Stan.Param,
+  FireDAC.Phys.PGDef, System.Generics.Collections, UUsuario;
+
+type
+  TUsuarioRepository = class
+
+  private
+    FDQuery: TFDQuery;
+    FBaseRepository: TBaseRepository;
+  public
+    constructor Create(ABaseRepository: TBaseRepository);
+    function FindAll(): TList<TUsuario>;
+  end;
+
+implementation
+
+constructor TUsuarioRepository.Create(ABaseRepository: TBaseRepository);
+begin
+  FBaseRepository := ABaseRepository;
+  FDQuery := TFDQuery.Create(nil);
+  FDQuery.Connection := FBaseRepository.Connection;
+end;
+
+function TUsuarioRepository.FindAll: TList<TUsuario>;
+var
+  Usuario: TUsuario;
+begin
+
+  Result := TList<TUsuario>.Create;
+  FDQuery.SQL.Text := 'SELECT * FROM login.usuarios';
+  FDQuery.Open;
+
+  while not FDQuery.Eof do
+  begin
+    try
+      Usuario := TUsuario.Create(FDQuery.FieldByName('id').AsInteger,
+        FDQuery.FieldByName('usuario').AsString, FDQuery.FieldByName('senha')
+        .AsString);
+      Result.Add(Usuario);
+    except
+      Usuario.Free;
+      raise;
+    end;
+    FDQuery.Next;
+  end;
+end;
+
+end.

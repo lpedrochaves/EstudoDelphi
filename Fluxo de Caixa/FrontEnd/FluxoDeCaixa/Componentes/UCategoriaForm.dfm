@@ -1,0 +1,76 @@
+object FormCategoria: TFormCategoria
+  Left = 0
+  Top = 0
+  Caption = 'FormCategoria'
+  ClientHeight = 198
+  ClientWidth = 281
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -12
+  Font.Name = 'Segoe UI'
+  Font.Style = []
+  TextHeight = 15
+  object StringGrid1: TStringGrid
+    Left = 0
+    Top = 0
+    Width = 281
+    Height = 157
+    Align = alClient
+    TabOrder = 0
+    ExplicitLeft = 48
+    ExplicitTop = 72
+    ExplicitWidth = 320
+    ExplicitHeight = 120
+  end
+  object pnlBotoes: TPanel
+    AlignWithMargins = True
+    Left = 0
+    Top = 157
+    Width = 281
+    Height = 41
+    Margins.Left = 0
+    Margins.Top = 0
+    Margins.Right = 0
+    Margins.Bottom = 0
+    Align = alBottom
+    BevelOuter = bvNone
+    TabOrder = 1
+    ExplicitLeft = 88
+    ExplicitTop = 216
+    ExplicitWidth = 185
+    object Button1: TButton
+      AlignWithMargins = True
+      Left = 86
+      Top = 8
+      Width = 75
+      Height = 25
+      Margins.Left = 0
+      Margins.Top = 8
+      Margins.Right = 40
+      Margins.Bottom = 8
+      Align = alRight
+      Caption = 'Button1'
+      TabOrder = 0
+      ExplicitLeft = 184
+      ExplicitTop = 6
+    end
+    object Button2: TButton
+      AlignWithMargins = True
+      Left = 201
+      Top = 8
+      Width = 75
+      Height = 25
+      Margins.Left = 0
+      Margins.Top = 8
+      Margins.Right = 5
+      Margins.Bottom = 8
+      Align = alRight
+      Caption = 'Button1'
+      TabOrder = 1
+      ExplicitLeft = 380
+      ExplicitTop = 6
+      ExplicitHeight = 35
+    end
+  end
+end

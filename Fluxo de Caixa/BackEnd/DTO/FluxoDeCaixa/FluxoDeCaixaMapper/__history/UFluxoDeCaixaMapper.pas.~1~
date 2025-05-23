@@ -1,0 +1,18 @@
+unit UFluxoDeCaixaMapper;
+
+interface
+
+uses
+  FireDAC.Comp.Client, UFluxoDeCaixa;
+
+function MapearFluxoDeCaixa(Qry: TFDQuery): TFluxoDeCaixa;
+
+implementation
+
+function MapearFluxoDeCaixa(Qry: TFDQuery): TFluxoDeCaixa;
+begin
+  // código conforme mostrado acima
+end;
+
+end.
+

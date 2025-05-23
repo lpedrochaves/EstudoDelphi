@@ -1,0 +1,103 @@
+unit UFluxoDeCaixaController;
+
+interface
+
+uses
+  UBaseRepository, UFluxoDeCaixaRepository, UFluxoDeCaixaService,
+  Generics.Collections, System.SysUtils, UFluxoDeCaixa, UFluxoDeCaixaDTOPost,
+  UFluxoDeCaixaPaginadoDTO;
+
+type
+  TFluxoDeCaixaController = class
+  private
+    FBaseRepository: TBaseRepository;
+    FFluxoRepository: TFluxoDeCaixaRepository;
+    FFluxoDeCaixaService: TFluxoDeCaixaService;
+  public
+    constructor Create();
+    destructor Destroy();
+    function FindAll(): TList<TFluxoDeCaixa>;
+    function ListarTodasDespesas(): TList<TFluxoDeCaixa>;
+    function ListarTodasReceitas(): TList<TFluxoDeCaixa>;
+    procedure Atualizar(AFluxoDeCaixa: TFluxoDeCaixaDTOPost);
+    procedure Cadastrar(AFluxoDeCaixa: TFluxoDeCaixaDTOPost);
+    procedure DeletarFluxo(AId: Integer);
+    function MostrarValorTotal(): Double;
+    function MostrarReceitas(): Double;
+    function MostrarDespesas(): Double;
+    function BuscarPaginado(APagina, ATamanhoPagina: Integer)
+      : TFluxoDeCaixaPaginadoDTO;
+  end;
+
+implementation
+
+constructor TFluxoDeCaixaController.Create;
+begin
+  FBaseRepository := TBaseRepository.Create();
+  FFluxoRepository := TFluxoDeCaixaRepository.Create(FBaseRepository);
+  FFluxoDeCaixaService := TFluxoDeCaixaService.Create(FFluxoRepository);
+end;
+
+destructor TFluxoDeCaixaController.Destroy;
+begin
+  FBaseRepository.Free;
+  FFluxoRepository.Free;
+  FFluxoDeCaixaService.Free;
+end;
+
+procedure TFluxoDeCaixaController.Atualizar(AFluxoDeCaixa
+  : TFluxoDeCaixaDTOPost);
+begin
+  FFluxoDeCaixaService.AtualizarFluxo(AFluxoDeCaixa);
+end;
+
+function TFluxoDeCaixaController.BuscarPaginado(APagina, ATamanhoPagina
+  : Integer): TFluxoDeCaixaPaginadoDTO;
+begin
+  Result := FFluxoDeCaixaService.BuscarPaginado(APagina, ATamanhoPagina);
+end;
+
+procedure TFluxoDeCaixaController.Cadastrar(AFluxoDeCaixa
+  : TFluxoDeCaixaDTOPost);
+begin
+  FFluxoDeCaixaService.CadastrarFluxo(AFluxoDeCaixa);
+end;
+
+procedure TFluxoDeCaixaController.DeletarFluxo(AId: Integer);
+begin
+  FFluxoDeCaixaService.DeletarFluxo(AId);
+end;
+
+{ FFluxoDeCaixaController }
+
+function TFluxoDeCaixaController.FindAll: TList<TFluxoDeCaixa>;
+begin
+  Result := FFluxoDeCaixaService.ListarTodosFluxos();
+end;
+
+function TFluxoDeCaixaController.ListarTodasDespesas: TList<TFluxoDeCaixa>;
+begin
+  Result := FFluxoDeCaixaService.ListarTodasDespesas();
+end;
+
+function TFluxoDeCaixaController.ListarTodasReceitas: TList<TFluxoDeCaixa>;
+begin
+  Result := FFluxoDeCaixaService.ListarTodasReceitas();
+end;
+
+function TFluxoDeCaixaController.MostrarDespesas: Double;
+begin
+  Result := FFluxoDeCaixaService.DespesasNoPeríodo;
+end;
+
+function TFluxoDeCaixaController.MostrarReceitas: Double;
+begin
+  Result := FFluxoDeCaixaService.ReceitasNoPeríodo;
+end;
+
+function TFluxoDeCaixaController.MostrarValorTotal: Double;
+begin
+  Result := FFluxoDeCaixaService.ResultadoNoPeríodo();
+end;
+
+end.

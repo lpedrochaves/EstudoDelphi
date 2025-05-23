@@ -1,0 +1,385 @@
+unit UFluxoDeCaixaCadastrarModal;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
+  System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Mask,
+  Vcl.Imaging.pngimage, Vcl.ExtCtrls, UCategoriaForm, UTipoPagamentoController,
+  UTipoPagamentoModel, Generics.Collections, UFluxoDeCaixaDTOPost,
+  UFluxoDeCaixa, UFluxoDeCaixaController, System.RegularExpressions;
+
+type
+  TOnFluxoCadastrado = procedure of object;
+
+  TFormFluxoDeCaixaCadastrarModal = class(TForm)
+    lblTitulo: TLabel;
+    imgCategoria: TImage;
+    lblTipoFluxo: TLabel;
+    lblCategoria: TLabel;
+    lblValor: TLabel;
+    lblData: TLabel;
+    lblDescricao: TLabel;
+    lblTipoPagamento: TLabel;
+    selDespesaReceita: TComboBox;
+    memDescricao: TMemo;
+    edtCategoria: TEdit;
+    edtValor: TMaskEdit;
+    edtData: TMaskEdit;
+    btnCadastrar: TButton;
+    btnCancelar: TButton;
+    selTipoPagamento: TComboBox;
+    edtId: TEdit;
+    lblDadosEmbranco: TLabel;
+    pnlCategoria: TPanel;
+    pnlTipoFluxo: TPanel;
+    pnlData: TPanel;
+    pnlValor: TPanel;
+    pnlTipoPagamento: TPanel;
+    lblDadoCategoria: TLabel;
+    lblDadoData: TLabel;
+    lblDadoTipoFluxo: TLabel;
+    lblDadoValor: TLabel;
+    lblDadoPagamento: TLabel;
+    procedure imgCategoriaClick(Sender: TObject);
+    procedure btnCadastrarClick(Sender: TObject);
+    procedure edtValorChange(Sender: TObject);
+    procedure edtValorKeyPress(Sender: TObject; var Key: Char);
+    procedure pnlTipoPagamentoClick(Sender: TObject);
+    procedure edtDataEnter(Sender: TObject);
+    procedure edtDataMouseDown(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
+  private
+    { Private declarations }
+    FIdFluxo: Integer;
+  public
+    { Public declarations }
+    OnFluxoCadastrado: TOnFluxoCadastrado; // PROP PARA  ATUALIZAR FLUXO
+
+    procedure btnCancelarClick(Sender: TObject);
+    procedure CriarTiposDePagamento;
+    procedure SelecionarTipoPagamentoPorNome(const Nome: string);
+    procedure LimparCampos;
+    function ValidarCampos(CategoriaTexto, DataTexto, Pagamento, Valor,
+      FormaPagamento: string): Boolean;
+    constructor Create(AOwner: TComponent); overload;
+  end;
+
+var
+  FormFluxoDeCaixaCadastrarModal: TFormFluxoDeCaixaCadastrarModal;
+
+implementation
+
+{$R *.dfm}
+
+procedure TFormFluxoDeCaixaCadastrarModal.btnCadastrarClick(Sender: TObject);
+var
+  FluxoDeCaixaDto: TFluxoDeCaixaDTOPost;
+  FluxoDeCaixaController: TFluxoDeCaixaController;
+  TipoPagamentoId: Integer;
+  TextoValor: string;
+  ValorConvertido: double;
+begin
+
+  try
+
+    if not ValidarCampos(edtCategoria.Text, edtData.Text,
+      selDespesaReceita.Text, edtValor.Text, selTipoPagamento.Text) then
+    begin
+      Exit;
+    end;
+
+    if selTipoPagamento.ItemIndex >= 0 then
+    begin
+      TipoPagamentoId :=
+        Integer(selTipoPagamento.Items.Objects[selTipoPagamento.ItemIndex]);
+    end
+    else
+    begin
+      ShowMessage('Selecione um tipo de pagamento.');
+      Exit;
+    end;
+
+    TextoValor := edtValor.Text;
+    TextoValor := StringReplace(TextoValor, '.', '', [rfReplaceAll]);
+    TextoValor := StringReplace(TextoValor, 'R$', '', [rfReplaceAll]);
+    TextoValor := StringReplace(TextoValor, ',', '', [rfReplaceAll]);
+    TextoValor := Trim(TextoValor);
+
+    ValorConvertido := StrToFloat(TextoValor);
+
+    FluxoDeCaixaDto := TFluxoDeCaixaDTOPost.Create;
+    try
+      // ShowMessage('Criando DTO');
+
+      FluxoDeCaixaDto.Id := FIdFluxo;
+      // FluxoDeCaixaDto.Id := StrToInt(edtId.Text);
+      FluxoDeCaixaDto.CategoriaId := StrToInt(edtCategoria.Text);
+      FluxoDeCaixaDto.TipoPagamentoId := TipoPagamentoId;
+      FluxoDeCaixaDto.Tipo := selDespesaReceita.Text;
+      FluxoDeCaixaDto.Data := StrToDate(edtData.Text);
+      FluxoDeCaixaDto.Valor := ValorConvertido;
+      FluxoDeCaixaDto.Descricao := memDescricao.Text;
+
+      // ShowMessage(IntToStr(FIdFluxo));
+
+      FluxoDeCaixaController := TFluxoDeCaixaController.Create;
+      try
+        // ShowMessage('Chamando controlador');
+        FluxoDeCaixaController.Cadastrar(FluxoDeCaixaDto);
+      finally
+        FluxoDeCaixaController.Free;
+      end;
+    finally
+      FluxoDeCaixaDto.Free;
+    end;
+
+    ShowMessage('Cadastrado com sucesso!');
+    if Assigned(OnFluxoCadastrado) then
+      OnFluxoCadastrado;
+    LimparCampos();
+  except
+    on E: Exception do
+      ShowMessage('Erro ao cadastrar: ' + E.Message);
+  end;
+end;
+
+procedure TFormFluxoDeCaixaCadastrarModal.btnCancelarClick(Sender: TObject);
+begin
+  ModalResult := mrCancel;
+end;
+
+constructor TFormFluxoDeCaixaCadastrarModal.Create(AOwner: TComponent);
+begin
+  inherited Create(AOwner);
+  CriarTiposDePagamento();
+end;
+
+// METODO QUE VA POPULAR O SELECT DE PAGAMENTO
+procedure TFormFluxoDeCaixaCadastrarModal.CriarTiposDePagamento;
+var
+  TipoPagamento: TTipoPagamentoModel;
+  TipoPagamentosController: TTipoPagamentoController;
+  Tipos: TList<TTipoPagamentoModel>;
+
+begin
+  TipoPagamentosController := TTipoPagamentoController.Create;
+  try
+    Tipos := TipoPagamentosController.FindAll;
+    try
+      selTipoPagamento.Items.Clear;
+      for TipoPagamento in Tipos do
+        selTipoPagamento.Items.AddObject(TipoPagamento.TipoPagamento,
+          // texto visível
+          TObject(Pointer(TipoPagamento.Id))
+          // armazena o ID no objeto associado
+          );
+    finally
+      Tipos.Free;
+    end;
+  finally
+    TipoPagamentosController.Free;
+  end;
+end;
+
+procedure TFormFluxoDeCaixaCadastrarModal.edtDataEnter(Sender: TObject);
+begin
+  edtData.SelStart := 0; // Move o cursor para o início (dia)
+end;
+
+procedure TFormFluxoDeCaixaCadastrarModal.edtDataMouseDown(Sender: TObject;
+  Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+begin
+  edtData.SelStart := 0;
+end;
+
+procedure TFormFluxoDeCaixaCadastrarModal.edtValorChange(Sender: TObject);
+var
+  Valor: Currency;
+  TextoFormatado: string;
+begin
+  // Remove tudo que não for número
+  TextoFormatado := TRegEx.Replace(edtValor.Text, '[^\d]', '');
+
+  if TextoFormatado = '' then
+    Exit;
+
+  // Converte o texto para valor monetário (com duas casas)
+  Valor := StrToCurr(TextoFormatado) / 100;
+
+  // Atualiza o texto do Edit formatado como moeda
+  edtValor.Text := FormatFloat('#,##0.00', Valor);
+
+  // Move o cursor para o final
+  edtValor.SelStart := Length(edtValor.Text);
+
+end;
+
+procedure TFormFluxoDeCaixaCadastrarModal.edtValorKeyPress(Sender: TObject;
+  var Key: Char);
+begin
+  // Só permite números e backspace
+  if not(Key in ['0' .. '9', #8]) then
+    Key := #0;
+end;
+
+procedure TFormFluxoDeCaixaCadastrarModal.imgCategoriaClick(Sender: TObject);
+var
+  FormCategoria: TFormCategoria;
+begin
+  FormCategoria := TFormCategoria.Create(Self);
+  try
+    if FormCategoria.ShowModal = mrOk then
+    begin
+      if Assigned(FormCategoria.CategoriaSelecionada) then
+      begin
+        edtCategoria.Text := FormCategoria.CategoriaSelecionada.Id.ToString;
+      end;
+    end;
+  finally
+    FormCategoria.Free;
+  end;
+
+end;
+
+procedure TFormFluxoDeCaixaCadastrarModal.LimparCampos;
+begin
+  edtCategoria.Text := '';
+  lblDadoCategoria.Visible := False;
+  edtCategoria.Height := 25;
+
+  edtData.Text := '  /  /    ';
+  lblDadoData.Visible := False;
+  edtData.Height := 25;
+
+  selDespesaReceita.Text := '';
+  lblDadoTipoFluxo.Visible := False;
+  pnlTipoFluxo.Height := 25;
+
+  edtValor.Text := '';
+  lblDadoValor.Visible := False;
+  edtValor.Height := 25;
+
+  selTipoPagamento.ItemIndex := -1;
+  selTipoPagamento.Text := '';
+  lblDadoPagamento.Visible := False;
+  pnlTipoPagamento.Height := 25;
+
+  memDescricao.Text := '';
+end;
+
+procedure TFormFluxoDeCaixaCadastrarModal.pnlTipoPagamentoClick
+  (Sender: TObject);
+begin
+
+end;
+
+// PEGA O ID DO PAGAMENTO NO METODO CREATE, SEM PRECISAR SELECIONAR OUTRO OU RE-SELECIONAR
+procedure TFormFluxoDeCaixaCadastrarModal.SelecionarTipoPagamentoPorNome
+  (const Nome: string);
+var
+  i: Integer;
+begin
+  for i := 0 to selTipoPagamento.Items.Count - 1 do
+  begin
+    if selTipoPagamento.Items[i] = Nome then
+    begin
+      selTipoPagamento.ItemIndex := i;
+      Break;
+    end;
+  end;
+end;
+
+function TFormFluxoDeCaixaCadastrarModal.ValidarCampos(CategoriaTexto,
+  DataTexto, Pagamento, Valor, FormaPagamento: string): Boolean;
+var
+  i, CategoriaId: Integer;
+  // ValorFluxo: double;
+begin
+  Result := True;
+
+  // TryStrToFloat(edtValor.Text, ValorFluxo);
+  TryStrToInt(edtCategoria.Text, CategoriaId);
+
+  if (CategoriaTexto = '') or (CategoriaId <= 0) then
+  begin
+    lblDadoCategoria.Visible := True;
+    lblDadoCategoria.Font.Color := clRed;
+    lblDadoCategoria.Caption := 'Categoria inválida!';
+    edtCategoria.Align := alTop;
+    edtCategoria.Height := 23;
+    Result := False;
+  end
+  else
+  begin
+    lblDadoCategoria.Visible := False;
+    edtCategoria.Height := 25;
+  end;
+
+  if DataTexto = '  /  /    ' then
+  begin
+    lblDadoData.Visible := True;
+    lblDadoData.Font.Color := clRed;
+    lblDadoData.Caption := 'Data obrigatória!';
+    edtData.Align := alTop;
+    edtData.Height := 23;
+    Result := False;
+  end
+  else
+  begin
+    lblDadoData.Visible := False;
+    edtData.Height := 25;
+  end;
+
+  if Pagamento = '' then
+  begin
+    lblDadoTipoFluxo.Visible := True;
+    lblDadoTipoFluxo.Font.Color := clRed;
+    lblDadoTipoFluxo.Caption := 'Tipo obrigatório!';
+    selDespesaReceita.Align := alTop;
+    // selDespesaReceita.Height := 23;
+    pnlTipoFluxo.Height := 27;
+    Result := False;
+  end
+  else
+  begin
+    lblDadoTipoFluxo.Visible := False;
+    pnlTipoFluxo.Height := 25;
+  end;
+
+  if Valor = '' then
+  begin
+    lblDadoValor.Visible := True;
+    lblDadoValor.Font.Color := clRed;
+    lblDadoValor.Caption := 'Valor obrigatório!';
+    edtValor.Align := alTop;
+    edtValor.Height := 23;
+    Result := False;
+  end
+  else
+  begin
+    lblDadoValor.Visible := False;
+    edtValor.Height := 25;
+  end;
+
+  if FormaPagamento = '' then
+  begin
+    lblDadoPagamento.Visible := True;
+    lblDadoPagamento.Font.Color := clRed;
+    lblDadoPagamento.Caption := 'Tipo obrigatório!';
+    selTipoPagamento.Align := alTop;
+    pnlTipoPagamento.Height := 27;
+    Result := False;
+  end
+  else
+  begin
+    lblDadoPagamento.Visible := False;
+    pnlTipoPagamento.Height := 25;
+  end;
+
+end;
+
+// METODO QUE PEGA O ID DA CATEGORIA E COLOCA NO FORM
+
+end.

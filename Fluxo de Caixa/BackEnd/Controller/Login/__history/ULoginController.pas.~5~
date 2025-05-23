@@ -1,0 +1,47 @@
+unit ULoginController;
+
+interface
+
+uses
+  ULoginService, UBaseRepository, UUsuarioRepository, Generics.Collections,
+  UUsuario;
+
+type
+
+  TLoginController = class
+  private
+    FLoginService: TLoginService;
+  public
+    function AutenticarSemMensagem(AUsuario: string; ASenha: string): Boolean;
+  end;
+
+implementation
+
+function TLoginController.AutenticarSemMensagem(AUsuario,
+  ASenha: string): Boolean;
+var
+  BaseRepository: TBaseRepository;
+  UsuarioRepository: TUsuarioRepository;
+  LoginService: TLoginService;
+  Logado: Boolean;
+begin
+  try
+    BaseRepository := TBaseRepository.Create;
+    try
+      UsuarioRepository := TUsuarioRepository.Create(BaseRepository);
+      try
+        LoginService := TLoginService.Create(UsuarioRepository);
+        Logado := LoginService.FazerLogin(AUsuario, ASenha);
+        Result := Logado;
+      finally
+        LoginService.Free;
+      end;
+    finally
+      UsuarioRepository.Free;
+    end;
+  finally
+    BaseRepository.Free;
+  end;
+end;
+
+end.

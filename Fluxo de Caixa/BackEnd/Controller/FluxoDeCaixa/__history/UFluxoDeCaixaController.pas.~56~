@@ -1,0 +1,287 @@
+unit UFluxoDeCaixaController;
+
+interface
+
+uses
+  UBaseRepository, UFluxoDeCaixaRepository, UFluxoDeCaixaService,
+  Generics.Collections, System.SysUtils, UFluxoDeCaixa, UFluxoDeCaixaDTOPost,
+  UFluxoDeCaixaPaginadoDTO;
+
+type
+  TFluxoDeCaixaController = class
+  private
+    FBaseRepository: TBaseRepository;
+    FFluxoRepository: TFluxoDeCaixaRepository;
+    FFluxoDeCaixaService: TFluxoDeCaixaService;
+  public
+    constructor Create();
+    destructor Destroy();
+    function FindAll(): TList<TFluxoDeCaixa>;
+    function ListarTodasDespesas(): TList<TFluxoDeCaixa>;
+    function ListarTodasReceitas(): TList<TFluxoDeCaixa>;
+    procedure Atualizar(AFluxoDeCaixa: TFluxoDeCaixaDTOPost);
+    procedure Cadastrar(AFluxoDeCaixa: TFluxoDeCaixaDTOPost);
+    procedure DeletarFluxo(AId: Integer);
+    function MostrarValorTotal(): Double;
+    function MostrarReceitas(): Double;
+    function MostrarDespesas(): Double;
+    function BuscarPaginado(APagina, ATamanhoPagina: Integer)
+      : TFluxoDeCaixaPaginadoDTO;
+  end;
+
+implementation
+
+constructor TFluxoDeCaixaController.Create;
+begin
+  FBaseRepository := TBaseRepository.Create();
+  FFluxoRepository := TFluxoDeCaixaRepository.Create(FBaseRepository);
+  FFluxoDeCaixaService := TFluxoDeCaixaService.Create(FFluxoRepository);
+end;
+
+destructor TFluxoDeCaixaController.Destroy;
+begin
+  FBaseRepository.Free;
+  FFluxoRepository.Free;
+  FFluxoDeCaixaService.Free;
+end;
+
+procedure TFluxoDeCaixaController.Atualizar(AFluxoDeCaixa
+  : TFluxoDeCaixaDTOPost);
+begin
+  FFluxoDeCaixaService.AtualizarFluxo(AFluxoDeCaixa);
+end;
+
+function TFluxoDeCaixaController.BuscarPaginado(APagina, ATamanhoPagina
+  : Integer): TFluxoDeCaixaPaginadoDTO;
+var
+  BaseRepository: TBaseRepository;
+  FluxoRepository: TFluxoDeCaixaRepository;
+  FluxoService: TFluxoDeCaixaService;
+begin
+  BaseRepository := TBaseRepository.Create;
+  try
+    FluxoRepository := TFluxoDeCaixaRepository.Create(BaseRepository);
+    try
+      FluxoService := TFluxoDeCaixaService.Create(FluxoRepository);
+      try
+        Result := FluxoService.BuscarPaginado(APagina, ATamanhoPagina);
+      finally
+        FluxoService.Free;
+      end;
+    finally
+      FluxoRepository.Free;
+    end;
+  finally
+    BaseRepository.Free;
+  end;
+end;
+
+procedure TFluxoDeCaixaController.Cadastrar(AFluxoDeCaixa
+  : TFluxoDeCaixaDTOPost);
+var
+  BaseRepository: TBaseRepository;
+  FluxoRepository: TFluxoDeCaixaRepository;
+  FluxoService: TFluxoDeCaixaService;
+begin
+  BaseRepository := TBaseRepository.Create();
+  try
+    FluxoRepository := TFluxoDeCaixaRepository.Create(BaseRepository);
+    try
+      FluxoService := TFluxoDeCaixaService.Create(FluxoRepository);
+      try
+        FluxoService.CadastrarFluxo(AFluxoDeCaixa);
+      finally
+        FluxoService.Free;
+      end;
+    finally
+      FluxoRepository.Free;
+    end;
+  finally
+    BaseRepository.Free;
+  end;
+end;
+
+procedure TFluxoDeCaixaController.DeletarFluxo(AId: Integer);
+var
+  BaseRepository: TBaseRepository;
+  FluxoRepository: TFluxoDeCaixaRepository;
+  FluxoService: TFluxoDeCaixaService;
+begin
+  BaseRepository := TBaseRepository.Create();
+  try
+    FluxoRepository := TFluxoDeCaixaRepository.Create(BaseRepository);
+    try
+      FluxoService := TFluxoDeCaixaService.Create(FluxoRepository);
+      try
+        FluxoService.DeletarFluxo(AId);
+      finally
+        FluxoService.Free;
+      end;
+    finally
+      FluxoRepository.Free;
+    end;
+  finally
+    BaseRepository.Free;
+  end;
+end;
+
+{ FFluxoDeCaixaController }
+
+function TFluxoDeCaixaController.FindAll: TList<TFluxoDeCaixa>;
+var
+  Fluxos: TList<TFluxoDeCaixa>;
+  BaseRepository: TBaseRepository;
+  FluxoRepository: TFluxoDeCaixaRepository;
+  FluxoService: TFluxoDeCaixaService;
+begin
+  Result := nil;
+  BaseRepository := TBaseRepository.Create();
+  try
+    FluxoRepository := TFluxoDeCaixaRepository.Create(BaseRepository);
+    try
+      FluxoService := TFluxoDeCaixaService.Create(FluxoRepository);
+      try
+        Result := FluxoService.ListarTodosFluxos();
+      finally
+        FluxoService.Free;
+      end;
+    finally
+      FluxoRepository.Free;
+    end;
+  finally
+    BaseRepository.Free;
+  end;
+end;
+
+function TFluxoDeCaixaController.ListarTodasDespesas: TList<TFluxoDeCaixa>;
+var
+  Fluxos: TList<TFluxoDeCaixa>;
+  BaseRepository: TBaseRepository;
+  FluxoRepository: TFluxoDeCaixaRepository;
+  FluxoService: TFluxoDeCaixaService;
+begin
+  Result := nil;
+  BaseRepository := TBaseRepository.Create();
+  try
+    FluxoRepository := TFluxoDeCaixaRepository.Create(BaseRepository);
+    try
+      FluxoService := TFluxoDeCaixaService.Create(FluxoRepository);
+      try
+        Result := FluxoService.ListarTodasDespesas();
+      finally
+        FluxoService.Free;
+      end;
+    finally
+      FluxoRepository.Free;
+    end;
+  finally
+    BaseRepository.Free;
+  end;
+end;
+
+function TFluxoDeCaixaController.ListarTodasReceitas: TList<TFluxoDeCaixa>;
+var
+  Fluxos: TList<TFluxoDeCaixa>;
+  BaseRepository: TBaseRepository;
+  FluxoRepository: TFluxoDeCaixaRepository;
+  FluxoService: TFluxoDeCaixaService;
+begin
+  Result := nil;
+  BaseRepository := TBaseRepository.Create();
+  try
+    FluxoRepository := TFluxoDeCaixaRepository.Create(BaseRepository);
+    try
+      FluxoService := TFluxoDeCaixaService.Create(FluxoRepository);
+      try
+        Result := FluxoService.ListarTodasReceitas();
+      finally
+        FluxoService.Free;
+      end;
+    finally
+      FluxoRepository.Free;
+    end;
+  finally
+    BaseRepository.Free;
+  end;
+
+end;
+
+function TFluxoDeCaixaController.MostrarDespesas: Double;
+var
+  Fluxos: TList<TFluxoDeCaixa>;
+  BaseRepository: TBaseRepository;
+  FluxoRepository: TFluxoDeCaixaRepository;
+  FluxoService: TFluxoDeCaixaService;
+begin
+
+  BaseRepository := TBaseRepository.Create();
+  try
+    FluxoRepository := TFluxoDeCaixaRepository.Create(BaseRepository);
+    try
+      FluxoService := TFluxoDeCaixaService.Create(FluxoRepository);
+      try
+        Result := FluxoService.DespesasNoPeríodo;
+      finally
+        FluxoService.Free;
+      end;
+    finally
+      FluxoRepository.Free;
+    end;
+  finally
+    BaseRepository.Free;
+  end;
+end;
+
+function TFluxoDeCaixaController.MostrarReceitas: Double;
+var
+  Fluxos: TList<TFluxoDeCaixa>;
+  BaseRepository: TBaseRepository;
+  FluxoRepository: TFluxoDeCaixaRepository;
+  FluxoService: TFluxoDeCaixaService;
+begin
+
+  BaseRepository := TBaseRepository.Create();
+  try
+    FluxoRepository := TFluxoDeCaixaRepository.Create(BaseRepository);
+    try
+      FluxoService := TFluxoDeCaixaService.Create(FluxoRepository);
+      try
+        Result := FluxoService.ReceitasNoPeríodo;
+      finally
+        FluxoService.Free;
+      end;
+    finally
+      FluxoRepository.Free;
+    end;
+  finally
+    BaseRepository.Free;
+  end;
+end;
+
+function TFluxoDeCaixaController.MostrarValorTotal: Double;
+var
+  Fluxos: TList<TFluxoDeCaixa>;
+  BaseRepository: TBaseRepository;
+  FluxoRepository: TFluxoDeCaixaRepository;
+  FluxoService: TFluxoDeCaixaService;
+begin
+
+  BaseRepository := TBaseRepository.Create();
+  try
+    FluxoRepository := TFluxoDeCaixaRepository.Create(BaseRepository);
+    try
+      FluxoService := TFluxoDeCaixaService.Create(FluxoRepository);
+      try
+        Result := FluxoService.ResultadoNoPeríodo();
+      finally
+        FluxoService.Free;
+      end;
+    finally
+      FluxoRepository.Free;
+    end;
+  finally
+    BaseRepository.Free;
+  end;
+end;
+
+end.

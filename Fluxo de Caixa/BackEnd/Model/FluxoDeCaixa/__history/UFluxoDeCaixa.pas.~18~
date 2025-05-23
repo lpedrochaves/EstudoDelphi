@@ -1,0 +1,162 @@
+unit UFluxoDeCaixa;
+
+interface
+
+type
+
+  TFluxoDeCaixa = class
+  private
+    FId: Integer;
+    FUsuario: string;
+    FCategoria: string;
+    FTipoPagamento: string;
+    FTipo: string;
+    FData: TDate;
+    FValor: Double;
+    FDescricao: string;
+
+    function GetId: Integer;
+    function GetUsuario: string;
+    procedure SetId(const Value: Integer);
+    procedure SetUsuario(const Value: string);
+    function GetCategoria: string;
+    function GetTipoPagamento: string;
+    procedure SetCategoria(const Value: string);
+    procedure SetTipoPagamento(const Value: string);
+    function GetTipo: string;
+    procedure SetTipo(const Value: string);
+    function GetData: TDate;
+    function GetValor: Double;
+    procedure SetData(const Value: TDate);
+    procedure SetValor(const Value: Double);
+    function GetDescricao: string;
+    procedure SetDescricao(const Value: string);
+  public
+    constructor Create(AData: TDate; APagamento, ACategoria: String;
+      AValor: Double); overload;
+    constructor Create(AID: Integer; AUsuario, ACategoria, APagamento, ATipo,
+      ADescricao: String; AData: TDate; AValor: Double); overload;
+    constructor Create(); overload;
+    property Id: Integer read GetId write SetId;
+    property Usuario: string read GetUsuario write SetUsuario;
+    property Categoria: string read GetCategoria write SetCategoria;
+    property TipoPagamento: string read GetTipoPagamento write SetTipoPagamento;
+    property Tipo: string read GetTipo write SetTipo;
+    property Data: TDate read GetData write SetData;
+    property Valor: Double read GetValor write SetValor;
+    property Descricao: string read GetDescricao write SetDescricao;
+  end;
+
+implementation
+
+{ TFluxoDeCaixa }
+
+constructor TFluxoDeCaixa.Create;
+begin
+
+end;
+
+constructor TFluxoDeCaixa.Create(AID: Integer; AUsuario, ACategoria, APagamento,
+  ATipo, ADescricao: String; AData: TDate; AValor: Double);
+begin
+  FId := AID;
+  FUsuario := AUsuario;
+  FCategoria := ACategoria;
+  FTipoPagamento := APagamento;
+  FTipo := ATipo;
+  FDescricao := ADescricao;
+  FData := AData;
+  FValor := AValor;
+
+end;
+
+constructor TFluxoDeCaixa.Create(AData: TDate; APagamento, ACategoria: String;
+  AValor: Double);
+begin
+  FData := AData;
+  FTipoPagamento := APagamento;
+  FCategoria := ACategoria;
+  FValor := AValor;
+end;
+
+function TFluxoDeCaixa.GetCategoria: string;
+begin
+  Result := FCategoria;
+end;
+
+function TFluxoDeCaixa.GetData: TDate;
+begin
+  Result := FValor;
+end;
+
+function TFluxoDeCaixa.GetDescricao: string;
+begin
+  Result := FDescricao
+end;
+
+function TFluxoDeCaixa.GetId: Integer;
+begin
+  Result := FId;
+end;
+
+function TFluxoDeCaixa.GetTipo: string;
+begin
+  Result := FTipo;
+end;
+
+function TFluxoDeCaixa.GetTipoPagamento: string;
+begin
+  Result := FTipoPagamento;
+end;
+
+function TFluxoDeCaixa.GetUsuario: string;
+begin
+  Result := FUsuario;
+end;
+
+function TFluxoDeCaixa.GetValor: Double;
+begin
+  Result := FValor;
+end;
+
+procedure TFluxoDeCaixa.SetCategoria(const Value: string);
+begin
+  FCategoria := Value;
+end;
+
+procedure TFluxoDeCaixa.SetData(const Value: TDate);
+begin
+  FData := Value;
+end;
+
+procedure TFluxoDeCaixa.SetDescricao(const Value: string);
+begin
+  FDescricao := Value;
+end;
+
+procedure TFluxoDeCaixa.SetId(const Value: Integer);
+begin
+  FId := Value;
+end;
+
+procedure TFluxoDeCaixa.SetTipo(const Value: string);
+begin
+  FTipo := Value;
+end;
+
+procedure TFluxoDeCaixa.SetTipoPagamento(const Value: string);
+begin
+  FTipoPagamento := Value;
+end;
+
+procedure TFluxoDeCaixa.SetUsuario(const Value: string);
+begin
+  FUsuario := Value;
+end;
+
+procedure TFluxoDeCaixa.SetValor(const Value: Double);
+begin
+  FValor := Value;
+end;
+
+end.

@@ -1,0 +1,50 @@
+unit Utils;
+
+interface
+
+uses
+  System.SysUtils;
+
+function ConverterValorParaFloat(const Texto: string): Double;
+
+function ConverterValorParaTexto(const Valor: Double): string;
+
+// edtValor.Text := 'R$ ' + FormatFloat('#,##0.00', Valor);
+
+implementation
+
+function ConverterValorParaFloat(const Texto: string): Double;
+var
+  ValorLimpo: string;
+  FormatSettings: TFormatSettings;
+begin
+  // FormatSettings := TFormatSettings.Create;
+  // FormatSettings.DecimalSeparator := ',';
+  // FormatSettings.ThousandSeparator := '.';
+  // FormatSettings.CurrencyString := 'R$';
+  // FormatSettings.CurrencyFormat := 2; // R$ antes do valor
+  //
+  // ValorLimpo := StringReplace(Texto, 'R$', '', [rfReplaceAll, rfIgnoreCase]);
+  // ValorLimpo := StringReplace(ValorLimpo, '.', '', [rfReplaceAll]);
+  // ValorLimpo := StringReplace(ValorLimpo, ',', '.', [rfReplaceAll]);
+  //
+  // ValorLimpo := Trim(ValorLimpo);
+  //
+  // Result := StrToFloatDef(ValorLimpo, 0, FormatSettings);
+
+  ValorLimpo := StringReplace(Texto, 'R$', '', [rfReplaceAll, rfIgnoreCase]);
+//  ValorLimpo := StringReplace(ValorLimpo, '.', '', [rfReplaceAll]);
+//  ValorLimpo := StringReplace(ValorLimpo, ',', '.', [rfReplaceAll]);
+
+  Result := StrToFloatDef(Trim(ValorLimpo), 0);
+end;
+
+function ConverterValorParaTexto(const Valor: Double): string;
+var
+  Texto: string;
+begin
+  Result := 'R$ ' + FormatFloat('#,##0.00', Valor);
+
+end;
+
+end.

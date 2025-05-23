@@ -1,0 +1,35 @@
+object FrameInicio: TFrameInicio
+  Left = 0
+  Top = 0
+  Width = 640
+  Height = 480
+  TabOrder = 0
+  object pnlContainer: TPanel
+    Left = 0
+    Top = 0
+    Width = 640
+    Height = 480
+    Align = alClient
+    TabOrder = 0
+    ExplicitLeft = 344
+    ExplicitTop = 216
+    ExplicitWidth = 185
+    ExplicitHeight = 41
+    object Label1: TLabel
+      Left = 1
+      Top = 1
+      Width = 638
+      Height = 71
+      Align = alTop
+      Alignment = taCenter
+      Caption = 'T'#237'tulo'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -53
+      Font.Name = 'Segoe UI'
+      Font.Style = []
+      ParentFont = False
+      ExplicitWidth = 133
+    end
+  end
+end

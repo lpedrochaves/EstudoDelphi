@@ -1,0 +1,16 @@
+unit UCategoriaModel;
+
+interface
+
+type
+  TCategoriaModel = class
+  private
+    FId: integer;
+    FNomeCategoria: string;
+  public
+
+  end;
+
+implementation
+
+end.

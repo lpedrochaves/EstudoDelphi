@@ -1,0 +1,76 @@
+unit UTipoPagamentoController;
+
+interface
+
+uses
+  UBaseRepository, UTipoPagamentoRepository, UTipoPagamentoService,
+  Generics.Collections, System.SysUtils, UTipoPagamentoModel;
+
+type
+  TTipoPagamentoController = class
+  private
+    FTipoPagamentoService: TTipoPagamentoService;
+    FBaseRepository: TBaseRepository;
+    TipoPagamentosRepository: TTipoPagamentoRepository;
+  public
+    constructor Create();
+    destructor Destroy; override;
+    function FindAll(): TList<TTipoPagamentoModel>;
+  end;
+
+implementation
+
+{ TTipoPagamentoController }
+
+constructor TTipoPagamentoController.Create;
+begin
+  inherited Create;
+  FBaseRepository := TBaseRepository.Create;
+  TipoPagamentosRepository := TipoPagamentosRepository.Create(FBaseRepository);
+  FTipoPagamentoService := FTipoPagamentoService.Create
+    (TipoPagamentosRepository);
+end;
+
+destructor TTipoPagamentoController.Destroy;
+begin
+  FTipoPagamentoService.Free;
+  TipoPagamentosRepository.Free;
+  FBaseRepository.Free;
+  inherited;
+end;
+
+function TTipoPagamentoController.FindAll: TList<TTipoPagamentoModel>;
+begin
+  Result := FTipoPagamentoService.ListarTodas();
+end;
+// function TTipoPagamentoController.FindAll: TList<TTipoPagamentoModel>;
+// var
+// TipoPagamentos: TList<TTipoPagamentoModel>;
+// BaseRepository: TBaseRepository;
+// TipoPagamentosRepository: TTipoPagamentoRepository;
+// TipoPagamentosService: TTipoPagamentoService;
+// begin
+//
+// Result := nil;
+// BaseRepository := TBaseRepository.Create();
+//
+// try
+// TipoPagamentosRepository := TTipoPagamentoRepository.Create(BaseRepository);
+// try
+// TipoPagamentosService := TTipoPagamentoService.Create
+// (TipoPagamentosRepository);
+// try
+// Result := TipoPagamentosService.ListarTodas();
+// finally
+// TipoPagamentosService.Free;
+// end;
+// finally
+// TipoPagamentosRepository.Free;
+// end;
+// finally
+// BaseRepository.Free;
+// end;
+//
+// end;
+
+end.

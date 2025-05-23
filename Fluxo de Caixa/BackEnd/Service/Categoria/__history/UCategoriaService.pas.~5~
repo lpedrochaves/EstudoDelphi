@@ -1,0 +1,32 @@
+unit UCategoriaService;
+
+interface
+
+uses
+  Generics.Collections, System.SysUtils, UCategoriaRepository, UCategoriaModel;
+
+type
+  TCategoriaService = class
+  private
+    FCategoriaRepository: TCategoriaRepository;
+  public
+    constructor Create(ACategoriaRepository: TCategoriaRepository);
+    function ListarTodas(): TList<TCategoriaModel>;
+  end;
+
+implementation
+
+{ TCategoriaService }
+
+constructor TCategoriaService.Create(ACategoriaRepository
+  : TCategoriaRepository);
+begin
+  FCategoriaRepository := ACategoriaRepository;
+end;
+
+function TCategoriaService.ListarTodas: TList<TCategoriaModel>;
+begin
+
+end;
+
+end.

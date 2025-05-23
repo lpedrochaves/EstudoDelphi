@@ -1,0 +1,46 @@
+unit UBaseRepository;
+
+interface
+
+uses
+  FireDAC.Comp.Client, UDatabaseConfig, FireDAC.Phys.PG;
+
+type
+  TBaseRepository = class
+
+  private
+    // Propriedades que viram parâmetro de acesso ao banco
+    FConnection: TFDConnection;
+    FDriverLink: TFDPhysPgDriverLink;
+    // Propriedade que permite acessar a classe de configuração do banco
+    FConfig: TDatabaseConfig;
+
+  public
+
+    constructor Create();
+    destructor Destroy(); override;
+    // O read ou write, precisam estar relacionados com métodos ou os atributos da classe
+    property Connection: TFDConnection read FConnection;
+  end;
+
+implementation
+
+constructor TBaseRepository.Create();
+begin
+  FConnection := TFDConnection.Create(nil);
+  FDriverLink := TFDPhysPgDriverLink.Create(nil);
+
+  FConfig.ApplyToConnection(FConnection, FDriverLink);
+
+  // Coloquei esse FConnection, pois o repository não estava acessando a classe config
+  FConnection.Connected := True;
+end;
+
+destructor TBaseRepository.Destroy;
+begin
+  FConnection.Free;
+  FDriverLink.Free;
+  inherited;
+end;
+
+end.

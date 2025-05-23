@@ -1,0 +1,19 @@
+unit ULoginService;
+
+interface
+
+uses
+  UUsuarioRepository, UUsuario, Generics.Collections, System.SysUtils;
+
+type
+  TLoginService = class
+  private
+    FUsuarioRepository: TUsuarioRepository;
+  public
+    constructor Create(AUsuarioRepository: TUsuarioRepository);
+    function FazerLogin(AUsuario, ASenha: String): boolean;
+  end;
+
+implementation
+
+end.

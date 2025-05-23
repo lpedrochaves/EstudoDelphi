@@ -1,0 +1,15 @@
+unit UBaseRepository;
+
+interface
+
+uses
+  FireDAC.Comp.Client, UDatabaseConfig, FireDAC.Phys.PG;
+
+type
+  TBaseRepository = class
+
+  end;
+
+implementation
+
+end.

@@ -1,0 +1,180 @@
+unit ULoginPage;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
+  System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls,
+  UBaseRepository, Generics.Collections,
+  UDataBaseConfig, UUsuario, UUsuarioRepository,untInicio,
+  ULoginController;
+
+type
+  TfrmLogin = class(TForm)
+    Label1: TLabel;
+    Label2: TLabel;
+    lblLoginVazioInvalido: TLabel;
+    lblSenhaVaziaInvalida: TLabel;
+    lblUsuarioSenhaIncorreto: TLabel;
+    pnlEdtitSenha: TPanel;
+    edtSenha: TEdit;
+    pnlEditLogin: TPanel;
+    edtLogin: TEdit;
+    btnEntrarMvc: TButton;
+    btnEntrar: TButton;
+    procedure btnEntrarMvcClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+    function ValidarCampos(ALogin, Asenha: String): Boolean;
+  end;
+
+var
+  frmLogin: TfrmLogin;
+
+implementation
+
+{$R *.dfm}
+
+procedure TfrmLogin.btnEntrarMvcClick(Sender: TObject);
+var
+  UsuarioDigitado, SenhaDigitada: string;
+  LoginController: TLoginController;
+  LoginValido: Boolean;
+  formPrincipal: TfrmInicio;
+begin
+  lblLoginVazioInvalido.Visible := False;
+  lblSenhaVaziaInvalida.Visible := False;
+  lblUsuarioSenhaIncorreto.Visible := False;
+  edtLogin.Height := 41;
+  edtSenha.Height := 41;
+
+  LoginValido := False;
+  UsuarioDigitado := edtLogin.Text;
+  SenhaDigitada := edtSenha.Text;
+
+  try
+    LoginController := TLoginController.Create;
+    LoginValido := LoginController.AutenticarSemMensagem(UsuarioDigitado,
+      SenhaDigitada);
+    if LoginValido then
+    begin
+      Self.Hide;
+      formPrincipal := TfrmInicio.Create(Self);
+      formPrincipal.ShowModal;
+      Application.Terminate;
+      ShowMessage('DEU CERTO!!!')
+    end
+    else
+      ValidarCampos(UsuarioDigitado, SenhaDigitada);
+
+  finally
+    LoginController.Free;
+  end;
+
+end;
+
+function TfrmLogin.ValidarCampos(ALogin, Asenha: String): Boolean;
+var
+  i: Integer;
+  CampoInvalido: Boolean;
+  Usuario: TUsuario;
+  ListaUsuarios: TList<TUsuario>;
+  UsuarioController: TLoginController;
+begin
+
+  CampoInvalido := False;
+  ListaUsuarios := TList<TUsuario>.Create;
+  UsuarioController := TLoginController.Create;
+  ListaUsuarios := UsuarioController.ListarUsuarios();
+
+  // Percorre todos os componentes do formulário
+  for i := 0 to ComponentCount - 1 do
+  begin
+    if Components[i] is TEdit then
+    begin
+      with TEdit(Components[i]) do
+      begin
+        if (Trim(ALogin) = '') and (Trim(Asenha) <> '') then
+        // Login
+        begin
+          lblLoginVazioInvalido.Visible := True;
+          lblLoginVazioInvalido.Font.Color := clRed;
+          lblLoginVazioInvalido.Caption :=
+            'Campo Usuário não pode ficar em branco!';
+          Align := alTop;
+          Height := 39;
+          CampoInvalido := True;
+          Result := False;
+
+        end
+        else if (Trim(ALogin) <> '') and (Trim(Asenha) = '') then
+        begin
+          // Senha
+          lblSenhaVaziaInvalida.Visible := True;
+          lblSenhaVaziaInvalida.Font.Color := clRed;
+          lblSenhaVaziaInvalida.Caption :=
+            'Campo Senha não pode ficar em branco!';
+          Align := alTop;
+          Height := 39;
+          CampoInvalido := True;
+          Result := False;
+
+        end
+        else if (Trim(ALogin) = '') and (Trim(Asenha) = '') then
+        begin
+          // Login
+          lblLoginVazioInvalido.Visible := True;
+          lblLoginVazioInvalido.Font.Color := clRed;
+          lblLoginVazioInvalido.Caption :=
+            'Campo Usuário não pode ficar em branco!';
+          // Senha
+          lblSenhaVaziaInvalida.Visible := True;
+          lblSenhaVaziaInvalida.Font.Color := clRed;
+          lblSenhaVaziaInvalida.Caption :=
+            'Campo Senha não pode ficar em branco!';
+          Align := alTop;
+          Height := 39;
+          CampoInvalido := True;
+          Result := False;
+
+        end
+        else
+        begin
+          Align := alClient;
+          Height := 41;
+          Color := clWindow; // Cor padrão de volta
+          Font.Color := clBlack;
+          Result := True;
+
+        end;
+
+        // TESTANDO VALIDAÇÃO NO BANCO
+        if (Trim(ALogin) <> '') or (Trim(Asenha) <> '') then
+        begin
+          for Usuario in ListaUsuarios do
+          begin
+            if (Trim(ALogin) <> Usuario.Nome) or (Trim(Asenha) = Usuario.Senha)
+            then
+            begin
+              lblUsuarioSenhaIncorreto.Visible := True;
+              lblUsuarioSenhaIncorreto.Font.Color := clRed;
+              lblUsuarioSenhaIncorreto.Caption :=
+                'Usuário ou Senha Incorretos!';
+              Align := alTop;
+              Height := 39;
+              CampoInvalido := True;
+              Result := False;
+            end
+          end;
+        end;
+        // FIM TESTE
+      end;
+
+    end;
+  end;
+end;
+
+end.

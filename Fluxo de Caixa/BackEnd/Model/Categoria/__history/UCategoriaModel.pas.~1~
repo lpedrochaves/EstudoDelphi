@@ -1,0 +1,12 @@
+unit UCategoriaModel;
+
+interface
+
+type
+  TCategoriaModel = class
+
+  end;
+
+implementation
+
+end.

@@ -1,0 +1,12 @@
+unit UTipoPagamentoRepository;
+
+interface
+
+type
+  TTipoPagamentoRepository = class
+
+  end;
+
+implementation
+
+end.

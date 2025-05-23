@@ -1,0 +1,20 @@
+unit UTipoPagamentoController;
+
+interface
+
+uses
+  UBaseRepository, UTipoPagamentoRepository, UTipoPagamentoService,
+  Generics.Collections, System.SysUtils, UTipoPagamentoModel;
+
+type
+  TTipoPagamentoController = class
+  private
+    FTipoPagamentoService: TTipoPagamentoService;
+  public
+    constructor Create();
+    function FindAll(): TList<TTipoPagamentoModel>;
+  end;
+
+implementation
+
+end.

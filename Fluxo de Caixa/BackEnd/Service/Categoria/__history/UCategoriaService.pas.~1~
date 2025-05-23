@@ -1,0 +1,18 @@
+unit UCategoriaService;
+
+interface
+
+uses
+  Generics.Collections, System.SysUtils, UCategoriaRepository, UCategoriaModel;
+
+type
+  TCategoriaService = class
+  private
+    FCategoriaRepository: TCategoriaRepository;
+  public
+
+  end;
+
+implementation
+
+end.
