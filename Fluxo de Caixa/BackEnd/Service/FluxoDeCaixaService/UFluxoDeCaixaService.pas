@@ -5,7 +5,7 @@ interface
 uses
   Generics.Collections, System.SysUtils, UFluxoDeCaixaRepository,
   UFluxoDeCaixa, UCategoriaRepository, UCategoriaModel, UFluxoDeCaixaDTOPost,
-  UBaseRepository,UFluxoDeCaixaPaginadoDTO;
+  UBaseRepository;
 
 type
   TFluxoDeCaixaService = class
@@ -22,16 +22,16 @@ type
     function ResultadoNoPeríodo(): Double;
     function DespesasNoPeríodo(): Double;
     function ReceitasNoPeríodo(): Double;
-    function BuscarPaginado(APagina, ATamanhoPagina: Integer): TFluxoDeCaixaPaginadoDTO;
+   // function BuscarPaginado(APagina, ATamanhoPagina: Integer): TFluxoDeCaixaPaginadoDTO;
   end;
 
 implementation
 
-function TFluxoDeCaixaService.BuscarPaginado(APagina,
-  ATamanhoPagina: Integer): TFluxoDeCaixaPaginadoDTO;
-begin
-  Result := FFluxoDeCaixaRepository.BuscarPaginado(APagina, ATamanhoPagina);
-end;
+//function TFluxoDeCaixaService.BuscarPaginado(APagina,
+//  ATamanhoPagina: Integer): TFluxoDeCaixaPaginadoDTO;
+//begin
+//  Result := FFluxoDeCaixaRepository.BuscarPaginado(APagina, ATamanhoPagina);
+//end;
 
 procedure TFluxoDeCaixaService.CadastrarFluxo(AFluxoDeCaixa
   : TFluxoDeCaixaDTOPost);

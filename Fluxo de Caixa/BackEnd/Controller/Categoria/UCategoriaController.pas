@@ -16,7 +16,7 @@ type
     constructor Create();
     destructor Destroy; override;
     function FindAll(): TList<TCategoriaModel>;
-    function GetDataSetAll: TFDQuery;
+   // function GetDataSetAll: TFDQuery;
   end;
 
 implementation
@@ -45,9 +45,9 @@ begin
 end;
 
 
-function TCategoriaController.GetDataSetAll: TFDQuery;
-begin
-  Result := FCategoriaService.GetDataSetAll;
-end;
+//function TCategoriaController.GetDataSetAll: TFDQuery;
+//begin
+//  Result := FCategoriaService.GetDataSetAll;
+//end;
 
 end.

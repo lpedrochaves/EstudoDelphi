@@ -70,8 +70,8 @@ begin
 
   Result := TList<TFluxoDeCaixa>.Create;
   FDQuery.SQL.Text := 'SELECT ' + 'c.id AS categoria_id, ' +
-    'f.id,  c.nomecategoria AS categoria, ' +
-    'tp.nomepagamento AS tipos_pagamento, f.tipo, f.data, f.valor, f.descricao '
+    'f.id,  c.nome_categoria AS categoria, ' +
+    'tp.nome_pagamento AS tipos_pagamento, f.tipo, f.data, f.valor, f.descricao '
     + 'FROM fin.fluxo_caixa f ' +
     'JOIN fin.categorias c ON f.categoria_id = c.id ' +
     'JOIN fin.tipos_pagamento tp ON f.tipo_pagamento_id = tp.id ' +
@@ -114,7 +114,7 @@ begin
       'tipo = EXCLUDED.tipo, ' + 'data = EXCLUDED.data, ' +
       'valor = EXCLUDED.valor, ' + 'descricao = EXCLUDED.descricao';
 
-    // FDQuery.Open;
+    //FDQuery.Open; Não utiliza open em insert.
     // Garante que o ID esteja presente
     if AFluxoDeCaixa.Id > 0 then
       FDQuery.ParamByName('id').AsInteger := AFluxoDeCaixa.Id
@@ -129,7 +129,7 @@ begin
     FDQuery.ParamByName('valor').AsFloat := AFluxoDeCaixa.Valor;
     FDQuery.ParamByName('descricao').AsString := AFluxoDeCaixa.Descricao;
 
-    FDQuery.ExecSQL;
+    FDQuery.ExecSQL;  //esse é utilizado para update,insert,delete e create.
   except
     on E: Exception do
       raise Exception.Create('Erro ao atualizar no banco de dados: ' +
@@ -151,8 +151,3 @@ begin
 end;
 
 end.
-
-
-// ###########   CONVERTENDO A DATA PARA FORMATO DATE E FICAR IGUAL ##########
-
-

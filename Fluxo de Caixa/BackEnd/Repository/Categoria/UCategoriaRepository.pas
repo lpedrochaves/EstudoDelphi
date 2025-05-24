@@ -14,8 +14,6 @@ type
     FBaseRepository: TBaseRepository;
   public
     function FindAll(): TList<TCategoriaModel>;
-    function GetDataSetAll: TFDQuery;
-    function GetDataSetWithFilter: TFDQuery;
     constructor Create(ABaseRepository: TBaseRepository);
     function ExistePorId(const Id: Integer): Boolean;
     procedure Buscar();
@@ -72,7 +70,7 @@ begin
   begin
     try
       Categoria := TCategoriaModel.Create(FDQuery.FieldByName('id').AsInteger,
-        FDQuery.FieldByName('nomecategoria').AsString);
+        FDQuery.FieldByName('nome_categoria').AsString);
       Result.Add(Categoria);
     Except
       Categoria.Free;

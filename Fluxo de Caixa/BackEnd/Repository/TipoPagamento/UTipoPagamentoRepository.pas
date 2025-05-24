@@ -46,7 +46,7 @@ begin
   begin
     try
       TipoPagamento := TTipoPagamentoModel.Create(FDQuery.FieldByName('id')
-        .AsInteger, FDQuery.FieldByName('nomepagamento').AsString);
+        .AsInteger, FDQuery.FieldByName('nome_pagamento').AsString);
       Result.Add(TipoPagamento);
     Except
       TipoPagamento.Free;

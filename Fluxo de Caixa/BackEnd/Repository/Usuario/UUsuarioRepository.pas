@@ -39,7 +39,7 @@ begin
   begin
     try
       Usuario := TUsuario.Create(FDQuery.FieldByName('id').AsInteger,
-        FDQuery.FieldByName('nome').AsString, FDQuery.FieldByName('senha_hash')
+        FDQuery.FieldByName('usuario').AsString, FDQuery.FieldByName('senha')
         .AsString);
       Result.Add(Usuario);
     except

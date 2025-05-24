@@ -172,7 +172,6 @@
             <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="BackEnd\Utils\Utils.pas"/>
-        <DCCReference Include="BackEnd\DTO\PaginacaoFluxoDeCaixa\UFluxoDeCaixaPaginadoDTO.pas"/>
         <DCCReference Include="BackEnd\DTO\FluxoDeCaixa\FluxoDeCaixaMapper\UFluxoDeCaixaMapper.pas"/>
         <DCCReference Include="FrontEnd\Paginas\Inicio\UFrameInicio.pas">
             <Form>FrameInicio</Form>

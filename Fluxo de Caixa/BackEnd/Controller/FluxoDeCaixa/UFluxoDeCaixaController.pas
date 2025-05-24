@@ -4,8 +4,7 @@ interface
 
 uses
   UBaseRepository, UFluxoDeCaixaRepository, UFluxoDeCaixaService,
-  Generics.Collections, System.SysUtils, UFluxoDeCaixa, UFluxoDeCaixaDTOPost,
-  UFluxoDeCaixaPaginadoDTO;
+  Generics.Collections, System.SysUtils, UFluxoDeCaixa, UFluxoDeCaixaDTOPost;
 
 type
   TFluxoDeCaixaController = class

@@ -12,7 +12,7 @@ type
   public
     constructor Create(ACategoriaRepository: TCategoriaRepository);
     function ListarTodas(): TList<TCategoriaModel>;
-    function GetDataSetAll: TFDQuery;
+   // function GetDataSetAll: TFDQuery;
   end;
 
 implementation
@@ -25,10 +25,10 @@ begin
   FCategoriaRepository := ACategoriaRepository;
 end;
 
-function TCategoriaService.GetDataSetAll: TFDQuery;
-begin
-  Result := FCategoriaRepository.GetDataSetAll;
-end;
+//function TCategoriaService.GetDataSetAll: TFDQuery;
+//begin
+//  Result := FCategoriaRepository.GetDataSetAll;
+//end;
 
 function TCategoriaService.ListarTodas: TList<TCategoriaModel>;
 var

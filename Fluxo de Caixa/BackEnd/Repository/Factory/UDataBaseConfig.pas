@@ -31,7 +31,8 @@ begin
 
   // Caminho no meu computador
   FDPhysPgDriverLink1.VendorLib :=
-    'C:\Program Files (x86)\PostgreSQL\psqlODBC\bin\libpq.dll';
+  // 'C:\Program Files (x86)\PostgreSQL\psqlODBC\bin\libpq.dll';
+    'C:\Program Files (x86)\PostgreSQL\bin\libpq.dll';
 
   // Configura a conexão
   AConnection.DriverName := 'PG';
