@@ -29,15 +29,14 @@ uses
   UTipoPagamentoController in 'BackEnd\Controller\TipoPagamento\UTipoPagamentoController.pas',
   UFluxoDeCaixaCadastrarModal in 'FrontEnd\Paginas\FluxoDeCaixaCadastrar\UFluxoDeCaixaCadastrarModal.pas' {FormFluxoDeCaixaCadastrarModal},
   Utils in 'BackEnd\Utils\Utils.pas',
-  UFluxoDeCaixaMapper in 'BackEnd\DTO\FluxoDeCaixa\FluxoDeCaixaMapper\UFluxoDeCaixaMapper.pas',
-  UFrameInicio in 'FrontEnd\Paginas\Inicio\UFrameInicio.pas' {FrameInicio: TFrame};
+  UFluxoDeCaixaMapper in 'BackEnd\DTO\FluxoDeCaixa\FluxoDeCaixaMapper\UFluxoDeCaixaMapper.pas';
 
 {$R *.res}
 
 begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
-  //Application.CreateForm(TfrmLogin, frmLogin);
+  Application.CreateForm(TfrmLogin, frmLogin);
   Application.CreateForm(TfrmInicio, frmInicio);
   Application.CreateForm(TfrmFluxoDeCaixaAtualizarModal, frmFluxoDeCaixaAtualizarModal);
   Application.CreateForm(TFormCategoria, FormCategoria);

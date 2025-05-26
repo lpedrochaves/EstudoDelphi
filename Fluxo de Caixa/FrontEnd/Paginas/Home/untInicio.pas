@@ -4,7 +4,7 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
-  System.Classes, Vcl.Graphics, UFrameFluxo, UFrameInicio,
+  System.Classes, Vcl.Graphics, UFrameFluxo,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.WinXCtrls,
   System.ImageList, Vcl.ImgList, Vcl.StdCtrls, Vcl.Imaging.pngimage,
   Vcl.ComCtrls, Vcl.Grids, UFluxoDeCaixa, UFluxoDeCaixaController, Utils,
@@ -114,8 +114,7 @@ begin
 end;
 
 procedure TfrmInicio.pnlInicioClick(Sender: TObject);
-var
-  frameInicio: TFrameInicio;
+
 begin
   if Assigned(FAtivoFrame) and (FAtivoFrame is TFrameFluxo) then
   begin

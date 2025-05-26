@@ -7,7 +7,8 @@ uses
   System.Classes, Vcl.Graphics, UFrameFluxo, UFrameInicio,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.WinXCtrls,
   System.ImageList, Vcl.ImgList, Vcl.StdCtrls, Vcl.Imaging.pngimage,
-  Vcl.ComCtrls, Vcl.Grids,UFluxoDeCaixa, UFluxoDeCaixaController,Utils;
+  Vcl.ComCtrls, Vcl.Grids, UFluxoDeCaixa, UFluxoDeCaixaController, Utils,
+  Generics.Collections;
 
 type
   TfrmInicio = class(TForm)
@@ -20,23 +21,24 @@ type
     imgInicio: TImage;
     lblInicio: TLabel;
     pnlContainer: TPanel;
-    Panel1: TPanel;
-    a: TPanel;
-    Panel2: TPanel;
+    pnlBody: TPanel;
+    pnlDadosAdicionais: TPanel;
+    pnlInformacoesDoGrafico: TPanel;
     pnlInformacoesDoFluxo: TPanel;
     pnlInformacaoReceita: TPanel;
     pnlInformacaoResultado: TPanel;
     pnlInfomacaoDespesa: TPanel;
-    Label1: TLabel;
+    lblResultado: TLabel;
     lblValorResultado: TLabel;
-    Label3: TLabel;
+    lblReceita: TLabel;
     lblValorReceita: TLabel;
-    Label5: TLabel;
+    lblDespesas: TLabel;
     lblValorDespesa: TLabel;
 
     procedure pnlFluxoClick(Sender: TObject);
     procedure pnlInicioClick(Sender: TObject);
     procedure MostrarValorTotal();
+    procedure FormCreate(Sender: TObject);
   private
     FAtivoFrame: TFrame;
     { Private declarations }
@@ -52,6 +54,11 @@ var
 implementation
 
 {$R *.dfm}
+
+procedure TfrmInicio.FormCreate(Sender: TObject);
+begin
+  MostrarValorTotal();
+end;
 
 procedure TfrmInicio.MostrarValorTotal;
 var
@@ -110,19 +117,11 @@ procedure TfrmInicio.pnlInicioClick(Sender: TObject);
 var
   frameInicio: TFrameInicio;
 begin
-  if Assigned(FAtivoFrame) and (FAtivoFrame is TFrameInicio) then
-    Exit;
-  try
-    frameInicio := TFrameInicio.Create(Self);
-    frameInicio.Name := '';
-    frameInicio.Parent := pnlContainer;
-    frameInicio.Align := alClient;
-
-    MudarTela(frameInicio);
-
-  except
-    on E: Exception do
-      ShowMessage('Erro ao criar frame:  ' + E.Message);
+  if Assigned(FAtivoFrame) and (FAtivoFrame is TFrameFluxo) then
+  begin
+    MostrarValorTotal;
+    FAtivoFrame.Free;
+    FAtivoFrame := nil;
   end;
 end;
 

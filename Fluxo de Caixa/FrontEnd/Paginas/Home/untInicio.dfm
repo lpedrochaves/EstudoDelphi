@@ -360,14 +360,14 @@ object frmInicio: TfrmInicio
             Height = 30
             Align = alTop
             Alignment = taCenter
-            Caption = 'Receitas no M'#234's'
+            Caption = 'Receitas '
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWindowText
             Font.Height = -21
             Font.Name = 'Segoe UI'
             Font.Style = []
             ParentFont = False
-            ExplicitWidth = 151
+            ExplicitWidth = 82
           end
           object lblValorReceita: TLabel
             Left = 1
@@ -458,14 +458,14 @@ object frmInicio: TfrmInicio
             Height = 30
             Align = alTop
             Alignment = taCenter
-            Caption = 'Despesas no M'#234's'
+            Caption = 'Despesas '
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWindowText
             Font.Height = -21
             Font.Name = 'Segoe UI'
             Font.Style = []
             ParentFont = False
-            ExplicitWidth = 162
+            ExplicitWidth = 93
           end
           object lblValorDespesa: TLabel
             Left = 1
