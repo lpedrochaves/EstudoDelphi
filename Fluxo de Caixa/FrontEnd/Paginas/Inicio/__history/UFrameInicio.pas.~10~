@@ -1,0 +1,64 @@
+unit UFrameInicio;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
+  System.Classes,
+  Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls,
+  Vcl.StdCtrls, UFluxoDeCaixaController, UFluxoDeCaixaRepository, UFluxoDeCaixa,
+  Utils, Generics.Collections;
+
+type
+  TFrameInicio = class(TFrame)
+    pnlContainer: TPanel;
+    pnlBody: TPanel;
+    pnlDadosAdicionais: TPanel;
+    pnlInformacoesDoGrafico: TPanel;
+    pnlInformacoesDoFluxo: TPanel;
+    pnlInformacaoReceita: TPanel;
+    lblReceita: TLabel;
+    lblValorReceita: TLabel;
+    pnlInformacaoResultado: TPanel;
+    lblResultado: TLabel;
+    lblValorResultado: TLabel;
+    pnlInfomacaoDespesa: TPanel;
+    lblDespesas: TLabel;
+    lblValorDespesa: TLabel;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+    procedure MostrarValorTotal;
+  //  constructor Create(AOwner: TComponent);
+  end;
+
+implementation
+
+{$R *.dfm}
+
+//constructor TFrameInicio.Create(AOwner: TComponent);
+//begin
+//  MostrarValorTotal;
+//end;
+
+procedure TFrameInicio.MostrarValorTotal;
+var
+  FluxoDeCaixa: TFluxoDeCaixa;
+  Fluxos: TList<TFluxoDeCaixa>;
+  FluxoController: TFluxoDeCaixaController;
+  Receita, Despesa, ValorTotal: double;
+begin
+  ValorTotal := 0;
+  Receita := 0;
+  Despesa := 0;
+  FluxoController := TFluxoDeCaixaController.Create;
+  Receita := FluxoController.MostrarReceitas();
+  Despesa := FluxoController.MostrarDespesas();
+  ValorTotal := FluxoController.MostrarValorTotal();
+  lblValorReceita.Caption := ConverterValorParaTexto(Receita);
+  lblValorDespesa.Caption := ConverterValorParaTexto(Despesa);
+  lblValorResultado.Caption := ConverterValorParaTexto(ValorTotal);
+end;
+
+end.

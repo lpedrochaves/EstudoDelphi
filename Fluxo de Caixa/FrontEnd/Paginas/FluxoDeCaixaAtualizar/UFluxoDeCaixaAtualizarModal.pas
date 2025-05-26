@@ -95,8 +95,6 @@ var
   TextoValor: string;
   ValorConvertido: double;
 begin
-     ShowMessage('ID do fluxo: ' + IntToStr(FIdFluxo));
-     ShowMessage('ID do fluxo: ' + edtCategoria.Text);
 
   if not ValidarCampos(edtCategoria.Text, edtData.Text, selDespesaReceita.Text,
     edtValor.Text, selTipoPagamento.Text) then

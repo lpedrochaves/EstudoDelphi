@@ -3,7 +3,7 @@ unit UDataBaseConfig;
 interface
 
 uses
-  FireDAC.Comp.Client, FireDAC.DApt,
+  FireDAC.Comp.Client, FireDAC.DApt, SysUtils,
   FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Error,
   FireDAC.UI.Intf, FireDAC.Phys.Intf, FireDAC.Stan.Def, FireDAC.Stan.Pool,
   FireDAC.Stan.Async, FireDAC.Phys, FireDAC.VCLUI.Wait, Data.DB,
@@ -24,15 +24,17 @@ implementation
 
 procedure TDataBaseConfig.ApplyToConnection(AConnection: TFDConnection;
   FDPhysPgDriverLink1: TFDPhysPgDriverLink);
+var
+  LibCaminho: string;
 begin
+
+  // Volta uma pasta e acessa a pasta lib
+  LibCaminho := ExtractFilePath(ParamStr(0)) + 'lib\libpq.dll';
 
   // Configura o driver para PostgreSQL
   FDPhysPgDriverLink1.DriverID := 'PG';
 
-  // Caminho no meu computador
-  FDPhysPgDriverLink1.VendorLib :=
-  // 'C:\Program Files (x86)\PostgreSQL\psqlODBC\bin\libpq.dll';
-    'C:\Program Files (x86)\PostgreSQL\bin\libpq.dll';
+  FDPhysPgDriverLink1.VendorLib := LibCaminho;
 
   // Configura a conexão
   AConnection.DriverName := 'PG';

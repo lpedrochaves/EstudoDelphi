@@ -55,8 +55,6 @@ implementation
 
 {$R *.dfm}
 
-
-
 procedure TfrmInicio.FormCreate(Sender: TObject);
 begin
   MostrarValorTotal();
@@ -119,19 +117,11 @@ procedure TfrmInicio.pnlInicioClick(Sender: TObject);
 var
   frameInicio: TFrameInicio;
 begin
-  if Assigned(FAtivoFrame) and (FAtivoFrame is TFrameInicio) then
-    Exit;
-  try
-    frameInicio := TFrameInicio.Create(Self);
-    frameInicio.Name := '';
-    frameInicio.Parent := pnlContainer;
-    frameInicio.Align := alClient;
-
-    MudarTela(frameInicio);
-
-  except
-    on E: Exception do
-      ShowMessage('Erro ao criar frame:  ' + E.Message);
+  if Assigned(FAtivoFrame) and (FAtivoFrame is TFrameFluxo) then
+  begin
+    MostrarValorTotal;
+    FAtivoFrame.Free;
+    FAtivoFrame := nil;
   end;
 end;
 
