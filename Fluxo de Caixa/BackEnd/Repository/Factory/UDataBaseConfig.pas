@@ -42,7 +42,7 @@ begin
   AConnection.Params.Values['User_Name'] := 'postgres';
   AConnection.Params.Values['Password'] := '123456';
   AConnection.Params.Values['Server'] := 'localhost';
-  AConnection.Params.Values['Port'] := '5432';
+  AConnection.Params.Values['Port'] := '5433';
   AConnection.LoginPrompt := False;
 
   // Estabelece a conexão
