@@ -1,0 +1,25 @@
+unit UGraficoPizzaPercentualCategorias;
+
+interface
+
+type
+  TGraficoPizzaPercentualCategorias = class
+
+  private
+    FCategoria: string;
+    FTipo: string;
+    FPagamento: string;
+    FTotalValorCategoria: double;
+  public
+    constructor Create();
+    property Categoria: String read GetCategoria write SetCategoria;
+    property Tipo: String read GetTipo write SetTipo;
+    property Pagamento: String read GetPagamento write SetPagamento;
+    property TotalValorCategoria: double read GetTotalValorCategoria
+      write SetTotalValorCategoria;
+
+  end;
+
+implementation
+
+end.

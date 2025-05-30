@@ -1,0 +1,33 @@
+unit UGraficoPizzaPercentualCategoriasController;
+
+interface
+
+uses
+  UBaseRepository, UGraficoPizzaPercentualCategoriasService,
+  UGraficoPizzaPercentualCategoriasRepository,
+  UGraficoPizzaPercentualCategorias;
+
+type
+  TGraficoPizzaPercentualCategoriasController = class
+  private
+    FBaseRepository: TBaseRepository;
+    FGraficoRepository: TGraficoPizzaPercentualCategoriasRepository;
+    FGraficoService: TGraficoPizzaPercentualCategoriasService;
+  public
+    constructor Create();
+    destructor Destroy();
+  end;
+
+implementation
+
+constructor TGraficoPizzaPercentualCategoriasController.Create;
+begin
+  FBaseRepository := TBaseRepository.Create();
+  FGraficoRepository := TGraficoPizzaPercentualCategoriasRepository.Create
+    (FBaseRepository);
+  FGraficoService := TGraficoPizzaPercentualCategoriasService.Create
+    (FGraficoRepository);
+
+end;
+
+end.

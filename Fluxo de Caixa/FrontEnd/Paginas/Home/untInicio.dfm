@@ -331,6 +331,63 @@ object frmInicio: TfrmInicio
         Align = alTop
         Caption = 'Panel1'
         TabOrder = 1
+        object chrGraficoCategoria: TChart
+          Left = 5
+          Top = 65
+          Width = 484
+          Height = 250
+          Legend.CheckBoxesStyle = cbsRadio
+          Legend.TextStyle = ltsRightPercent
+          Title.Text.Strings = (
+            'TChart')
+          Chart3DPercent = 92
+          LeftAxis.Title.Angle = 180
+          View3D = False
+          View3DOptions.Elevation = 315
+          View3DOptions.HorizOffset = -69
+          View3DOptions.Orthogonal = False
+          View3DOptions.Perspective = 0
+          View3DOptions.Rotation = 360
+          View3DOptions.Zoom = 386
+          TabOrder = 0
+          DefaultCanvas = 'TGDIPlusCanvas'
+          ColorPaletteIndex = 13
+          object Series1: TPieSeries
+            HoverElement = []
+            Marks.Visible = False
+            Marks.Style = smsLabelPercent
+            Marks.Tail.Margin = 2
+            XValues.Order = loAscending
+            YValues.Name = 'Pie'
+            YValues.Order = loNone
+            Frame.InnerBrush.BackColor = clRed
+            Frame.InnerBrush.Gradient.EndColor = clGray
+            Frame.InnerBrush.Gradient.MidColor = clWhite
+            Frame.InnerBrush.Gradient.StartColor = 4210752
+            Frame.InnerBrush.Gradient.Visible = True
+            Frame.MiddleBrush.BackColor = clYellow
+            Frame.MiddleBrush.Gradient.EndColor = 8553090
+            Frame.MiddleBrush.Gradient.MidColor = clWhite
+            Frame.MiddleBrush.Gradient.StartColor = clGray
+            Frame.MiddleBrush.Gradient.Visible = True
+            Frame.OuterBrush.BackColor = clGreen
+            Frame.OuterBrush.Gradient.EndColor = 4210752
+            Frame.OuterBrush.Gradient.MidColor = clWhite
+            Frame.OuterBrush.Gradient.StartColor = clSilver
+            Frame.OuterBrush.Gradient.Visible = True
+            Frame.Width = 4
+            OtherSlice.Legend.Visible = False
+          end
+        end
+        object Button1: TButton
+          Left = 744
+          Top = 208
+          Width = 75
+          Height = 25
+          Caption = 'Button1'
+          TabOrder = 1
+          OnClick = Button1Click
+        end
       end
       object pnlInformacoesDoFluxo: TPanel
         Left = 1
@@ -350,7 +407,6 @@ object frmInicio: TfrmInicio
           Margins.Right = 15
           Margins.Bottom = 15
           Align = alLeft
-          Color = 15658734
           ParentBackground = False
           TabOrder = 0
           object lblReceita: TLabel
@@ -399,7 +455,6 @@ object frmInicio: TfrmInicio
           Margins.Right = 15
           Margins.Bottom = 15
           Align = alLeft
-          Color = 15658734
           ParentBackground = False
           TabOrder = 1
           object lblResultado: TLabel
@@ -448,7 +503,6 @@ object frmInicio: TfrmInicio
           Margins.Right = 15
           Margins.Bottom = 15
           Align = alLeft
-          Color = 15658734
           ParentBackground = False
           TabOrder = 2
           object lblDespesas: TLabel

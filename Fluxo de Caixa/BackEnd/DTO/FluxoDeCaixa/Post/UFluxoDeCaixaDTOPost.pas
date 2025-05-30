@@ -34,7 +34,7 @@ type
   public
     // constructor Create(AID, ACategoriaId, ATipoPagamentoId: Integer;
     // ATipo, ADescricao: String; AData: TDate; AValor: Double); overload;
-     constructor Create(); overload;
+    constructor Create(); overload;
     constructor Create(AFluxoDeCaixa: TFluxoDeCaixa); overload;
     property Id: Integer read GetId write SetId;
     property CategoriaId: Integer read GetCategoriaId write SetCategoriaId;

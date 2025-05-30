@@ -47,8 +47,8 @@ object FrameFluxo: TFrameFluxo
       ParentBackground = False
       TabOrder = 1
       object lblTituloResultado: TLabel
-        Left = 619
-        Top = 101
+        Left = 511
+        Top = 126
         Width = 80
         Height = 21
         Caption = 'Resultado : '
@@ -60,8 +60,8 @@ object FrameFluxo: TFrameFluxo
         ParentFont = False
       end
       object lblValorResultado: TLabel
-        Left = 727
-        Top = 101
+        Left = 619
+        Top = 126
         Width = 4
         Height = 21
         Font.Charset = DEFAULT_CHARSET
@@ -72,8 +72,8 @@ object FrameFluxo: TFrameFluxo
         ParentFont = False
       end
       object lblTituloDespesas: TLabel
-        Left = 397
-        Top = 101
+        Left = 289
+        Top = 126
         Width = 76
         Height = 21
         Caption = 'Despesas : '
@@ -85,8 +85,8 @@ object FrameFluxo: TFrameFluxo
         ParentFont = False
       end
       object lblTituloReceitas: TLabel
-        Left = 182
-        Top = 101
+        Left = 74
+        Top = 126
         Width = 68
         Height = 21
         Caption = 'Receitas : '
@@ -98,8 +98,8 @@ object FrameFluxo: TFrameFluxo
         ParentFont = False
       end
       object lblValorReceita: TLabel
-        Left = 270
-        Top = 101
+        Left = 166
+        Top = 126
         Width = 4
         Height = 21
         Font.Charset = DEFAULT_CHARSET
@@ -110,8 +110,8 @@ object FrameFluxo: TFrameFluxo
         ParentFont = False
       end
       object lblValorDespesa: TLabel
-        Left = 495
-        Top = 101
+        Left = 387
+        Top = 126
         Width = 4
         Height = 21
         Font.Charset = DEFAULT_CHARSET
@@ -122,11 +122,12 @@ object FrameFluxo: TFrameFluxo
         ParentFont = False
       end
       object pnlDespesas: TPanel
-        Left = 15
-        Top = 89
+        Left = 698
+        Top = 22
         Width = 130
         Height = 45
         Cursor = crHandPoint
+        BevelKind = bkSoft
         BevelOuter = bvNone
         Color = clWindow
         ParentBackground = False
@@ -135,7 +136,7 @@ object FrameFluxo: TFrameFluxo
         object lblDespesas: TLabel
           Left = 0
           Top = 0
-          Width = 130
+          Width = 126
           Height = 28
           Cursor = crHandPoint
           Align = alTop
@@ -155,8 +156,8 @@ object FrameFluxo: TFrameFluxo
         end
         object pnlDespesaBorda: TPanel
           Left = 0
-          Top = 42
-          Width = 130
+          Top = 38
+          Width = 126
           Height = 3
           Cursor = crHandPoint
           Align = alBottom
@@ -165,11 +166,13 @@ object FrameFluxo: TFrameFluxo
           ParentBackground = False
           TabOrder = 0
           OnClick = pnlDespesasClick
+          ExplicitTop = 42
+          ExplicitWidth = 130
         end
       end
       object pnlReceitas: TPanel
         AlignWithMargins = True
-        Left = 12
+        Left = 524
         Top = 22
         Width = 133
         Height = 45
@@ -178,6 +181,7 @@ object FrameFluxo: TFrameFluxo
         Margins.Top = 0
         Margins.Right = 0
         Margins.Bottom = 0
+        BevelKind = bkSoft
         BevelOuter = bvNone
         Color = clWindow
         ParentBackground = False
@@ -186,7 +190,7 @@ object FrameFluxo: TFrameFluxo
         object lblReceitas: TLabel
           Left = 0
           Top = 0
-          Width = 133
+          Width = 129
           Height = 28
           Cursor = crHandPoint
           Align = alTop
@@ -206,8 +210,8 @@ object FrameFluxo: TFrameFluxo
         end
         object pnlReceitasBorda: TPanel
           Left = 0
-          Top = 42
-          Width = 133
+          Top = 38
+          Width = 129
           Height = 3
           Cursor = crHandPoint
           Align = alBottom
@@ -215,12 +219,13 @@ object FrameFluxo: TFrameFluxo
           Color = clDarkgreen
           ParentBackground = False
           TabOrder = 0
-          OnClick = pnlReceitasClick
+          ExplicitTop = 42
+          ExplicitWidth = 133
         end
       end
       object pnlCadastrar: TPanel
-        Left = 706
-        Top = -1
+        Left = 35
+        Top = 6
         Width = 148
         Height = 83
         BevelOuter = bvNone
@@ -229,8 +234,8 @@ object FrameFluxo: TFrameFluxo
         TabOrder = 2
         object btnCadastrar: TButton
           AlignWithMargins = True
-          Left = 16
-          Top = 17
+          Left = 20
+          Top = 18
           Width = 121
           Height = 43
           Margins.Left = 0
@@ -337,8 +342,8 @@ object FrameFluxo: TFrameFluxo
         end
       end
       object pnlSelecionarData: TPanel
-        Left = 182
-        Top = 20
+        Left = 21
+        Top = 73
         Width = 523
         Height = 47
         BevelOuter = bvNone
@@ -506,8 +511,8 @@ object FrameFluxo: TFrameFluxo
         end
       end
       object pnlResultados: TPanel
-        Left = 176
-        Top = 127
+        Left = 68
+        Top = 152
         Width = 641
         Height = 1
         BevelOuter = bvNone

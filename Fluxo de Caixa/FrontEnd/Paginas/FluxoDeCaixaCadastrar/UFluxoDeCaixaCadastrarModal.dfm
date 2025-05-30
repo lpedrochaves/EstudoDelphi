@@ -95,7 +95,7 @@ object FormFluxoDeCaixaCadastrarModal: TFormFluxoDeCaixaCadastrarModal
     ParentFont = False
   end
   object lblData: TLabel
-    Left = 150
+    Left = 134
     Top = 109
     Width = 32
     Height = 21
@@ -212,6 +212,7 @@ object FormFluxoDeCaixaCadastrarModal: TFormFluxoDeCaixaCadastrarModal
     Height = 35
     Caption = 'Cancelar'
     TabOrder = 7
+    OnClick = btnCancelarClick
   end
   object edtId: TEdit
     Left = 8
@@ -269,15 +270,16 @@ object FormFluxoDeCaixaCadastrarModal: TFormFluxoDeCaixaCadastrarModal
       Font.Style = []
       ParentFont = False
       TabOrder = 0
+      OnKeyPress = selDespesaReceitaKeyPress
       Items.Strings = (
         'Receita'
         'Despesa')
     end
   end
   object pnlData: TPanel
-    Left = 150
+    Left = 132
     Top = 136
-    Width = 60
+    Width = 78
     Height = 25
     BevelOuter = bvNone
     Color = clRed
@@ -286,7 +288,7 @@ object FormFluxoDeCaixaCadastrarModal: TFormFluxoDeCaixaCadastrarModal
     object edtData: TMaskEdit
       Left = 0
       Top = 0
-      Width = 60
+      Width = 78
       Height = 25
       Align = alClient
       EditMask = '!99/99/9999;1;_'
@@ -301,6 +303,7 @@ object FormFluxoDeCaixaCadastrarModal: TFormFluxoDeCaixaCadastrarModal
       Text = '  /  /    '
       OnEnter = edtDataEnter
       OnMouseDown = edtDataMouseDown
+      ExplicitWidth = 60
     end
   end
   object pnlValor: TPanel
@@ -339,7 +342,6 @@ object FormFluxoDeCaixaCadastrarModal: TFormFluxoDeCaixaCadastrarModal
     Color = clRed
     ParentBackground = False
     TabOrder = 4
-    OnClick = pnlTipoPagamentoClick
     object selTipoPagamento: TComboBox
       Left = 0
       Top = 0

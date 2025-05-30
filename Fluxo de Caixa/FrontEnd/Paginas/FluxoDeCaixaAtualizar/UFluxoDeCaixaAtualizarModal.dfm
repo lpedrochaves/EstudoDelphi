@@ -96,7 +96,7 @@ object frmFluxoDeCaixaAtualizarModal: TfrmFluxoDeCaixaAtualizarModal
     ParentFont = False
   end
   object lblData: TLabel
-    Left = 181
+    Left = 165
     Top = 125
     Width = 32
     Height = 21
@@ -143,7 +143,7 @@ object frmFluxoDeCaixaAtualizarModal: TfrmFluxoDeCaixaAtualizarModal
     Visible = False
   end
   object lblDadoData: TLabel
-    Left = 181
+    Left = 177
     Top = 183
     Width = 65
     Height = 15
@@ -243,9 +243,9 @@ object frmFluxoDeCaixaAtualizarModal: TfrmFluxoDeCaixaAtualizarModal
     end
   end
   object pnlData: TPanel
-    Left = 181
+    Left = 165
     Top = 152
-    Width = 65
+    Width = 82
     Height = 25
     BevelOuter = bvNone
     Color = clRed
@@ -254,7 +254,7 @@ object frmFluxoDeCaixaAtualizarModal: TfrmFluxoDeCaixaAtualizarModal
     object edtData: TMaskEdit
       Left = 0
       Top = 0
-      Width = 65
+      Width = 82
       Height = 25
       Align = alClient
       EditMask = '!99/99/9999;1;_'
@@ -268,6 +268,7 @@ object frmFluxoDeCaixaAtualizarModal: TfrmFluxoDeCaixaAtualizarModal
       TabOrder = 0
       Text = '  /  /    '
       OnEnter = edtDataEnter
+      ExplicitWidth = 65
     end
   end
   object pnlTipoFluxo: TPanel
@@ -292,6 +293,7 @@ object frmFluxoDeCaixaAtualizarModal: TfrmFluxoDeCaixaAtualizarModal
       Font.Style = []
       ParentFont = False
       TabOrder = 0
+      OnKeyPress = selDespesaReceitaKeyPress
       Items.Strings = (
         'Receita'
         'Despesa')

@@ -63,7 +63,7 @@ begin
 
   Result := TList<TCategoriaModel>.Create;
 
-  FDQuery.SQL.Text := 'SELECT * FROM fin.categorias';
+  FDQuery.SQL.Text := 'SELECT id,nome_categoria FROM fin.categorias';
   FDQuery.Open;
 
   while not FDQuery.Eof do
@@ -80,7 +80,5 @@ begin
   end;
 
 end;
-
-
 
 end.

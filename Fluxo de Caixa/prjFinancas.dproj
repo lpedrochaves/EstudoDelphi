@@ -5,7 +5,7 @@
         <FrameworkType>VCL</FrameworkType>
         <Base>True</Base>
         <Config Condition="'$(Config)'==''">Debug</Config>
-        <Platform Condition="'$(Platform)'==''">Win64</Platform>
+        <Platform Condition="'$(Platform)'==''">Win32</Platform>
         <ProjectName Condition="'$(ProjectName)'==''">prjFinancas</ProjectName>
         <TargetedPlatforms>3</TargetedPlatforms>
         <AppType>Application</AppType>
@@ -173,6 +173,10 @@
         </DCCReference>
         <DCCReference Include="BackEnd\Utils\Utils.pas"/>
         <DCCReference Include="BackEnd\DTO\FluxoDeCaixa\FluxoDeCaixaMapper\UFluxoDeCaixaMapper.pas"/>
+        <DCCReference Include="BackEnd\DTO\Grafico\GraficoPizza\UGraficoPizzaPercentualCategorias.pas"/>
+        <DCCReference Include="BackEnd\Repository\Grafico\UGraficoPizzaPercentualCategoriasRepository.pas"/>
+        <DCCReference Include="BackEnd\Service\Grafico\UGraficoPizzaPercentualCategoriasService.pas"/>
+        <DCCReference Include="BackEnd\Controller\Grafico\UGraficoPizzaPercentualCategoriasController.pas"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>
@@ -201,6 +205,12 @@
             <Deployment Version="4">
                 <DeployFile LocalName="Win32\Debug\prjFinancas.exe" Configuration="Debug" Class="ProjectOutput">
                     <Platform Name="Win32">
+                        <RemoteName>prjFinancas.exe</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="Win64\Debug\prjFinancas.exe" Configuration="Debug" Class="ProjectOutput">
+                    <Platform Name="Win64">
                         <RemoteName>prjFinancas.exe</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>

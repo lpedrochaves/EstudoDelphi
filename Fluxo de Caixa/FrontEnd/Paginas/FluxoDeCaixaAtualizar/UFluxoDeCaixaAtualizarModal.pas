@@ -54,13 +54,14 @@ type
     procedure edtDataEnter(Sender: TObject);
     procedure edtValorChange(Sender: TObject);
     procedure edtValorKeyPress(Sender: TObject; var Key: Char);
+    procedure selDespesaReceitaKeyPress(Sender: TObject; var Key: Char);
   private
     FIdFluxo: Integer;
     { Private declarations }
   public
     { Public declarations }
 
-    OnFluxoAtualizado: TOnFluxoAtualizado;    //PROP PARA  ATUALIZAR FLUXO
+    OnFluxoAtualizado: TOnFluxoAtualizado; // PROP PARA  ATUALIZAR FLUXO
 
     constructor Create(AOwner: TComponent); overload;
     constructor Create(AOwner: TComponent; Descricao, Tipo: string;
@@ -69,7 +70,6 @@ type
     procedure SelecionarTipoPagamentoPorNome(const Nome: string);
     function ValidarCampos(CategoriaTexto, DataTexto, Pagamento, Valor,
       FormaPagamento: string): Boolean;
-
 
   end;
 
@@ -85,7 +85,6 @@ constructor TfrmFluxoDeCaixaAtualizarModal.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
 end;
-
 
 procedure TfrmFluxoDeCaixaAtualizarModal.btnAtualizarClick(Sender: TObject);
 var
@@ -114,7 +113,6 @@ begin
       Exit;
     end;
 
-
     ValorConvertido := ConverterValorParaFloat(edtValor.Text);
 
     FluxoDeCaixaDto := TFluxoDeCaixaDTOPost.Create;
@@ -128,7 +126,6 @@ begin
       FluxoDeCaixaDto.Data := StrToDate(edtData.Text);
       FluxoDeCaixaDto.Valor := ValorConvertido;
       FluxoDeCaixaDto.Descricao := memDescricao.Text;
-
 
       FluxoDeCaixaController := TFluxoDeCaixaController.Create;
       try
@@ -286,6 +283,12 @@ begin
   finally
     FormCategoria.Free;
   end;
+end;
+
+procedure TfrmFluxoDeCaixaAtualizarModal.selDespesaReceitaKeyPress
+  (Sender: TObject; var Key: Char);
+begin
+  Key := #0;
 end;
 
 function TfrmFluxoDeCaixaAtualizarModal.ValidarCampos(CategoriaTexto, DataTexto,

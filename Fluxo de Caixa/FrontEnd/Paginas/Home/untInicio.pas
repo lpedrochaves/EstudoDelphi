@@ -8,7 +8,9 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.WinXCtrls,
   System.ImageList, Vcl.ImgList, Vcl.StdCtrls, Vcl.Imaging.pngimage,
   Vcl.ComCtrls, Vcl.Grids, UFluxoDeCaixa, UFluxoDeCaixaController, Utils,
-  Generics.Collections;
+  Generics.Collections, VclTee.TeeGDIPlus, VclTee.TeEngine, VclTee.Series,
+  VclTee.TeeProcs, VclTee.Chart, UGraficoPizzaPercentualCategoriasController,
+  UGraficoPizzaPercentualCategorias;
 
 type
   TfrmInicio = class(TForm)
@@ -34,11 +36,16 @@ type
     lblValorReceita: TLabel;
     lblDespesas: TLabel;
     lblValorDespesa: TLabel;
+    chrGraficoCategoria: TChart;
+    Series1: TPieSeries;
+    Button1: TButton;
 
     procedure pnlFluxoClick(Sender: TObject);
     procedure pnlInicioClick(Sender: TObject);
     procedure MostrarValorTotal();
     procedure FormCreate(Sender: TObject);
+    procedure MontarGrafico();
+    procedure Button1Click(Sender: TObject);
   private
     FAtivoFrame: TFrame;
     { Private declarations }
@@ -55,9 +62,47 @@ implementation
 
 {$R *.dfm}
 
+procedure TfrmInicio.MontarGrafico;
+var
+  GraficoController: TGraficoPizzaPercentualCategoriasController;
+  ListaGraficos: TList<TGraficoPizzaPercentualCategorias>;
+  i: integer;
+  Serie: TPieSeries;
+  Grafico: TGraficoPizzaPercentualCategorias;
+begin
+  GraficoController := TGraficoPizzaPercentualCategoriasController.Create;
+  ListaGraficos := TList<TGraficoPizzaPercentualCategorias>.Create;
+  ListaGraficos := GraficoController.FindAll();
+
+  Serie := TPieSeries.Create(chrGraficoCategoria);
+
+  for Grafico in ListaGraficos do
+  begin
+    Grafico.Create(Grafico.Categoria, Grafico.Tipo, Grafico.Pagamento,
+      Grafico.TotalValorCategoria);
+    Serie.Add(Grafico.TotalValorCategoria, Grafico.Categoria);
+  end;
+
+
+  // for i := 0 to ListaGraficos.Count - 1 do
+  // begin
+  // ShowMessage(ListaGraficos[i].Pagamento + ' - ' + ListaGraficos[i].Categoria
+  // + ' - ' + ListaGraficos[i].Tipo + ' - ' +
+  // FloatToStr(ListaGraficos[i].TotalValorCategoria));
+  // end;
+
+end;
+
+procedure TfrmInicio.Button1Click(Sender: TObject);
+begin
+  ShowMessage('clicou');
+  MontarGrafico;
+end;
+
 procedure TfrmInicio.FormCreate(Sender: TObject);
 begin
   MostrarValorTotal();
+  MontarGrafico();
 end;
 
 procedure TfrmInicio.MostrarValorTotal;

@@ -66,6 +66,7 @@ type
     procedure btnCadastrarClick(Sender: TObject);
     procedure MostrarValorTotal();
 
+
   private
     FPaginaAtual: integer;
     FTotalPaginas: integer;
@@ -359,6 +360,8 @@ begin
   end;
 
 end;
+
+
 
 procedure TFrameFluxo.scrBarraDeRolagemMouseWheel(Sender: TObject;
   Shift: TShiftState; WheelDelta: integer; MousePos: TPoint;

@@ -2,12 +2,12 @@
 <BorlandProject>
 	<Transactions>
     <Transaction>2025/03/04 13:08:20.000.455,=C:\Users\pedro\OneDrive\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
-    <Transaction>2025/03/04 13:10:00.000.796,C:\Users\pedro\OneDrive\Documents\Finanças Pessoais APP\Fluxo de Caixa\Home\untInicio.dfm=C:\Users\pedro\OneDrive\Documents\Embarcadero\Studio\Projects\Unit1.dfm</Transaction>
     <Transaction>2025/03/04 13:10:00.000.796,C:\Users\pedro\OneDrive\Documents\Finanças Pessoais APP\Fluxo de Caixa\Home\untInicio.pas=C:\Users\pedro\OneDrive\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2025/03/04 13:10:00.000.796,C:\Users\pedro\OneDrive\Documents\Finanças Pessoais APP\Fluxo de Caixa\Home\untInicio.dfm=C:\Users\pedro\OneDrive\Documents\Embarcadero\Studio\Projects\Unit1.dfm</Transaction>
     <Transaction>2025/03/04 13:10:18.000.891,C:\Users\pedro\OneDrive\Documents\Finanças Pessoais APP\Fluxo de Caixa\prjFinancas.dproj=C:\Users\pedro\OneDrive\Documents\Embarcadero\Studio\Projects\Project1.dproj</Transaction>
     <Transaction>2025/03/16 00:17:11.000.153,=C:\Users\pedro\OneDrive\Documents\Finanças Pessoais APP\Fluxo de Caixa\Unit1.pas</Transaction>
-    <Transaction>2025/03/16 00:37:49.000.769,C:\Users\pedro\OneDrive\Documents\Finanças Pessoais APP\Fluxo de Caixa\FluxoDeCaixa\Unit1.dfm=C:\Users\pedro\OneDrive\Documents\Finanças Pessoais APP\Fluxo de Caixa\Unit1.dfm</Transaction>
     <Transaction>2025/03/16 00:37:49.000.769,C:\Users\pedro\OneDrive\Documents\Finanças Pessoais APP\Fluxo de Caixa\FluxoDeCaixa\Unit1.pas=C:\Users\pedro\OneDrive\Documents\Finanças Pessoais APP\Fluxo de Caixa\Unit1.pas</Transaction>
+    <Transaction>2025/03/16 00:37:49.000.769,C:\Users\pedro\OneDrive\Documents\Finanças Pessoais APP\Fluxo de Caixa\FluxoDeCaixa\Unit1.dfm=C:\Users\pedro\OneDrive\Documents\Finanças Pessoais APP\Fluxo de Caixa\Unit1.dfm</Transaction>
     <Transaction>2025/03/16 14:16:02.000.058,=C:\Users\pedro\OneDrive\Documents\Finanças Pessoais APP\Fluxo de Caixa\Unit2.pas</Transaction>
     <Transaction>2025/03/16 14:17:39.000.488,C:\Users\pedro\OneDrive\Documents\Finanças Pessoais APP\Fluxo de Caixa\Unit2.pas=C:\Users\pedro\OneDrive\Documents\Finanças Pessoais APP\Fluxo de Caixa\FluxoDeCaixa\PáginaInicialFluxo\UFrameFluxo.pas</Transaction>
     <Transaction>2025/03/16 14:17:39.000.488,C:\Users\pedro\OneDrive\Documents\Finanças Pessoais APP\Fluxo de Caixa\Unit2.dfm=C:\Users\pedro\OneDrive\Documents\Finanças Pessoais APP\Fluxo de Caixa\FluxoDeCaixa\PáginaInicialFluxo\UFrameFluxo.dfm</Transaction>
@@ -32,8 +32,8 @@
     <Transaction>2025/03/20 21:50:34.000.008,C:\Users\pedro\OneDrive\Documents\DELPHI ESTUDOS\FinancasApp\FinancasDelphi\Fluxo de Caixa\Unit1.pas=C:\Users\pedro\OneDrive\Documents\DELPHI ESTUDOS\FinancasApp\FinancasDelphi\Fluxo de Caixa\BackEnd\Controller\ULoginController.pas</Transaction>
     <Transaction>2025/03/20 21:53:38.000.742,C:\Users\pedro\OneDrive\Documents\DELPHI ESTUDOS\FinancasApp\FinancasDelphi\Fluxo de Caixa\BackEnd\Controller\ULoginController.pas=C:\Users\pedro\OneDrive\Documents\DELPHI ESTUDOS\FinancasApp\FinancasDelphi\Fluxo de Caixa\BackEnd\Controller\Login\ULoginController.pas</Transaction>
     <Transaction>2025/03/21 07:15:45.000.744,=C:\Users\pedro\OneDrive\Documents\DELPHI ESTUDOS\FinancasApp\FinancasDelphi\Fluxo de Caixa\Unit1.pas</Transaction>
-    <Transaction>2025/03/21 07:18:54.000.927,C:\Users\pedro\OneDrive\Documents\DELPHI ESTUDOS\FinancasApp\FinancasDelphi\Fluxo de Caixa\FrontEnd\Paginas\Login\ULoginPage.dfm=C:\Users\pedro\OneDrive\Documents\DELPHI ESTUDOS\FinancasApp\FinancasDelphi\Fluxo de Caixa\Unit1.dfm</Transaction>
     <Transaction>2025/03/21 07:18:54.000.927,C:\Users\pedro\OneDrive\Documents\DELPHI ESTUDOS\FinancasApp\FinancasDelphi\Fluxo de Caixa\FrontEnd\Paginas\Login\ULoginPage.pas=C:\Users\pedro\OneDrive\Documents\DELPHI ESTUDOS\FinancasApp\FinancasDelphi\Fluxo de Caixa\Unit1.pas</Transaction>
+    <Transaction>2025/03/21 07:18:54.000.927,C:\Users\pedro\OneDrive\Documents\DELPHI ESTUDOS\FinancasApp\FinancasDelphi\Fluxo de Caixa\FrontEnd\Paginas\Login\ULoginPage.dfm=C:\Users\pedro\OneDrive\Documents\DELPHI ESTUDOS\FinancasApp\FinancasDelphi\Fluxo de Caixa\Unit1.dfm</Transaction>
     <Transaction>2025/03/22 12:50:27.000.816,C:\Users\pedro\OneDrive\Documents\Finanças Pessoais APP\Fluxo de Caixa\FluxoDeCaixa\PáginaInicialFluxo\UFrameFluxo.pas=C:\Users\pedro\OneDrive\Documents\Finanças Pessoais APP\Fluxo de Caixa\FrontEnd\Paginas\PáginaInicialFluxo\UFrameFluxo.pas</Transaction>
     <Transaction>2025/03/22 12:50:27.000.816,C:\Users\pedro\OneDrive\Documents\Finanças Pessoais APP\Fluxo de Caixa\FluxoDeCaixa\PáginaInicialFluxo\UFrameFluxo.dfm=C:\Users\pedro\OneDrive\Documents\Finanças Pessoais APP\Fluxo de Caixa\FrontEnd\Paginas\PáginaInicialFluxo\UFrameFluxo.dfm</Transaction>
     <Transaction>2025/03/22 18:34:45.000.093,=C:\Users\pedro\OneDrive\Documents\DELPHI ESTUDOS\FinancasApp\FinancasDelphi\Fluxo de Caixa\Unit1.pas</Transaction>
@@ -59,8 +59,8 @@
     <Transaction>2025/04/08 07:44:57.000.957,=C:\Users\pedro\OneDrive\Documents\DELPHI ESTUDOS\FinancasApp\FinancasDelphi\Fluxo de Caixa\Unit1.pas</Transaction>
     <Transaction>2025/04/08 07:47:51.000.043,C:\Users\pedro\OneDrive\Documents\DELPHI ESTUDOS\FinancasApp\FinancasDelphi\Fluxo de Caixa\Unit1.pas=C:\Users\pedro\OneDrive\Documents\DELPHI ESTUDOS\FinancasApp\FinancasDelphi\Fluxo de Caixa\BackEnd\Controller\Categoria\UCategoriaController.pas</Transaction>
     <Transaction>2025/04/08 21:30:43.000.648,=C:\Users\pedro\OneDrive\Documents\DELPHI ESTUDOS\FinancasApp\FinancasDelphi\Fluxo de Caixa\Unit1.pas</Transaction>
-    <Transaction>2025/04/08 21:35:58.000.774,C:\Users\pedro\OneDrive\Documents\DELPHI ESTUDOS\FinancasApp\FinancasDelphi\Fluxo de Caixa\Unit1.dfm=C:\Users\pedro\OneDrive\Documents\DELPHI ESTUDOS\FinancasApp\FinancasDelphi\Fluxo de Caixa\FrontEnd\FluxoDeCaixa\Componentes\UCategoriaForm.dfm</Transaction>
     <Transaction>2025/04/08 21:35:58.000.774,C:\Users\pedro\OneDrive\Documents\DELPHI ESTUDOS\FinancasApp\FinancasDelphi\Fluxo de Caixa\Unit1.pas=C:\Users\pedro\OneDrive\Documents\DELPHI ESTUDOS\FinancasApp\FinancasDelphi\Fluxo de Caixa\FrontEnd\FluxoDeCaixa\Componentes\UCategoriaForm.pas</Transaction>
+    <Transaction>2025/04/08 21:35:58.000.774,C:\Users\pedro\OneDrive\Documents\DELPHI ESTUDOS\FinancasApp\FinancasDelphi\Fluxo de Caixa\Unit1.dfm=C:\Users\pedro\OneDrive\Documents\DELPHI ESTUDOS\FinancasApp\FinancasDelphi\Fluxo de Caixa\FrontEnd\FluxoDeCaixa\Componentes\UCategoriaForm.dfm</Transaction>
     <Transaction>2025/04/08 21:36:14.000.421,C:\Users\pedro\OneDrive\Documents\DELPHI ESTUDOS\FinancasApp\FinancasDelphi\Fluxo de Caixa\FrontEnd\FluxoDeCaixa\Componentes\UCategoriaForm.pas=</Transaction>
     <Transaction>2025/04/08 21:37:15.000.537,=C:\Users\pedro\OneDrive\Documents\DELPHI ESTUDOS\FinancasApp\FinancasDelphi\Fluxo de Caixa\Unit1.pas</Transaction>
     <Transaction>2025/04/08 21:37:42.000.505,C:\Users\pedro\OneDrive\Documents\DELPHI ESTUDOS\FinancasApp\FinancasDelphi\Fluxo de Caixa\Unit1.dfm=C:\Users\pedro\OneDrive\Documents\DELPHI ESTUDOS\FinancasApp\FinancasDelphi\Fluxo de Caixa\FrontEnd\FluxoDeCaixa\Componentes\FormCategoria\UCategoriaForm.dfm</Transaction>
@@ -78,8 +78,8 @@
     <Transaction>2025/04/28 07:51:46.000.891,C:\Users\pedro\OneDrive\Documents\DELPHI ESTUDOS\FinancasApp\FinancasDelphi\Fluxo de Caixa\UFluxoDeCaixaCadastrarModal.pas=C:\Users\pedro\OneDrive\Documents\DELPHI ESTUDOS\FinancasApp\FinancasDelphi\Fluxo de Caixa\Unit1.pas</Transaction>
     <Transaction>2025/04/28 07:52:38.000.924,C:\Users\pedro\OneDrive\Documents\DELPHI ESTUDOS\FinancasApp\FinancasDelphi\Fluxo de Caixa\UFluxoDeCaixaCadastrarModal.pas=</Transaction>
     <Transaction>2025/04/28 07:53:01.000.985,=C:\Users\pedro\OneDrive\Documents\DELPHI ESTUDOS\FinancasApp\FinancasDelphi\Fluxo de Caixa\Unit1.pas</Transaction>
-    <Transaction>2025/04/28 07:53:17.000.994,C:\Users\pedro\OneDrive\Documents\DELPHI ESTUDOS\FinancasApp\FinancasDelphi\Fluxo de Caixa\FrontEnd\Paginas\FluxoDeCaixaCadastrar\UFluxoDeCaixaCadastrarModal.dfm=C:\Users\pedro\OneDrive\Documents\DELPHI ESTUDOS\FinancasApp\FinancasDelphi\Fluxo de Caixa\Unit1.dfm</Transaction>
     <Transaction>2025/04/28 07:53:17.000.994,C:\Users\pedro\OneDrive\Documents\DELPHI ESTUDOS\FinancasApp\FinancasDelphi\Fluxo de Caixa\FrontEnd\Paginas\FluxoDeCaixaCadastrar\UFluxoDeCaixaCadastrarModal.pas=C:\Users\pedro\OneDrive\Documents\DELPHI ESTUDOS\FinancasApp\FinancasDelphi\Fluxo de Caixa\Unit1.pas</Transaction>
+    <Transaction>2025/04/28 07:53:17.000.994,C:\Users\pedro\OneDrive\Documents\DELPHI ESTUDOS\FinancasApp\FinancasDelphi\Fluxo de Caixa\FrontEnd\Paginas\FluxoDeCaixaCadastrar\UFluxoDeCaixaCadastrarModal.dfm=C:\Users\pedro\OneDrive\Documents\DELPHI ESTUDOS\FinancasApp\FinancasDelphi\Fluxo de Caixa\Unit1.dfm</Transaction>
     <Transaction>2025/05/12 21:40:02.000.029,=C:\Users\pedro\OneDrive\Documents\DELPHI ESTUDOS\FinancasApp\FinancasDelphi\Fluxo de Caixa\Unit1.pas</Transaction>
     <Transaction>2025/05/12 21:40:58.000.749,C:\Users\pedro\OneDrive\Documents\DELPHI ESTUDOS\FinancasApp\FinancasDelphi\Fluxo de Caixa\BackEnd\Utils\Utils.pas=C:\Users\pedro\OneDrive\Documents\DELPHI ESTUDOS\FinancasApp\FinancasDelphi\Fluxo de Caixa\Unit1.pas</Transaction>
     <Transaction>2025/05/19 07:07:02.000.036,=C:\Users\pedro\OneDrive\Documents\DELPHI ESTUDOS\FinancasApp\FinancasDelphi\Fluxo de Caixa\Unit1.pas</Transaction>
@@ -92,7 +92,18 @@
     <Transaction>2025/05/20 20:19:00.000.579,=C:\Users\pedro\OneDrive\Documents\Estudo Alterdata\FinancasDelphi\Fluxo de Caixa\Unit1.pas</Transaction>
     <Transaction>2025/05/20 20:21:35.000.840,C:\Users\pedro\OneDrive\Documents\Estudo Alterdata\FinancasDelphi\Fluxo de Caixa\Unit1.pas=C:\Users\pedro\OneDrive\Documents\Estudo Alterdata\FinancasDelphi\Fluxo de Caixa\FrontEnd\Paginas\Inicio\UFrameInicio.pas</Transaction>
     <Transaction>2025/05/20 20:21:35.000.840,C:\Users\pedro\OneDrive\Documents\Estudo Alterdata\FinancasDelphi\Fluxo de Caixa\Unit1.dfm=C:\Users\pedro\OneDrive\Documents\Estudo Alterdata\FinancasDelphi\Fluxo de Caixa\FrontEnd\Paginas\Inicio\UFrameInicio.dfm</Transaction>
-    <Transaction>2025/05/26 07:21:41.931,C:\Users\Luís Pedro\Documents\Estudo Alterdata\EstudoDelphi\Fluxo de Caixa\FrontEnd\Paginas\Inicio\UFrameInicio.pas=</Transaction>
+    <Transaction>2025/05/26 07:21:41.000.931,C:\Users\Luís Pedro\Documents\Estudo Alterdata\EstudoDelphi\Fluxo de Caixa\FrontEnd\Paginas\Inicio\UFrameInicio.pas=</Transaction>
+    <Transaction>2025/05/28 06:54:56.000.874,=C:\Users\Luís Pedro\Documents\Estudo Alterdata\EstudoDelphi\Fluxo de Caixa\Unit1.pas</Transaction>
+    <Transaction>2025/05/28 06:57:58.000.366,C:\Users\Luís Pedro\Documents\Estudo Alterdata\EstudoDelphi\Fluxo de Caixa\Unit1.pas=C:\Users\Luís Pedro\Documents\Estudo Alterdata\EstudoDelphi\Fluxo de Caixa\BackEnd\DTO\Grafico\GraficoPizza\UGraficoPizzaPercentualCategorias.pas</Transaction>
+    <Transaction>2025/05/28 07:28:41.000.323,=C:\Users\Luís Pedro\Documents\Estudo Alterdata\EstudoDelphi\Fluxo de Caixa\Unit1.pas</Transaction>
+    <Transaction>2025/05/28 07:34:18.000.339,C:\Users\Luís Pedro\Documents\Estudo Alterdata\EstudoDelphi\Fluxo de Caixa\Unit1.pas=C:\Users\Luís Pedro\Documents\Estudo Alterdata\EstudoDelphi\Fluxo de Caixa\BackEnd\Repository\Grafico\UGraficoPizzaPercentualCategoriasRepository.pas</Transaction>
+    <Transaction>2025/05/28 20:18:08.000.189,=C:\Users\Luís Pedro\Documents\Estudo Alterdata\EstudoDelphi\Fluxo de Caixa\Unit1.pas</Transaction>
+    <Transaction>2025/05/28 20:20:27.000.908,C:\Users\Luís Pedro\Documents\Estudo Alterdata\EstudoDelphi\Fluxo de Caixa\Unit1.pas=C:\Users\Luís Pedro\Documents\Estudo Alterdata\EstudoDelphi\Fluxo de Caixa\UGraficoPizzaPercentualCategoriasService.pas</Transaction>
+    <Transaction>2025/05/28 20:20:45.000.049,C:\Users\Luís Pedro\Documents\Estudo Alterdata\EstudoDelphi\Fluxo de Caixa\UGraficoPizzaPercentualCategoriasService.pas=</Transaction>
+    <Transaction>2025/05/28 20:20:50.000.388,=C:\Users\Luís Pedro\Documents\Estudo Alterdata\EstudoDelphi\Fluxo de Caixa\Unit1.pas</Transaction>
+    <Transaction>2025/05/28 20:21:43.000.310,C:\Users\Luís Pedro\Documents\Estudo Alterdata\EstudoDelphi\Fluxo de Caixa\Unit1.pas=C:\Users\Luís Pedro\Documents\Estudo Alterdata\EstudoDelphi\Fluxo de Caixa\BackEnd\Service\Grafico\UGraficoPizzaPercentualCategoriasService.pas</Transaction>
+    <Transaction>2025/05/29 23:04:30.000.914,=C:\Users\Luís Pedro\Documents\Estudo Alterdata\EstudoDelphi\Fluxo de Caixa\Unit1.pas</Transaction>
+    <Transaction>2025/05/29 23:09:13.000.250,C:\Users\Luís Pedro\Documents\Estudo Alterdata\EstudoDelphi\Fluxo de Caixa\BackEnd\Controller\Grafico\UGraficoPizzaPercentualCategoriasController.pas=C:\Users\Luís Pedro\Documents\Estudo Alterdata\EstudoDelphi\Fluxo de Caixa\Unit1.pas</Transaction>
   </Transactions>
 	<ProjectSortOrder AutoSort="0" SortType="0">
     <File Path="BackEnd"/>
@@ -101,6 +112,8 @@
     <File Path="BackEnd\Controller\Categoria\UCategoriaController.pas"/>
     <File Path="BackEnd\Controller\FluxoDeCaixa"/>
     <File Path="BackEnd\Controller\FluxoDeCaixa\UFluxoDeCaixaController.pas"/>
+    <File Path="BackEnd\Controller\Grafico"/>
+    <File Path="BackEnd\Controller\Grafico\UGraficoPizzaPercentualCategoriasController.pas"/>
     <File Path="BackEnd\Controller\Login"/>
     <File Path="BackEnd\Controller\Login\ULoginController.pas"/>
     <File Path="BackEnd\Controller\TipoPagamento"/>
@@ -111,6 +124,9 @@
     <File Path="BackEnd\DTO\FluxoDeCaixa\FluxoDeCaixaMapper\UFluxoDeCaixaMapper.pas"/>
     <File Path="BackEnd\DTO\FluxoDeCaixa\Post"/>
     <File Path="BackEnd\DTO\FluxoDeCaixa\Post\UFluxoDeCaixaDTOPost.pas"/>
+    <File Path="BackEnd\DTO\Grafico"/>
+    <File Path="BackEnd\DTO\Grafico\GraficoPizza"/>
+    <File Path="BackEnd\DTO\Grafico\GraficoPizza\UGraficoPizzaPercentualCategorias.pas"/>
     <File Path="BackEnd\Model"/>
     <File Path="BackEnd\Model\Categoria"/>
     <File Path="BackEnd\Model\Categoria\UCategoriaModel.pas"/>
@@ -127,6 +143,8 @@
     <File Path="BackEnd\Repository\Factory\UDataBaseConfig.pas"/>
     <File Path="BackEnd\Repository\FluxoDeCaixa"/>
     <File Path="BackEnd\Repository\FluxoDeCaixa\UFluxoDeCaixaRepository.pas"/>
+    <File Path="BackEnd\Repository\Grafico"/>
+    <File Path="BackEnd\Repository\Grafico\UGraficoPizzaPercentualCategoriasRepository.pas"/>
     <File Path="BackEnd\Repository\TipoPagamento"/>
     <File Path="BackEnd\Repository\TipoPagamento\UTipoPagamentoRepository.pas"/>
     <File Path="BackEnd\Repository\Usuario"/>
@@ -136,6 +154,8 @@
     <File Path="BackEnd\Service\Categoria\UCategoriaService.pas"/>
     <File Path="BackEnd\Service\FluxoDeCaixaService"/>
     <File Path="BackEnd\Service\FluxoDeCaixaService\UFluxoDeCaixaService.pas"/>
+    <File Path="BackEnd\Service\Grafico"/>
+    <File Path="BackEnd\Service\Grafico\UGraficoPizzaPercentualCategoriasService.pas"/>
     <File Path="BackEnd\Service\Login"/>
     <File Path="BackEnd\Service\Login\ULoginService.pas"/>
     <File Path="BackEnd\Service\TipoPagamento"/>

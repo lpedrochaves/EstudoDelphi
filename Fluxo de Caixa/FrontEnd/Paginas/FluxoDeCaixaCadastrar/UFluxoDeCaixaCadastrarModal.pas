@@ -46,10 +46,11 @@ type
     procedure btnCadastrarClick(Sender: TObject);
     procedure edtValorChange(Sender: TObject);
     procedure edtValorKeyPress(Sender: TObject; var Key: Char);
-    procedure pnlTipoPagamentoClick(Sender: TObject);
     procedure edtDataEnter(Sender: TObject);
     procedure edtDataMouseDown(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
+    procedure btnCancelarClick(Sender: TObject);
+    procedure selDespesaReceitaKeyPress(Sender: TObject; var Key: Char);
   private
     { Private declarations }
     FIdFluxo: Integer;
@@ -57,7 +58,6 @@ type
     { Public declarations }
     OnFluxoCadastrado: TOnFluxoCadastrado; // PROP PARA  ATUALIZAR FLUXO
 
-    procedure btnCancelarClick(Sender: TObject);
     procedure CriarTiposDePagamento;
     procedure SelecionarTipoPagamentoPorNome(const Nome: string);
     procedure LimparCampos;
@@ -249,10 +249,10 @@ begin
   memDescricao.Text := '';
 end;
 
-procedure TFormFluxoDeCaixaCadastrarModal.pnlTipoPagamentoClick
-  (Sender: TObject);
+procedure TFormFluxoDeCaixaCadastrarModal.selDespesaReceitaKeyPress
+  (Sender: TObject; var Key: Char);
 begin
-
+  Key := #0;
 end;
 
 // PEGA O ID DO PAGAMENTO NO METODO CREATE, SEM PRECISAR SELECIONAR OUTRO OU RE-SELECIONAR

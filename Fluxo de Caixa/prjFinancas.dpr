@@ -29,14 +29,18 @@ uses
   UTipoPagamentoController in 'BackEnd\Controller\TipoPagamento\UTipoPagamentoController.pas',
   UFluxoDeCaixaCadastrarModal in 'FrontEnd\Paginas\FluxoDeCaixaCadastrar\UFluxoDeCaixaCadastrarModal.pas' {FormFluxoDeCaixaCadastrarModal},
   Utils in 'BackEnd\Utils\Utils.pas',
-  UFluxoDeCaixaMapper in 'BackEnd\DTO\FluxoDeCaixa\FluxoDeCaixaMapper\UFluxoDeCaixaMapper.pas';
+  UFluxoDeCaixaMapper in 'BackEnd\DTO\FluxoDeCaixa\FluxoDeCaixaMapper\UFluxoDeCaixaMapper.pas',
+  UGraficoPizzaPercentualCategorias in 'BackEnd\DTO\Grafico\GraficoPizza\UGraficoPizzaPercentualCategorias.pas',
+  UGraficoPizzaPercentualCategoriasRepository in 'BackEnd\Repository\Grafico\UGraficoPizzaPercentualCategoriasRepository.pas',
+  UGraficoPizzaPercentualCategoriasService in 'BackEnd\Service\Grafico\UGraficoPizzaPercentualCategoriasService.pas',
+  UGraficoPizzaPercentualCategoriasController in 'BackEnd\Controller\Grafico\UGraficoPizzaPercentualCategoriasController.pas';
 
 {$R *.res}
 
 begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
-  Application.CreateForm(TfrmLogin, frmLogin);
+//  Application.CreateForm(TfrmLogin, frmLogin);
   Application.CreateForm(TfrmInicio, frmInicio);
   Application.CreateForm(TfrmFluxoDeCaixaAtualizarModal, frmFluxoDeCaixaAtualizarModal);
   Application.CreateForm(TFormCategoria, FormCategoria);

@@ -1,0 +1,19 @@
+unit UGraficoPizzaPercentualCategoriasController;
+
+interface
+
+uses
+  UBaseRepository, UGraficoPizzaPercentualCategoriasService,
+  UGraficoPizzaPercentualCategoriasRepository,
+  UGraficoPizzaPercentualCategorias;
+
+type
+  TGraficoPizzaPercentualCategoriasController = class
+    FBaseRepository: TBaseRepository;
+    FGraficoRepository: TGraficoPizzaPercentualCategoriasRepository;
+    FGraficoService: TGraficoPizzaPercentualCategoriasService;
+  end;
+
+implementation
+
+end.

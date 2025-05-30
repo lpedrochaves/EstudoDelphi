@@ -1,0 +1,20 @@
+unit UGraficoPizzaPercentualCategorias;
+
+interface
+
+type
+  TGraficoPizzaPercentualCategorias = class
+
+  private
+    FCategoria:string;
+    FTipo:string;
+    FPagamento:string;
+    FTotalValorCategoria:double;
+  public
+
+
+  end;
+
+implementation
+
+end.
