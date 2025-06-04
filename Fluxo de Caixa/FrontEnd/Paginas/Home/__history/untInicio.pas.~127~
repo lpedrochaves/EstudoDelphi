@@ -36,16 +36,17 @@ type
     lblValorReceita: TLabel;
     lblDespesas: TLabel;
     lblValorDespesa: TLabel;
-    Chart1: TChart;
+    chrGraficoCategoria: TChart;
     Series1: TPieSeries;
-    Button1: TButton;
+    chrGraficoBarra: TChart;
+    Series2: TBarSeries;
 
     procedure pnlFluxoClick(Sender: TObject);
     procedure pnlInicioClick(Sender: TObject);
     procedure MostrarValorTotal();
     procedure FormCreate(Sender: TObject);
-    procedure MostrarObjeto();
-    procedure Button1Click(Sender: TObject);
+    procedure MontarGrafico();
+
   private
     FAtivoFrame: TFrame;
     { Private declarations }
@@ -62,33 +63,36 @@ implementation
 
 {$R *.dfm}
 
-procedure TfrmInicio.MostrarObjeto;
+procedure TfrmInicio.MontarGrafico;
 var
   GraficoController: TGraficoPizzaPercentualCategoriasController;
   ListaGraficos: TList<TGraficoPizzaPercentualCategorias>;
-  i:integer;
+  i: integer;
+  Serie: TPieSeries;
+  SerieBarra: TPieSeries;
+  Grafico: TGraficoPizzaPercentualCategorias;
 begin
-  GraficoController.Create;
-  ListaGraficos:=TList<TGraficoPizzaPercentualCategorias>.Create;
-  ListaGraficos:=GraficoController.FindAll();
+  GraficoController := TGraficoPizzaPercentualCategoriasController.Create;
+  ListaGraficos := GraficoController.FindAll();
 
-  for I := 0 to ListaGraficos.Count - 1 do
+  chrGraficoCategoria.SeriesList.Clear;
+  Serie := TPieSeries.Create(chrGraficoCategoria);
+  chrGraficoCategoria.AddSeries(Serie);
+  Serie.Marks.Visible := False; // via object inspector não funcionou
+
+  for Grafico in ListaGraficos do
   begin
-       ShowMessage(ListaGraficos[i].Pagamento + ' ' + ListaGraficos[i].Categoria )
+    // Grafico.Create(Grafico.Categoria, Grafico.Tipo, Grafico.Pagamento,
+    // Grafico.TotalValorCategoria);
+    Serie.Add(Grafico.TotalValorCategoria, Grafico.Categoria);
   end;
 
-
-end;
-
-procedure TfrmInicio.Button1Click(Sender: TObject);
-begin
-ShowMessage('clicou');
-MostrarObjeto;
 end;
 
 procedure TfrmInicio.FormCreate(Sender: TObject);
 begin
   MostrarValorTotal();
+  MontarGrafico();
 end;
 
 procedure TfrmInicio.MostrarValorTotal;
@@ -150,6 +154,7 @@ begin
   if Assigned(FAtivoFrame) and (FAtivoFrame is TFrameFluxo) then
   begin
     MostrarValorTotal;
+    MontarGrafico;
     FAtivoFrame.Free;
     FAtivoFrame := nil;
   end;

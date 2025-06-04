@@ -316,30 +316,60 @@ object frmInicio: TfrmInicio
       TabOrder = 0
       object pnlDadosAdicionais: TPanel
         Left = 1
-        Top = 481
+        Top = 433
         Width = 864
-        Height = 193
+        Height = 240
         Align = alTop
-        Caption = 'pnlDadosAdicionais'
         TabOrder = 0
+        object chrGraficoBarra: TChart
+          Left = 149
+          Top = 6
+          Width = 588
+          Height = 227
+          Title.Text.Strings = (
+            'TChart')
+          TabOrder = 0
+          DefaultCanvas = 'TGDIPlusCanvas'
+          PrintMargins = (
+            15
+            31
+            15
+            31)
+          ColorPaletteIndex = 13
+          object Series2: TBarSeries
+            HoverElement = []
+            MultiBar = mbSideAll
+            XValues.Name = 'X'
+            XValues.Order = loAscending
+            YValues.Name = 'Bar'
+            YValues.Order = loNone
+          end
+        end
       end
       object pnlInformacoesDoGrafico: TPanel
         Left = 1
         Top = 145
         Width = 864
-        Height = 336
+        Height = 288
         Align = alTop
         Caption = 'Panel1'
         TabOrder = 1
         object chrGraficoCategoria: TChart
-          Left = 5
-          Top = 65
-          Width = 484
-          Height = 250
+          Left = 149
+          Top = 6
+          Width = 588
+          Height = 275
           Legend.CheckBoxesStyle = cbsRadio
+          Legend.Font.Height = -16
           Legend.TextStyle = ltsRightPercent
+          Legend.Title.Font.Height = -13
+          Legend.Title.Margins.Left = 7
+          Legend.Title.Text.Strings = (
+            'Categorias')
+          Title.Font.Color = clBlack
+          Title.Font.Height = -19
           Title.Text.Strings = (
-            'TChart')
+            'Resultado do Per'#237'odo')
           Chart3DPercent = 92
           LeftAxis.Title.Angle = 180
           View3D = False
@@ -349,14 +379,26 @@ object frmInicio: TfrmInicio
           View3DOptions.Perspective = 0
           View3DOptions.Rotation = 360
           View3DOptions.Zoom = 386
+          BevelOuter = bvNone
+          Color = clWhite
           TabOrder = 0
           DefaultCanvas = 'TGDIPlusCanvas'
+          PrintMargins = (
+            15
+            28
+            15
+            28)
           ColorPaletteIndex = 13
           object Series1: TPieSeries
             HoverElement = []
+            Marks.Transparent = True
             Marks.Visible = False
             Marks.Style = smsLabelPercent
+            Marks.BackColor = 8454143
+            Marks.Callout.ArrowHeadSize = 12
+            Marks.Callout.Length = 20
             Marks.Tail.Margin = 2
+            Marks.Color = 8454143
             XValues.Order = loAscending
             YValues.Name = 'Pie'
             YValues.Order = loNone
@@ -377,16 +419,14 @@ object frmInicio: TfrmInicio
             Frame.OuterBrush.Gradient.Visible = True
             Frame.Width = 4
             OtherSlice.Legend.Visible = False
+            Data = {
+              04080000000000000000003840FF04000000436172730000000000207C40FF06
+              00000050686F6E65730000000000E88440FF060000005461626C657300000000
+              00804A40FF080000004D6F6E69746F72730000000000804D40FF050000004C61
+              6D70730000000000508A40FF090000004B6579626F617264730000000000807A
+              40FF0500000042696B65730000000000F07D40FF06000000436861697273}
+            Detail = {0000000000}
           end
-        end
-        object Button1: TButton
-          Left = 744
-          Top = 208
-          Width = 75
-          Height = 25
-          Caption = 'Button1'
-          TabOrder = 1
-          OnClick = Button1Click
         end
       end
       object pnlInformacoesDoFluxo: TPanel
@@ -407,12 +447,14 @@ object frmInicio: TfrmInicio
           Margins.Right = 15
           Margins.Bottom = 15
           Align = alLeft
+          BevelOuter = bvNone
+          Color = clWhite
           ParentBackground = False
           TabOrder = 0
           object lblReceita: TLabel
-            Left = 1
-            Top = 1
-            Width = 183
+            Left = 0
+            Top = 0
+            Width = 185
             Height = 30
             Align = alTop
             Alignment = taCenter
@@ -426,10 +468,10 @@ object frmInicio: TfrmInicio
             ExplicitWidth = 82
           end
           object lblValorReceita: TLabel
-            Left = 1
-            Top = 31
-            Width = 183
-            Height = 80
+            Left = 0
+            Top = 30
+            Width = 185
+            Height = 82
             Align = alClient
             Alignment = taCenter
             Caption = 'Label1'
@@ -455,12 +497,14 @@ object frmInicio: TfrmInicio
           Margins.Right = 15
           Margins.Bottom = 15
           Align = alLeft
+          BevelOuter = bvNone
+          Color = clWhite
           ParentBackground = False
           TabOrder = 1
           object lblResultado: TLabel
-            Left = 1
-            Top = 1
-            Width = 183
+            Left = 0
+            Top = 0
+            Width = 185
             Height = 30
             Align = alTop
             Alignment = taCenter
@@ -474,10 +518,10 @@ object frmInicio: TfrmInicio
             ExplicitWidth = 106
           end
           object lblValorResultado: TLabel
-            Left = 1
-            Top = 31
-            Width = 183
-            Height = 80
+            Left = 0
+            Top = 30
+            Width = 185
+            Height = 82
             Align = alClient
             Alignment = taCenter
             Caption = 'Label1'
@@ -503,12 +547,14 @@ object frmInicio: TfrmInicio
           Margins.Right = 15
           Margins.Bottom = 15
           Align = alLeft
+          BevelOuter = bvNone
+          Color = clWhite
           ParentBackground = False
           TabOrder = 2
           object lblDespesas: TLabel
-            Left = 1
-            Top = 1
-            Width = 183
+            Left = 0
+            Top = 0
+            Width = 185
             Height = 30
             Align = alTop
             Alignment = taCenter
@@ -522,10 +568,10 @@ object frmInicio: TfrmInicio
             ExplicitWidth = 93
           end
           object lblValorDespesa: TLabel
-            Left = 1
-            Top = 31
-            Width = 183
-            Height = 80
+            Left = 0
+            Top = 30
+            Width = 185
+            Height = 82
             Align = alClient
             Alignment = taCenter
             Caption = 'Label1'
