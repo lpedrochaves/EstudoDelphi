@@ -17,6 +17,8 @@ type
     constructor Create(AGraficoRepository
       : TGraficoPizzaPercentualCategoriasRepository);
     function MostrarGraficoDePizza(): TList<TGraficoPizzaPercentualCategorias>;
+    function MostrarUltimosLancamentos()
+      : TList<TGraficoPizzaPercentualCategorias>;
   end;
 
 implementation
@@ -25,6 +27,18 @@ constructor TGraficoPizzaPercentualCategoriasService.Create(AGraficoRepository
   : TGraficoPizzaPercentualCategoriasRepository);
 begin
   FGraficoPizzaPercentualCategoriasRepository := AGraficoRepository;
+end;
+
+function TGraficoPizzaPercentualCategoriasService.MostrarUltimosLancamentos()
+  : TList<TGraficoPizzaPercentualCategorias>;
+var
+  ListaGrafico: TList<TGraficoPizzaPercentualCategorias>;
+begin
+  ListaGrafico := TList<TGraficoPizzaPercentualCategorias>.Create;
+
+  ListaGrafico := FGraficoPizzaPercentualCategoriasRepository.
+    ListarUltimosLancamentosPorCategoria();
+  Result := ListaGrafico;
 end;
 
 function TGraficoPizzaPercentualCategoriasService.MostrarGraficoDePizza

@@ -40,12 +40,16 @@ type
     Series1: TPieSeries;
     chrGraficoBarra: TChart;
     Series2: TBarSeries;
+    pnlSair: TPanel;
+    lblSair: TLabel;
+    imgSair: TImage;
 
     procedure pnlFluxoClick(Sender: TObject);
     procedure pnlInicioClick(Sender: TObject);
     procedure MostrarValorTotal();
     procedure FormCreate(Sender: TObject);
     procedure MontarGrafico();
+    procedure pnlSairClick(Sender: TObject);
 
   private
     FAtivoFrame: TFrame;
@@ -65,15 +69,21 @@ implementation
 
 procedure TfrmInicio.MontarGrafico;
 var
+  Valor: Double;
+  Index: Integer;
   GraficoController: TGraficoPizzaPercentualCategoriasController;
   ListaGraficos: TList<TGraficoPizzaPercentualCategorias>;
-  i: integer;
+  ListaUltimosLancamentos: TList<TGraficoPizzaPercentualCategorias>;
+  i: Integer;
   Serie: TPieSeries;
   SerieBarra: TBarSeries;
   Grafico: TGraficoPizzaPercentualCategorias;
+  GraficoUltimosLancamentos: TGraficoPizzaPercentualCategorias;
 begin
+
   GraficoController := TGraficoPizzaPercentualCategoriasController.Create;
   ListaGraficos := GraficoController.FindAll();
+  ListaUltimosLancamentos := GraficoController.UltimosLancamentos();
 
   chrGraficoCategoria.SeriesList.Clear;
   Serie := TPieSeries.Create(chrGraficoCategoria);
@@ -85,12 +95,40 @@ begin
   chrGraficoBarra.AddSeries(SerieBarra);
   SerieBarra.Marks.Visible := False;
 
+  SerieBarra.BarWidthPercent := 50;
+
   for Grafico in ListaGraficos do
   begin
     // Grafico.Create(Grafico.Categoria, Grafico.Tipo, Grafico.Pagamento,
     // Grafico.TotalValorCategoria);
     Serie.Add(Grafico.TotalValorCategoria, Grafico.Categoria);
-    SerieBarra.Add(Grafico.TotalValorCategoria, Grafico.Categoria);
+  end;
+  for GraficoUltimosLancamentos in ListaUltimosLancamentos do
+  begin
+    // SerieBarra.Add(GraficoUltimosLancamentos.TotalValorCategoria,
+    // GraficoUltimosLancamentos.Categoria);
+
+    Valor := GraficoUltimosLancamentos.TotalValorCategoria;
+
+    // Inverte o valor se for Despesa
+    if GraficoUltimosLancamentos.Tipo = 'Despesa' then
+      Valor := -Valor;
+
+    // Adiciona ao gráfico e pega o índice
+    // Index := SerieBarra.Add(Valor, GraficoUltimosLancamentos.Categoria);
+
+    Index := SerieBarra.Add(Valor, Format('%s (%s)',
+      [GraficoUltimosLancamentos.Categoria, FormatDateTime('dd/mm',
+      GraficoUltimosLancamentos.Data)]));
+
+
+
+    // Define a cor com base no tipo
+    if GraficoUltimosLancamentos.Tipo = 'Despesa' then
+      SerieBarra.ValueColor[Index] := clRed
+    else
+      SerieBarra.ValueColor[Index] := clGreen;
+
   end;
 
 end;
@@ -106,7 +144,7 @@ var
   FluxoDeCaixa: TFluxoDeCaixa;
   Fluxos: TList<TFluxoDeCaixa>;
   FluxoController: TFluxoDeCaixaController;
-  Receita, Despesa, ValorTotal: double;
+  Receita, Despesa, ValorTotal: Double;
 begin
   ValorTotal := 0;
   Receita := 0;
@@ -164,6 +202,11 @@ begin
     FAtivoFrame.Free;
     FAtivoFrame := nil;
   end;
+end;
+
+procedure TfrmInicio.pnlSairClick(Sender: TObject);
+begin
+  Application.Terminate;
 end;
 
 end.

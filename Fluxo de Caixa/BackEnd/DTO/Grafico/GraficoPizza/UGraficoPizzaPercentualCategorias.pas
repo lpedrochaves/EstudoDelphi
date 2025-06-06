@@ -6,10 +6,14 @@ type
   TGraficoPizzaPercentualCategorias = class
 
   private
+    FData: TDate;
     FCategoria: string;
     FTipo: string;
     FPagamento: string;
     FTotalValorCategoria: double;
+
+    function GetData: TDate;
+    procedure SetData(const Value: TDate);
 
     function GetCategoria: string;
     procedure SetCategoria(const Value: string);
@@ -26,12 +30,15 @@ type
   public
     constructor Create(ACategoria, ATipo, APagamento: string;
       ATotalValorCategoria: double); overload;
+    constructor Create(AData: TDate; ACategoria, ATipo: string;
+      ATotalValorCategoria: double); overload;
     constructor Create(); overload;
     property Categoria: String read GetCategoria write SetCategoria;
     property Tipo: String read GetTipo write SetTipo;
     property Pagamento: String read GetPagamento write SetPagamento;
     property TotalValorCategoria: double read GetTotalValorCategoria
       write SetTotalValorCategoria;
+    property Data: TDate read GetData write SetData;
 
   end;
 
@@ -42,6 +49,15 @@ begin
 
 end;
 
+constructor TGraficoPizzaPercentualCategorias.Create(AData: TDate;
+  ACategoria, ATipo: string; ATotalValorCategoria: double);
+begin
+  FData := AData;
+  FCategoria := ACategoria;
+  FTipo := ATipo;
+  FTotalValorCategoria := ATotalValorCategoria;
+end;
+
 constructor TGraficoPizzaPercentualCategorias.Create(ACategoria, ATipo,
   APagamento: string; ATotalValorCategoria: double);
 begin
@@ -49,6 +65,16 @@ begin
   FTipo := ATipo;
   FPagamento := APagamento;
   FTotalValorCategoria := ATotalValorCategoria;
+end;
+
+function TGraficoPizzaPercentualCategorias.GetData: TDate;
+begin
+  Result := FData;
+end;
+
+procedure TGraficoPizzaPercentualCategorias.SetData(const Value: TDate);
+begin
+  FData := Value;
 end;
 
 function TGraficoPizzaPercentualCategorias.GetCategoria: string;

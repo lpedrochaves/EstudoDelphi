@@ -296,6 +296,75 @@ object frmInicio: TfrmInicio
         ExplicitHeight = 25
       end
     end
+    object pnlSair: TPanel
+      AlignWithMargins = True
+      Left = 0
+      Top = 519
+      Width = 200
+      Height = 65
+      Cursor = crHandPoint
+      Margins.Left = 0
+      Margins.Top = 0
+      Margins.Right = 0
+      Margins.Bottom = 0
+      BevelOuter = bvNone
+      Color = clGrayText
+      ParentBackground = False
+      TabOrder = 2
+      OnClick = pnlSairClick
+      object lblSair: TLabel
+        AlignWithMargins = True
+        Left = 68
+        Top = 0
+        Width = 132
+        Height = 65
+        Cursor = crHandPoint
+        Margins.Left = 5
+        Margins.Top = 0
+        Margins.Right = 0
+        Margins.Bottom = 0
+        Align = alClient
+        Caption = 'Sair'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -19
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        ParentFont = False
+        Layout = tlCenter
+        OnClick = pnlSairClick
+        ExplicitLeft = 70
+        ExplicitTop = 1
+        ExplicitWidth = 32
+        ExplicitHeight = 25
+      end
+      object imgSair: TImage
+        Left = 0
+        Top = 0
+        Width = 63
+        Height = 65
+        Cursor = crHandPoint
+        Align = alLeft
+        Center = True
+        Picture.Data = {
+          0954506E67496D61676589504E470D0A1A0A0000000D49484452000000320000
+          003208060000001E3F88B1000000017352474200AECE1CE90000012049444154
+          78DAEDD9310E8230140660201C800B30B839EAE6EA0D1C1DBD02277274F40ADE
+          406F8009EC5E80505F0713429448DFD3FE85F72F4D585E3FDA267D691C4D24B1
+          EF09284421E0990FA4AEEB933166CF2992E7F9CF7FD86081AAAA8C4411AF1089
+          9580807457A36DDB2249921B0372818050B6FF988C4214021885A0050662EB35
+          4DB3A0DC8385746BB962BC43CAB25CA5697AED7E73C178874861202012181808
+          170305E160442174F53F4A60A87D58D2B0198311854835629F3284090DB226C8
+          DBBE08756B6534ECBE4588432442873DA3C3FE18838083B822A0201C040C848B
+          808048202020FD5A2E0818C8AB9E2B020AC28D42D0A210B4CC0B12FAB3C239EA
+          5DA519107D7A1381D8D866891A9D43F09050A210B428042D93813C019EA05F42
+          5898DCDA0000000049454E44AE426082}
+        OnClick = pnlSairClick
+        ExplicitLeft = 1
+        ExplicitTop = 1
+        ExplicitHeight = 63
+      end
+    end
   end
   object pnlContainer: TPanel
     Left = 200
@@ -316,19 +385,49 @@ object frmInicio: TfrmInicio
       TabOrder = 0
       object pnlDadosAdicionais: TPanel
         Left = 1
-        Top = 433
+        Top = 393
         Width = 864
-        Height = 240
+        Height = 293
         Align = alTop
         TabOrder = 0
         object chrGraficoBarra: TChart
-          Left = 149
-          Top = 6
-          Width = 588
-          Height = 227
+          Left = 1
+          Top = 1
+          Width = 862
+          Height = 291
+          Cursor = crHandPoint
+          Legend.Font.Height = -16
+          Title.Font.Color = clBlack
+          Title.Font.Height = -19
           Title.Text.Strings = (
-            'TChart')
+            #218'ltimos Lan'#231'amentos')
+          Chart3DPercent = 1
+          DepthAxis.Automatic = False
+          DepthAxis.AutomaticMaximum = False
+          DepthAxis.Maximum = 3.000000000000000000
+          LeftAxis.Automatic = False
+          LeftAxis.AutomaticMaximum = False
+          LeftAxis.LabelsFormat.Font.Height = -13
+          LeftAxis.Maximum = 300.000000000000000000
+          LeftAxis.Title.Caption = 'R$'
+          LeftAxis.Title.Font.Height = -16
+          LeftAxis.Title.Font.Style = [fsBold]
+          RightAxis.Automatic = False
+          RightAxis.AutomaticMaximum = False
+          RightAxis.Maximum = 300.000000000000000000
+          TopAxis.Automatic = False
+          TopAxis.AutomaticMaximum = False
+          TopAxis.Maximum = 300.000000000000000000
+          View3D = False
+          View3DOptions.Zoom = 15
+          Align = alClient
+          BevelOuter = bvNone
+          Color = clWhite
           TabOrder = 0
+          ExplicitLeft = 149
+          ExplicitTop = 6
+          ExplicitWidth = 673
+          ExplicitHeight = 283
           DefaultCanvas = 'TGDIPlusCanvas'
           PrintMargins = (
             15
@@ -348,21 +447,22 @@ object frmInicio: TfrmInicio
       end
       object pnlInformacoesDoGrafico: TPanel
         Left = 1
-        Top = 145
+        Top = 105
         Width = 864
         Height = 288
         Align = alTop
         Caption = 'Panel1'
         TabOrder = 1
+        ExplicitTop = 145
         object chrGraficoCategoria: TChart
-          Left = 149
-          Top = 6
-          Width = 588
-          Height = 275
+          Left = 1
+          Top = 1
+          Width = 862
+          Height = 286
           Legend.CheckBoxesStyle = cbsRadio
-          Legend.Font.Height = -16
+          Legend.Font.Height = -15
           Legend.TextStyle = ltsRightPercent
-          Legend.Title.Font.Height = -13
+          Legend.Title.Font.Height = -16
           Legend.Title.Margins.Left = 7
           Legend.Title.Text.Strings = (
             'Categorias')
@@ -379,9 +479,14 @@ object frmInicio: TfrmInicio
           View3DOptions.Perspective = 0
           View3DOptions.Rotation = 360
           View3DOptions.Zoom = 386
+          Align = alClient
           BevelOuter = bvNone
           Color = clWhite
           TabOrder = 0
+          ExplicitLeft = 149
+          ExplicitTop = 6
+          ExplicitWidth = 588
+          ExplicitHeight = 275
           DefaultCanvas = 'TGDIPlusCanvas'
           PrintMargins = (
             15
@@ -433,7 +538,7 @@ object frmInicio: TfrmInicio
         Left = 1
         Top = 1
         Width = 864
-        Height = 144
+        Height = 104
         Align = alTop
         TabOrder = 2
         object pnlInformacaoReceita: TPanel
@@ -441,7 +546,7 @@ object frmInicio: TfrmInicio
           Left = 331
           Top = 16
           Width = 185
-          Height = 112
+          Height = 72
           Margins.Left = 80
           Margins.Top = 15
           Margins.Right = 15
@@ -451,6 +556,7 @@ object frmInicio: TfrmInicio
           Color = clWhite
           ParentBackground = False
           TabOrder = 0
+          ExplicitHeight = 112
           object lblReceita: TLabel
             Left = 0
             Top = 0
@@ -471,7 +577,7 @@ object frmInicio: TfrmInicio
             Left = 0
             Top = 30
             Width = 185
-            Height = 82
+            Height = 42
             Align = alClient
             Alignment = taCenter
             Caption = 'Label1'
@@ -491,7 +597,7 @@ object frmInicio: TfrmInicio
           Left = 51
           Top = 16
           Width = 185
-          Height = 112
+          Height = 72
           Margins.Left = 50
           Margins.Top = 15
           Margins.Right = 15
@@ -501,6 +607,7 @@ object frmInicio: TfrmInicio
           Color = clWhite
           ParentBackground = False
           TabOrder = 1
+          ExplicitHeight = 112
           object lblResultado: TLabel
             Left = 0
             Top = 0
@@ -521,7 +628,7 @@ object frmInicio: TfrmInicio
             Left = 0
             Top = 30
             Width = 185
-            Height = 82
+            Height = 42
             Align = alClient
             Alignment = taCenter
             Caption = 'Label1'
@@ -541,7 +648,7 @@ object frmInicio: TfrmInicio
           Left = 611
           Top = 16
           Width = 185
-          Height = 112
+          Height = 72
           Margins.Left = 80
           Margins.Top = 15
           Margins.Right = 15
@@ -551,6 +658,7 @@ object frmInicio: TfrmInicio
           Color = clWhite
           ParentBackground = False
           TabOrder = 2
+          ExplicitHeight = 112
           object lblDespesas: TLabel
             Left = 0
             Top = 0
@@ -571,7 +679,7 @@ object frmInicio: TfrmInicio
             Left = 0
             Top = 30
             Width = 185
-            Height = 82
+            Height = 42
             Align = alClient
             Alignment = taCenter
             Caption = 'Label1'

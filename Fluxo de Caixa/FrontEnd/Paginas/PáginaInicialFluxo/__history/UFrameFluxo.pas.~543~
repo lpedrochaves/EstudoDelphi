@@ -1,0 +1,416 @@
+﻿unit UFrameFluxo;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
+  System.Classes, Generics.Collections, UFrameDespesasReceitas,
+  Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls,
+  Vcl.StdCtrls, Vcl.ComCtrls, UFluxoDeCaixa, UFluxoDeCaixaController,
+  UFluxoDeCaixaAtualizarModal, UFluxoDeCaixaCadastrarModal, Utils,
+  Vcl.Imaging.pngimage;
+
+type
+  TTipoFluxo = (tfNenhum, tfReceita, tfDespesa);
+
+  TFrameFluxo = class(TFrame)
+    pnlHeaderFluxo: TPanel;
+    pnlContainer: TPanel;
+    pnlReceitas: TPanel;
+    pnlDespesas: TPanel;
+    lblReceitas: TLabel;
+    lblDespesas: TLabel;
+    pnlReceitasBorda: TPanel;
+    pnlDespesaBorda: TPanel;
+    pnlContainerBorda: TPanel;
+    pnlBotaoDespesaReceita: TPanel;
+    lblTituloContainer: TLabel;
+    pnlTitulo: TPanel;
+    scrBarraDeRolagem: TScrollBox;
+    btnCadastrar: TButton;
+    pnlCadastrar: TPanel;
+    lblTituloResultado: TLabel;
+    lblValorResultado: TLabel;
+    pnlNomeColuna: TPanel;
+    pnlNomeColunaData: TPanel;
+    Panel1: TPanel;
+    Panel2: TPanel;
+    Panel3: TPanel;
+    lblTituloDespesas: TLabel;
+    lblTituloReceitas: TLabel;
+    lblValorReceita: TLabel;
+    lblValorDespesa: TLabel;
+    dtInicial: TDateTimePicker;
+    dtFinal: TDateTimePicker;
+    pnlSelecionarData: TPanel;
+    Label1: TLabel;
+    Label2: TLabel;
+    pnlResultados: TPanel;
+    pnlBordaSelecionarData: TPanel;
+    pnlFiltrar: TPanel;
+    imgFiltrar: TImage;
+    Label3: TLabel;
+    Panel4: TPanel;
+    Panel5: TPanel;
+    Panel6: TPanel;
+    Panel7: TPanel;
+    procedure pnlDespesasClick(Sender: TObject);
+    procedure CriarFrameFluxoDeCaixa(CategoriaId, Id: integer;
+      Descricao, Tipo: string; Data: string; Pagamento: string;
+      Categoria: string; Valor: double);
+    procedure scrBarraDeRolagemMouseWheel(Sender: TObject; Shift: TShiftState;
+      WheelDelta: integer; MousePos: TPoint; var Handled: Boolean);
+    procedure pnlReceitasClick(Sender: TObject);
+    procedure LimparFrames();
+    procedure EditarFluxo(Sender: TObject);
+    procedure btnCadastrarClick(Sender: TObject);
+    procedure MostrarValorTotal();
+
+  private
+    FPaginaAtual: integer;
+    FTotalPaginas: integer;
+    FTipoSelecionado: TTipoFluxo;
+    Frames: TList<TFrameComponenteDespesaReceita>;
+    procedure AtualizarLista;
+
+  public
+    procedure Inicializar;
+    constructor Create(AOwner: TComponent); override;
+    destructor Destroy; override;
+  end;
+
+implementation
+
+{$R *.dfm}
+
+var
+  frameDespesasReceitas: TFrameComponenteDespesaReceita;
+  frmFluxoAtualizar: TfrmFluxoDeCaixaAtualizarModal;
+  frmFluxoCadastrar: TFormFluxoDeCaixaCadastrarModal;
+
+procedure TFrameFluxo.AtualizarLista;
+var
+  FluxoDeCaixa: TFluxoDeCaixa;
+  Fluxos: TList<TFluxoDeCaixa>;
+  FluxoController: TFluxoDeCaixaController;
+
+begin
+  if FTipoSelecionado = tfDespesa then
+  begin
+    if Assigned(frameDespesasReceitas) then
+    begin
+      LimparFrames();
+    end;
+
+    try
+      FluxoController := TFluxoDeCaixaController.Create;
+      Fluxos := FluxoController.ListarTodasDespesas();
+      for FluxoDeCaixa in Fluxos do
+      begin
+        CriarFrameFluxoDeCaixa(FluxoDeCaixa.CategoriaId, FluxoDeCaixa.Id,
+          FluxoDeCaixa.Descricao, FluxoDeCaixa.Tipo,
+          DateToStr(FluxoDeCaixa.Data), FluxoDeCaixa.TipoPagamento,
+          FluxoDeCaixa.Categoria, FluxoDeCaixa.Valor);
+      end;
+      MostrarValorTotal();
+      Fluxos.Free;
+    except
+      on E: Exception do
+        ShowMessage('Erro ao criar frame:  ' + E.Message);
+    end;
+  end
+
+  else if FTipoSelecionado = tfReceita then
+  begin
+    if Assigned(frameDespesasReceitas) then
+    begin
+      LimparFrames();
+    end;
+
+    try
+      FluxoController := TFluxoDeCaixaController.Create;
+      Fluxos := FluxoController.ListarTodasReceitas();
+
+      for FluxoDeCaixa in Fluxos do
+      begin
+
+        CriarFrameFluxoDeCaixa(FluxoDeCaixa.CategoriaId, FluxoDeCaixa.Id,
+          FluxoDeCaixa.Descricao, FluxoDeCaixa.Tipo,
+          FormatDateTime('DD/MM/YYYY', FluxoDeCaixa.Data),
+          FluxoDeCaixa.TipoPagamento, FluxoDeCaixa.Categoria,
+          FluxoDeCaixa.Valor);
+
+      end;
+      MostrarValorTotal();
+      Fluxos.Free;
+    except
+      on E: Exception do
+        ShowMessage('Erro ao criar frame:  ' + E.Message);
+    end;
+  end
+  else if FTipoSelecionado = tfNenhum then
+  begin
+    if Assigned(frameDespesasReceitas) then
+    begin
+      LimparFrames();
+    end;
+
+    try
+      FluxoController := TFluxoDeCaixaController.Create;
+      Fluxos := FluxoController.FindAll();
+
+      for FluxoDeCaixa in Fluxos do
+      begin
+
+        CriarFrameFluxoDeCaixa(FluxoDeCaixa.CategoriaId, FluxoDeCaixa.Id,
+          FluxoDeCaixa.Descricao, FluxoDeCaixa.Tipo,
+          FormatDateTime('DD/MM/YYYY', FluxoDeCaixa.Data),
+          FluxoDeCaixa.TipoPagamento, FluxoDeCaixa.Categoria,
+          FluxoDeCaixa.Valor);
+
+      end;
+      MostrarValorTotal();
+      Fluxos.Free;
+    except
+      on E: Exception do
+        ShowMessage('Erro ao criar frame:  ' + E.Message);
+    end;
+  end;
+
+end;
+
+procedure TFrameFluxo.btnCadastrarClick(Sender: TObject);
+begin
+  frmFluxoCadastrar := TFormFluxoDeCaixaCadastrarModal.Create(Self);
+  try
+    frmFluxoCadastrar.OnFluxoCadastrado := AtualizarLista;
+    frmFluxoCadastrar.ShowModal;
+
+  finally
+    frmFluxoCadastrar.Free;
+  end;
+end;
+
+procedure TFrameFluxo.Inicializar;
+var
+  FluxoDeCaixa: TFluxoDeCaixa;
+  Fluxos: TList<TFluxoDeCaixa>;
+  FluxoController: TFluxoDeCaixaController;
+begin
+
+  if Assigned(frameDespesasReceitas) then
+  begin
+    LimparFrames();
+  end;
+  MostrarValorTotal();
+
+  try
+    FluxoController := TFluxoDeCaixaController.Create;
+    Fluxos := FluxoController.FindAll();
+    for FluxoDeCaixa in Fluxos do
+    begin
+      CriarFrameFluxoDeCaixa(FluxoDeCaixa.CategoriaId, FluxoDeCaixa.Id,
+        FluxoDeCaixa.Descricao, FluxoDeCaixa.Tipo, DateToStr(FluxoDeCaixa.Data),
+        FluxoDeCaixa.TipoPagamento, FluxoDeCaixa.Categoria, FluxoDeCaixa.Valor);
+    end;
+
+    Fluxos.Free;
+  except
+    on E: Exception do
+      ShowMessage('Erro ao criar frame:  ' + E.Message);
+  end;
+
+  AtualizarLista;
+end;
+
+destructor TFrameFluxo.Destroy;
+begin
+  LimparFrames;
+  Frames.Free;
+  inherited Destroy;
+end;
+
+procedure TFrameFluxo.EditarFluxo(Sender: TObject);
+var
+  Control: TControl;
+  Frame: TFrameComponenteDespesaReceita;
+  Valor: double;
+begin
+
+  Control := Sender as TControl;
+
+  while (Control <> nil) and not(Control is TFrameComponenteDespesaReceita) do
+    Control := Control.Parent;
+
+  if Control is TFrameComponenteDespesaReceita then
+  begin
+    Frame := TFrameComponenteDespesaReceita(Control);
+    Valor := ConverterValorParaFloat(Frame.lblValorBanco.Caption);
+
+    try
+
+      frmFluxoAtualizar := TfrmFluxoDeCaixaAtualizarModal.Create(Self,
+        Frame.lblDescricao.Caption, Frame.lblTipo.Caption,
+        Frame.lblDataBanco.Caption, Frame.lblPagamentoBanco.Caption,
+        StrToInt(Frame.lblCategoriaId.Caption),
+        StrToInt(Frame.lblId.Caption), Valor);
+
+      // frmFluxoAtualizar.ShowModal;
+      // frmFluxoAtualizar.OnFluxoAtualizado := Self.AtualizarLista;
+
+    
+      ShowMessage('antes MR');
+      if frmFluxoAtualizar.ShowModal = mrOk then
+      begin
+        ShowMessage('ATUALIZOU');
+       // AtualizarLista;
+      end;
+
+    finally
+      frmFluxoAtualizar.Free;
+    end;
+  end;
+end;
+
+procedure TFrameFluxo.LimparFrames();
+var
+  i: integer;
+begin
+  for i := Frames.Count - 1 downto 0 do
+  begin
+    Frames[i].Free;
+
+  end;
+  Frames.Clear;
+end;
+
+procedure TFrameFluxo.MostrarValorTotal();
+var
+  FluxoDeCaixa: TFluxoDeCaixa;
+  Fluxos: TList<TFluxoDeCaixa>;
+  FluxoController: TFluxoDeCaixaController;
+  Receita, Despesa, ValorTotal: double;
+
+begin
+
+  ValorTotal := 0;
+  Receita := 0;
+  Despesa := 0;
+  FluxoController := TFluxoDeCaixaController.Create;
+  Receita := FluxoController.MostrarReceitas();
+  Despesa := FluxoController.MostrarDespesas();
+  ValorTotal := FluxoController.MostrarValorTotal();
+  lblValorReceita.Caption := ConverterValorParaTexto(Receita);
+  lblValorDespesa.Caption := ConverterValorParaTexto(Despesa);
+  lblValorResultado.Caption := ConverterValorParaTexto(ValorTotal);
+end;
+
+procedure TFrameFluxo.pnlDespesasClick(Sender: TObject);
+var
+  FluxoDeCaixa: TFluxoDeCaixa;
+  Fluxos: TList<TFluxoDeCaixa>;
+  FluxoController: TFluxoDeCaixaController;
+begin
+  FTipoSelecionado := tfDespesa;
+
+  if Assigned(frameDespesasReceitas) then
+  begin
+    LimparFrames();
+  end;
+
+  try
+    FluxoController := TFluxoDeCaixaController.Create;
+    Fluxos := FluxoController.ListarTodasDespesas();
+    for FluxoDeCaixa in Fluxos do
+    begin
+      CriarFrameFluxoDeCaixa(FluxoDeCaixa.CategoriaId, FluxoDeCaixa.Id,
+        FluxoDeCaixa.Descricao, FluxoDeCaixa.Tipo, DateToStr(FluxoDeCaixa.Data),
+        FluxoDeCaixa.TipoPagamento, FluxoDeCaixa.Categoria, FluxoDeCaixa.Valor);
+    end;
+    Fluxos.Free;
+  except
+    on E: Exception do
+      ShowMessage('Erro ao criar frame:  ' + E.Message);
+  end;
+
+end;
+
+procedure TFrameFluxo.pnlReceitasClick(Sender: TObject);
+var
+  FluxoDeCaixa: TFluxoDeCaixa;
+  Fluxos: TList<TFluxoDeCaixa>;
+  FluxoController: TFluxoDeCaixaController;
+begin
+  FTipoSelecionado := tfReceita;
+
+  if Assigned(frameDespesasReceitas) then
+  begin
+    LimparFrames();
+  end;
+
+  try
+    FluxoController := TFluxoDeCaixaController.Create;
+    Fluxos := FluxoController.ListarTodasReceitas();
+
+    for FluxoDeCaixa in Fluxos do
+    begin
+
+      CriarFrameFluxoDeCaixa(FluxoDeCaixa.CategoriaId, FluxoDeCaixa.Id,
+        FluxoDeCaixa.Descricao, FluxoDeCaixa.Tipo, FormatDateTime('DD/MM/YYYY',
+        FluxoDeCaixa.Data), FluxoDeCaixa.TipoPagamento, FluxoDeCaixa.Categoria,
+        FluxoDeCaixa.Valor);
+
+    end;
+    Fluxos.Free;
+  except
+    on E: Exception do
+      ShowMessage('Erro ao criar frame:  ' + E.Message);
+  end;
+
+end;
+
+procedure TFrameFluxo.scrBarraDeRolagemMouseWheel(Sender: TObject;
+  Shift: TShiftState; WheelDelta: integer; MousePos: TPoint;
+  var Handled: Boolean);
+begin
+  scrBarraDeRolagem.VertScrollBar.Position :=
+    scrBarraDeRolagem.VertScrollBar.Position - WheelDelta div 2;
+  Handled := True;
+end;
+
+constructor TFrameFluxo.Create(AOwner: TComponent);
+begin
+  inherited Create(AOwner);
+  Frames := TList<TFrameComponenteDespesaReceita>.Create;
+end;
+
+procedure TFrameFluxo.CriarFrameFluxoDeCaixa(CategoriaId, Id: integer;
+  Descricao, Tipo: string; Data: string; Pagamento: string; Categoria: string;
+  Valor: double);
+
+begin
+
+  frameDespesasReceitas := TFrameComponenteDespesaReceita.Create(Self);
+
+  frameDespesasReceitas.OnDelete := AtualizarLista;
+
+  frameDespesasReceitas.Name := '';
+  frameDespesasReceitas.Parent := scrBarraDeRolagem;
+  frameDespesasReceitas.Align := alTop;
+
+  frameDespesasReceitas.lblDescricao.Caption := Descricao;
+  frameDespesasReceitas.lblCategoriaId.Caption := IntToStr(CategoriaId);
+  frameDespesasReceitas.lblId.Caption := IntToStr(Id);
+  frameDespesasReceitas.lblTipo.Caption := Tipo;
+  frameDespesasReceitas.lblDataBanco.Caption := Data;
+  frameDespesasReceitas.lblPagamentoBanco.Caption := Pagamento;
+  frameDespesasReceitas.lblCategoriaBanco.Caption := Categoria;
+  frameDespesasReceitas.lblValorBanco.Caption := ConverterValorParaTexto(Valor);
+
+  frameDespesasReceitas.pnlEditar.OnClick := EditarFluxo;
+  frameDespesasReceitas.imgEditar.OnClick := EditarFluxo;
+
+  Frames.Add(frameDespesasReceitas);
+end;
+
+end.

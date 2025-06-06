@@ -66,7 +66,6 @@ type
     procedure btnCadastrarClick(Sender: TObject);
     procedure MostrarValorTotal();
 
-
   private
     FPaginaAtual: integer;
     FTotalPaginas: integer;
@@ -249,14 +248,21 @@ begin
     Valor := ConverterValorParaFloat(Frame.lblValorBanco.Caption);
 
     try
+
       frmFluxoAtualizar := TfrmFluxoDeCaixaAtualizarModal.Create(Self,
         Frame.lblDescricao.Caption, Frame.lblTipo.Caption,
         Frame.lblDataBanco.Caption, Frame.lblPagamentoBanco.Caption,
         StrToInt(Frame.lblCategoriaId.Caption),
         StrToInt(Frame.lblId.Caption), Valor);
 
-      frmFluxoAtualizar.OnFluxoAtualizado := Self.AtualizarLista;
-      frmFluxoAtualizar.ShowModal;
+      // frmFluxoAtualizar.ShowModal;
+      // frmFluxoAtualizar.OnFluxoAtualizado := Self.AtualizarLista;
+
+
+      if frmFluxoAtualizar.ShowModal = mrOk then
+      begin
+        AtualizarLista;
+      end;
 
     finally
       frmFluxoAtualizar.Free;
@@ -360,8 +366,6 @@ begin
   end;
 
 end;
-
-
 
 procedure TFrameFluxo.scrBarraDeRolagemMouseWheel(Sender: TObject;
   Shift: TShiftState; WheelDelta: integer; MousePos: TPoint;

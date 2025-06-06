@@ -1,0 +1,196 @@
+unit untInicio;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
+  System.Classes, Vcl.Graphics, UFrameFluxo,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.WinXCtrls,
+  System.ImageList, Vcl.ImgList, Vcl.StdCtrls, Vcl.Imaging.pngimage,
+  Vcl.ComCtrls, Vcl.Grids, UFluxoDeCaixa, UFluxoDeCaixaController, Utils,
+  Generics.Collections, VclTee.TeeGDIPlus, VclTee.TeEngine, VclTee.Series,
+  VclTee.TeeProcs, VclTee.Chart, UGraficoPizzaPercentualCategoriasController,
+  UGraficoPizzaPercentualCategorias;
+
+type
+  TfrmInicio = class(TForm)
+    heaLateral: TSplitView;
+    imgLogo: TImage;
+    pnlFluxo: TPanel;
+    imgFluxo: TImage;
+    lblFluxo: TLabel;
+    pnlInicio: TPanel;
+    imgInicio: TImage;
+    lblInicio: TLabel;
+    pnlContainer: TPanel;
+    pnlBody: TPanel;
+    pnlDadosAdicionais: TPanel;
+    pnlInformacoesDoGrafico: TPanel;
+    pnlInformacoesDoFluxo: TPanel;
+    pnlInformacaoReceita: TPanel;
+    pnlInformacaoResultado: TPanel;
+    pnlInfomacaoDespesa: TPanel;
+    lblResultado: TLabel;
+    lblValorResultado: TLabel;
+    lblReceita: TLabel;
+    lblValorReceita: TLabel;
+    lblDespesas: TLabel;
+    lblValorDespesa: TLabel;
+    chrGraficoCategoria: TChart;
+    Series1: TPieSeries;
+    chrGraficoBarra: TChart;
+    Series2: TBarSeries;
+
+    procedure pnlFluxoClick(Sender: TObject);
+    procedure pnlInicioClick(Sender: TObject);
+    procedure MostrarValorTotal();
+    procedure FormCreate(Sender: TObject);
+    procedure MontarGrafico();
+
+  private
+    FAtivoFrame: TFrame;
+    { Private declarations }
+  public
+
+    procedure MudarTela(AFrame: TFrame);
+    { Public declarations }
+  end;
+
+var
+  frmInicio: TfrmInicio;
+
+implementation
+
+{$R *.dfm}
+
+procedure TfrmInicio.MontarGrafico;
+var
+  Valor: Double;
+  Index: Integer;
+  GraficoController: TGraficoPizzaPercentualCategoriasController;
+  ListaGraficos: TList<TGraficoPizzaPercentualCategorias>;
+  ListaUltimosLancamentos: TList<TGraficoPizzaPercentualCategorias>;
+  i: Integer;
+  Serie: TPieSeries;
+  SerieBarra: TBarSeries;
+  Grafico: TGraficoPizzaPercentualCategorias;
+  GraficoUltimosLancamentos: TGraficoPizzaPercentualCategorias;
+begin
+
+  GraficoController := TGraficoPizzaPercentualCategoriasController.Create;
+  ListaGraficos := GraficoController.FindAll();
+  ListaUltimosLancamentos := GraficoController.UltimosLancamentos();
+
+  chrGraficoCategoria.SeriesList.Clear;
+  Serie := TPieSeries.Create(chrGraficoCategoria);
+  chrGraficoCategoria.AddSeries(Serie);
+  Serie.Marks.Visible := False; // via object inspector não funcionou
+
+  chrGraficoBarra.SeriesList.Clear;
+  SerieBarra := TBarSeries.Create(chrGraficoBarra);
+  chrGraficoBarra.AddSeries(SerieBarra);
+  SerieBarra.Marks.Visible := False;
+
+  for Grafico in ListaGraficos do
+  begin
+    // Grafico.Create(Grafico.Categoria, Grafico.Tipo, Grafico.Pagamento,
+    // Grafico.TotalValorCategoria);
+    Serie.Add(Grafico.TotalValorCategoria, Grafico.Categoria);
+  end;
+  for GraficoUltimosLancamentos in ListaUltimosLancamentos do
+  begin
+    // SerieBarra.Add(GraficoUltimosLancamentos.TotalValorCategoria,
+    // GraficoUltimosLancamentos.Categoria);
+
+    Valor := GraficoUltimosLancamentos.TotalValorCategoria;
+
+    // Inverte o valor se for Despesa
+    if GraficoUltimosLancamentos.Tipo = 'Despesa' then
+      Valor := -Valor;
+
+    // Adiciona ao gráfico e pega o índice
+    Index := SerieBarra.Add(Valor, GraficoUltimosLancamentos.Categoria);
+
+    // Define a cor com base no tipo
+    if GraficoUltimosLancamentos.Tipo = 'Despesa' then
+      SerieBarra.ValueColor[Index] := clRed
+    else
+      SerieBarra.ValueColor[Index] := clGreen;
+
+
+  end;
+
+end;
+
+procedure TfrmInicio.FormCreate(Sender: TObject);
+begin
+  MostrarValorTotal();
+  MontarGrafico();
+end;
+
+procedure TfrmInicio.MostrarValorTotal;
+var
+  FluxoDeCaixa: TFluxoDeCaixa;
+  Fluxos: TList<TFluxoDeCaixa>;
+  FluxoController: TFluxoDeCaixaController;
+  Receita, Despesa, ValorTotal: Double;
+begin
+  ValorTotal := 0;
+  Receita := 0;
+  Despesa := 0;
+  FluxoController := TFluxoDeCaixaController.Create;
+  Receita := FluxoController.MostrarReceitas();
+  Despesa := FluxoController.MostrarDespesas();
+  ValorTotal := FluxoController.MostrarValorTotal();
+  lblValorReceita.Caption := ConverterValorParaTexto(Receita);
+  lblValorDespesa.Caption := ConverterValorParaTexto(Despesa);
+  lblValorResultado.Caption := ConverterValorParaTexto(ValorTotal);
+end;
+
+procedure TfrmInicio.MudarTela(AFrame: TFrame);
+begin
+  if Assigned(FAtivoFrame) then
+  begin
+    FAtivoFrame.Free;
+    FAtivoFrame := nil;
+  end;
+  FAtivoFrame := AFrame;
+  FAtivoFrame.Parent := pnlContainer;
+  FAtivoFrame.Align := alClient;
+end;
+
+procedure TfrmInicio.pnlFluxoClick(Sender: TObject);
+var
+  frameFluxo: TFrameFluxo;
+begin
+  if Assigned(FAtivoFrame) and (FAtivoFrame is TFrameFluxo) then
+    Exit;
+  try
+    frameFluxo := TFrameFluxo.Create(Self);
+    frameFluxo.Name := '';
+    frameFluxo.Parent := pnlContainer;
+    frameFluxo.Align := alClient;
+    frameFluxo.Inicializar;
+    // TIVE QUE CRIAR POIS ESTAVA COM PROBLEMAS NO SCROL RECEBENDO OUTRO FRAME
+
+    MudarTela(frameFluxo);
+
+  except
+    on E: Exception do
+      ShowMessage('Erro ao criar frame:  ' + E.Message);
+  end;
+end;
+
+procedure TfrmInicio.pnlInicioClick(Sender: TObject);
+
+begin
+  if Assigned(FAtivoFrame) and (FAtivoFrame is TFrameFluxo) then
+  begin
+    MostrarValorTotal;
+    MontarGrafico;
+    FAtivoFrame.Free;
+    FAtivoFrame := nil;
+  end;
+end;
+
+end.

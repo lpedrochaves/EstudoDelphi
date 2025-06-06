@@ -55,6 +55,7 @@ type
     procedure edtValorChange(Sender: TObject);
     procedure edtValorKeyPress(Sender: TObject; var Key: Char);
     procedure selDespesaReceitaKeyPress(Sender: TObject; var Key: Char);
+    // procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
     FIdFluxo: Integer;
     { Private declarations }
@@ -63,7 +64,7 @@ type
 
     OnFluxoAtualizado: TOnFluxoAtualizado; // PROP PARA  ATUALIZAR FLUXO
 
-    constructor Create(AOwner: TComponent); overload;
+    // constructor Create(AOwner: TComponent); overload;
     constructor Create(AOwner: TComponent; Descricao, Tipo: string;
       Data: string; Pagamento: string; Categoria, Id: Integer;
       Valor: double); overload;
@@ -81,10 +82,10 @@ implementation
 {$R *.dfm}
 { TfrmFluxoDeCaixaAtualizarModal }
 
-constructor TfrmFluxoDeCaixaAtualizarModal.Create(AOwner: TComponent);
-begin
-  inherited Create(AOwner);
-end;
+// constructor TfrmFluxoDeCaixaAtualizarModal.Create(AOwner: TComponent);
+// begin
+// inherited Create(AOwner);
+// end;
 
 procedure TfrmFluxoDeCaixaAtualizarModal.btnAtualizarClick(Sender: TObject);
 var
@@ -140,8 +141,14 @@ begin
 
     ShowMessage('Atualização concluída com sucesso!');
 
-    if Assigned(OnFluxoAtualizado) then
-      OnFluxoAtualizado;
+//    if Assigned(OnFluxoAtualizado) then
+//    begin
+//      ShowMessage('ENTROU NO IF');
+//      OnFluxoAtualizado;
+//    end;
+
+
+    ModalResult := mrOk;
   except
     on E: Exception do
       ShowMessage('Erro ao atualizar: ' + E.Message);
@@ -244,6 +251,12 @@ begin
   if not(Key in ['0' .. '9', #8]) then
     Key := #0;
 end;
+
+// procedure TfrmFluxoDeCaixaAtualizarModal.FormClose(Sender: TObject;
+// var Action: TCloseAction);
+// begin
+// Action := caHide;
+// end;
 
 procedure TfrmFluxoDeCaixaAtualizarModal.FormCreate(Sender: TObject);
 begin

@@ -16,6 +16,8 @@ type
   public
     constructor Create(ABaseRepository: TBaseRepository);
     function ListarDadosDeCategoria(): TList<TGraficoPizzaPercentualCategorias>;
+    function ListarUltimosLancamentosPorCategoria()
+      : TList<TGraficoPizzaPercentualCategorias>;
   end;
 
 implementation
@@ -26,6 +28,44 @@ begin
   FBaseRepository := ABaseRepository;
   FDQuery := TFDQuery.Create(nil);
   FDQuery.Connection := FBaseRepository.Connection;
+end;
+
+function TGraficoPizzaPercentualCategoriasRepository.
+  ListarUltimosLancamentosPorCategoria()
+  : TList<TGraficoPizzaPercentualCategorias>;
+var
+  Categoria: TGraficoPizzaPercentualCategorias;
+begin
+  if FDQuery = nil then
+  begin
+    raise Exception.Create('Erro: FDQuery não foi instanciado.');
+  end;
+  Result := TList<TGraficoPizzaPercentualCategorias>.Create;
+  FDQuery.SQL.Text := 'SELECT ' + 'c.nome_categoria AS categoria, ' + 'f.tipo, '
+    + 'f.data, ' + 'f.valor ' + 'FROM fin.fluxo_caixa f ' +
+    'JOIN fin.categorias c ON f.categoria_id = c.id ' + 'ORDER BY f.data DESC ' +
+    'LIMIT 4;';
+  FDQuery.Open;
+
+  while not FDQuery.Eof do
+  begin
+    try
+      Categoria := TGraficoPizzaPercentualCategorias.Create
+      (
+       FDQuery.FieldByName('data').AsDateTime,
+       FDQuery.FieldByName('categoria').AsString,
+       FDQuery.FieldByName('tipo').AsString,
+       FDQuery.FieldByName('valor').AsFloat
+      );
+
+
+      Result.Add(Categoria);
+    Except
+      Categoria.Free;
+      raise
+    end;
+    FDQuery.Next;
+  end;
 end;
 
 function TGraficoPizzaPercentualCategoriasRepository.ListarDadosDeCategoria()
@@ -39,27 +79,21 @@ begin
   end;
 
   Result := TList<TGraficoPizzaPercentualCategorias>.Create;
-  FDQuery.SQL.Text :=
-   'SELECT ' +
-  'c.nome_categoria AS categoria, ' +
-  'f.tipo, ' +
-  'p.nome_pagamento, ' +
-  'SUM(f.valor) AS total ' +
-  'FROM fin.fluxo_caixa f ' +
-  'JOIN fin.categorias c ON f.categoria_id = c.id ' +
-  'JOIN fin.tipos_pagamento p ON f.tipo_pagamento_id = p.id ' +
-  'GROUP BY c.nome_categoria, f.tipo, p.nome_pagamento ' +
-  'ORDER BY total DESC;';
+  FDQuery.SQL.Text := 'SELECT ' + 'c.nome_categoria AS categoria, ' + 'f.tipo, '
+    + 'p.nome_pagamento, ' + 'SUM(f.valor) AS total ' +
+    'FROM fin.fluxo_caixa f ' +
+    'JOIN fin.categorias c ON f.categoria_id = c.id ' +
+    'JOIN fin.tipos_pagamento p ON f.tipo_pagamento_id = p.id ' +
+    'GROUP BY c.nome_categoria, f.tipo, p.nome_pagamento ' +
+    'ORDER BY total DESC;';
   FDQuery.Open;
 
   while not FDQuery.Eof do
   begin
     try
       Categoria := TGraficoPizzaPercentualCategorias.Create
-        (
-        FDQuery.FieldByName('categoria').AsString,
-        FDQuery.FieldByName('tipo').AsString,
-        FDQuery.FieldByName('nome_pagamento').AsString,
+        (FDQuery.FieldByName('categoria').AsString, FDQuery.FieldByName('tipo')
+        .AsString, FDQuery.FieldByName('nome_pagamento').AsString,
         FDQuery.FieldByName('total').AsFloat);
 
       Result.Add(Categoria);

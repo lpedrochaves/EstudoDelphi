@@ -17,6 +17,7 @@ type
     constructor Create();
     destructor Destroy();
     function FindAll(): TList<TGraficoPizzaPercentualCategorias>;
+    function UltimosLancamentos(): TList<TGraficoPizzaPercentualCategorias>;
   end;
 
 implementation
@@ -35,6 +36,12 @@ begin
   FBaseRepository.Free;
   FGraficoRepository.Free;
   FGraficoService.Free;
+end;
+
+function TGraficoPizzaPercentualCategoriasController.UltimosLancamentos()
+  : TList<TGraficoPizzaPercentualCategorias>;
+begin
+  Result := FGraficoService.MostrarUltimosLancamentos();
 end;
 
 function TGraficoPizzaPercentualCategoriasController.FindAll

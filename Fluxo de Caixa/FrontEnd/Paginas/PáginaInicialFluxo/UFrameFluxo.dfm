@@ -166,8 +166,6 @@ object FrameFluxo: TFrameFluxo
           ParentBackground = False
           TabOrder = 0
           OnClick = pnlDespesasClick
-          ExplicitTop = 42
-          ExplicitWidth = 130
         end
       end
       object pnlReceitas: TPanel
@@ -219,8 +217,6 @@ object FrameFluxo: TFrameFluxo
           Color = clDarkgreen
           ParentBackground = False
           TabOrder = 0
-          ExplicitTop = 42
-          ExplicitWidth = 133
         end
       end
       object pnlCadastrar: TPanel
