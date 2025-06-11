@@ -4,7 +4,8 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
-  System.Classes, Generics.Collections, UFrameDespesasReceitas,
+  System.Classes, Generics.Collections,
+  UFrameDespesasReceitas,
   Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls,
   Vcl.StdCtrls, Vcl.ComCtrls, UFluxoDeCaixa, UFluxoDeCaixaController,
   UFluxoDeCaixaAtualizarModal, UFluxoDeCaixaCadastrarModal, Utils,
@@ -54,7 +55,9 @@ type
     Panel5: TPanel;
     Panel6: TPanel;
     Panel7: TPanel;
-    Button1: TButton;
+    pnlFiltrarBotao: TPanel;
+    lblFiltrar: TLabel;
+    pnlFiltrarBorda: TPanel;
     procedure pnlDespesasClick(Sender: TObject);
     procedure CriarFrameFluxoDeCaixa(CategoriaId, Id: integer;
       Descricao, Tipo: string; Data: string; Pagamento: string;
@@ -67,6 +70,7 @@ type
     procedure btnCadastrarClick(Sender: TObject);
     procedure MostrarValorTotal();
     procedure Button1Click(Sender: TObject);
+    procedure pnlFiltrarBotaoClick(Sender: TObject);
   private
     FPaginaAtual: integer;
     FTotalPaginas: integer;
@@ -310,14 +314,13 @@ begin
         StrToInt(Frame.lblCategoriaId.Caption),
         StrToInt(Frame.lblId.Caption), Valor);
 
-//      frmFluxoAtualizarEdicao.OnFluxoAtualizado := AtualizarLista;
-//      frmFluxoAtualizarEdicao.ShowModal;
+      // frmFluxoAtualizarEdicao.OnFluxoAtualizado := AtualizarLista;
+      // frmFluxoAtualizarEdicao.ShowModal;
 
-       if frmFluxoAtualizarEdicao.ShowModal = mrOk then
-       begin
-       ShowMessage('entrou ');
-       AtualizarLista;
-       end;
+      if frmFluxoAtualizarEdicao.ShowModal = mrOk then
+      begin
+        // AtualizarLista;
+      end;
 
     finally
       frmFluxoAtualizarEdicao.Free;
@@ -326,13 +329,11 @@ begin
 
 end;
 
- procedure TFrameFluxo.LimparFrames();
+procedure TFrameFluxo.LimparFrames();
 var
   i: integer;
-  AFrame: TFrameComponenteDespesaReceita; // Variável auxiliar para o frame
 begin
-  OutputDebugString(PChar('LimparFrames: Iniciando limpeza de ' +
-    IntToStr(Frames.Count) + ' frames.'));
+
   for i := Frames.Count - 1 downto 0 do
   begin
     Frames[i].Free;
@@ -390,6 +391,11 @@ begin
       ShowMessage('Erro ao criar frame:  ' + E.Message);
   end;
 
+end;
+
+procedure TFrameFluxo.pnlFiltrarBotaoClick(Sender: TObject);
+begin
+  AtualizarLista;
 end;
 
 procedure TFrameFluxo.pnlReceitasClick(Sender: TObject);

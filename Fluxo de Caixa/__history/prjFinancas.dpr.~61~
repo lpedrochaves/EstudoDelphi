@@ -30,7 +30,10 @@ uses
   UFluxoDeCaixaCadastrarModal in 'FrontEnd\Paginas\FluxoDeCaixaCadastrar\UFluxoDeCaixaCadastrarModal.pas' {FormFluxoDeCaixaCadastrarModal},
   Utils in 'BackEnd\Utils\Utils.pas',
   UFluxoDeCaixaMapper in 'BackEnd\DTO\FluxoDeCaixa\FluxoDeCaixaMapper\UFluxoDeCaixaMapper.pas',
-  UFrameInicio in 'FrontEnd\Paginas\Inicio\UFrameInicio.pas' {FrameInicio: TFrame};
+  UGraficoPizzaPercentualCategorias in 'BackEnd\DTO\Grafico\GraficoPizza\UGraficoPizzaPercentualCategorias.pas',
+  UGraficoPizzaPercentualCategoriasRepository in 'BackEnd\Repository\Grafico\UGraficoPizzaPercentualCategoriasRepository.pas',
+  UGraficoPizzaPercentualCategoriasService in 'BackEnd\Service\Grafico\UGraficoPizzaPercentualCategoriasService.pas',
+  UGraficoPizzaPercentualCategoriasController in 'BackEnd\Controller\Grafico\UGraficoPizzaPercentualCategoriasController.pas';
 
 {$R *.res}
 

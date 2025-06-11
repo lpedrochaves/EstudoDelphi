@@ -54,7 +54,9 @@ type
     Panel5: TPanel;
     Panel6: TPanel;
     Panel7: TPanel;
-    Button1: TButton;
+    pnlFiltrarBotao: TPanel;
+    lblFiltrar: TLabel;
+    pnlFiltrarBorda: TPanel;
     procedure pnlDespesasClick(Sender: TObject);
     procedure CriarFrameFluxoDeCaixa(CategoriaId, Id: integer;
       Descricao, Tipo: string; Data: string; Pagamento: string;
@@ -67,6 +69,7 @@ type
     procedure btnCadastrarClick(Sender: TObject);
     procedure MostrarValorTotal();
     procedure Button1Click(Sender: TObject);
+    procedure pnlFiltrarBotaoClick(Sender: TObject);
   private
     FPaginaAtual: integer;
     FTotalPaginas: integer;
@@ -244,7 +247,6 @@ procedure TFrameFluxo.Button1Click(Sender: TObject);
 begin
   AtualizarLista;
 end;
-
 procedure TFrameFluxo.Inicializar;
 var
   FluxoDeCaixa: TFluxoDeCaixa;
@@ -310,13 +312,13 @@ begin
         StrToInt(Frame.lblCategoriaId.Caption),
         StrToInt(Frame.lblId.Caption), Valor);
 
-//      frmFluxoAtualizarEdicao.OnFluxoAtualizado := AtualizarLista;
-//      frmFluxoAtualizarEdicao.ShowModal;
+      // frmFluxoAtualizarEdicao.OnFluxoAtualizado := AtualizarLista;
+      // frmFluxoAtualizarEdicao.ShowModal;
 
-       if frmFluxoAtualizarEdicao.ShowModal = mrOk then
-       begin
-       AtualizarLista;
-       end;
+      if frmFluxoAtualizarEdicao.ShowModal = mrOk then
+      begin
+      //  AtualizarLista;
+      end;
 
     finally
       frmFluxoAtualizarEdicao.Free;
@@ -324,60 +326,19 @@ begin
   end;
 
 end;
-     procedure TFrameFluxo.LimparFrames();
-var
-  i: Integer;
-  AFrame: TFrameComponenteDespesaReceita;
-begin
-  // Desabilita o redesenho do ScrollBox para evitar problemas visuais e de acesso
-  scrBarraDeRolagem.DisableAlign; // Desabilita o alinhamento automático
-  //scrBarraDeRolagem.BeginUpdate; // Desabilita o redesenho
 
-  // Itera do final para o início para remover itens de uma TList com segurança
+procedure TFrameFluxo.LimparFrames();
+var
+  i: integer;
+begin
+
   for i := Frames.Count - 1 downto 0 do
   begin
-    AFrame := Frames[i];
+    Frames[i].Free;
 
-    if Assigned(AFrame) then // Verifica se o ponteiro é válido
-    begin
-      // Desvincula o frame do seu pai antes de liberá-lo.
-      // Isso é crucial para evitar que o pai tente acessar o filho em processo de destruição.
-      if Assigned(AFrame.Parent) then
-      begin
-        // AFrame.Parent.RemoveControl(AFrame); // Alternativa para explicitamente remover
-        AFrame.Parent := nil; // Define o pai como nil para desvincular
-      end;
-
-      // Libera o objeto frame
-      AFrame.Free;
-    end;
-
-    // Remove o ponteiro da lista APÓS o objeto ter sido liberado
-    Frames.Delete(i);
   end;
-
-  Frames.Clear; // Garante que a lista está completamente vazia
-
-  // Reabilita o redesenho e o alinhamento automático do ScrollBox
-  //scrBarraDeRolagem.EndUpdate;
-  scrBarraDeRolagem.EnableAlign; // Reabilita o alinhamento automático
-
-  // Força o ScrollBox a recalcular seu layout e redesenhar
-  scrBarraDeRolagem.Realign; // Força um realinhamento dos controles internos
-  scrBarraDeRolagem.Repaint; // Força o redesenho
-  Application.ProcessMessages; // Processa mensagens pendentes para garantir que o redraw ocorra
+  Frames.Clear;
 end;
-// procedure TFrameFluxo.LimparFrames();
-//var
-//  i: integer;
-//begin
-//  for i := Frames.Count - 1 downto 0 do
-//  begin
-//    Frames[i].Free;
-//
-//  end;
-//  Frames.Clear;
-//end;
 
 procedure TFrameFluxo.MostrarValorTotal();
 var
@@ -428,6 +389,11 @@ begin
       ShowMessage('Erro ao criar frame:  ' + E.Message);
   end;
 
+end;
+
+procedure TFrameFluxo.pnlFiltrarBotaoClick(Sender: TObject);
+begin
+  AtualizarLista;
 end;
 
 procedure TFrameFluxo.pnlReceitasClick(Sender: TObject);

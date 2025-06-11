@@ -11,6 +11,8 @@ uses
   UFluxoDeCaixa, UFluxoDeCaixaController, System.RegularExpressions, Utils;
 
 type
+
+
   TOnFluxoAtualizado = procedure of object;
 
   TfrmFluxoDeCaixaAtualizarModal = class(TForm)
@@ -42,6 +44,7 @@ type
     pnlTipoPagamento: TPanel;
     selTipoPagamento: TComboBox;
     pnlValor: TPanel;
+
     procedure imgCategoriaClick(Sender: TObject);
     procedure btnCancelarClick(Sender: TObject);
     procedure CriarTiposDePagamento();
@@ -60,6 +63,7 @@ type
     // procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
     FIdFluxo: Integer;
+
     { Private declarations }
   public
     { Public declarations }
@@ -90,7 +94,6 @@ implementation
 // inherited Create(AOwner);
 // end;
 
-
 procedure TfrmFluxoDeCaixaAtualizarModal.btnAtualizarClick(Sender: TObject);
 var
   FluxoDeCaixaDto: TFluxoDeCaixaDTOPost;
@@ -98,6 +101,7 @@ var
   TipoPagamentoId: Integer;
   TextoValor: string;
   ValorConvertido: double;
+
 begin
 
   if not ValidarCampos(edtCategoria.Text, edtData.Text, selDespesaReceita.Text,
@@ -146,11 +150,15 @@ begin
 
     ShowMessage('Atualização concluída com sucesso!');
 
-//    if Assigned(OnFluxoAtualizado) then
-//    begin
-//      OnFluxoAtualizado;
-//    end;
-     ModalResult := mrOk;
+    // if Assigned(OnFluxoAtualizado) then
+    // begin
+    // OnFluxoAtualizado;
+    // end;
+
+    ModalResult := mrOk;
+
+    if Assigned(FOnAtualizarLista) then
+      FOnAtualizarLista(Self);
 
   except
     on E: Exception do
@@ -254,9 +262,6 @@ begin
   if not(Key in ['0' .. '9', #8]) then
     Key := #0;
 end;
-
-
-
 
 procedure TfrmFluxoDeCaixaAtualizarModal.FormCreate(Sender: TObject);
 begin
@@ -418,4 +423,5 @@ begin
 
   memDescricao.Text := '';
 end;
+
 end.

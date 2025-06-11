@@ -4,7 +4,8 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
-  System.Classes, Generics.Collections, UFrameDespesasReceitas,
+  System.Classes, Generics.Collections,
+  //UFrameDespesasReceitas,
   Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls,
   Vcl.StdCtrls, Vcl.ComCtrls, UFluxoDeCaixa, UFluxoDeCaixaController,
   UFluxoDeCaixaAtualizarModal, UFluxoDeCaixaCadastrarModal, Utils,
@@ -54,7 +55,9 @@ type
     Panel5: TPanel;
     Panel6: TPanel;
     Panel7: TPanel;
-    Button1: TButton;
+    pnlFiltrarBotao: TPanel;
+    lblFiltrar: TLabel;
+    pnlFiltrarBorda: TPanel;
     procedure pnlDespesasClick(Sender: TObject);
     procedure CriarFrameFluxoDeCaixa(CategoriaId, Id: integer;
       Descricao, Tipo: string; Data: string; Pagamento: string;
@@ -67,6 +70,7 @@ type
     procedure btnCadastrarClick(Sender: TObject);
     procedure MostrarValorTotal();
     procedure Button1Click(Sender: TObject);
+    procedure pnlFiltrarBotaoClick(Sender: TObject);
   private
     FPaginaAtual: integer;
     FTotalPaginas: integer;
@@ -244,7 +248,6 @@ procedure TFrameFluxo.Button1Click(Sender: TObject);
 begin
   AtualizarLista;
 end;
-
 procedure TFrameFluxo.Inicializar;
 var
   FluxoDeCaixa: TFluxoDeCaixa;
@@ -310,14 +313,13 @@ begin
         StrToInt(Frame.lblCategoriaId.Caption),
         StrToInt(Frame.lblId.Caption), Valor);
 
-//      frmFluxoAtualizarEdicao.OnFluxoAtualizado := AtualizarLista;
-//      frmFluxoAtualizarEdicao.ShowModal;
+      // frmFluxoAtualizarEdicao.OnFluxoAtualizado := AtualizarLista;
+      // frmFluxoAtualizarEdicao.ShowModal;
 
-       if frmFluxoAtualizarEdicao.ShowModal = mrOk then
-       begin
-       ShowMessage('entrou ');
-       AtualizarLista;
-       end;
+      if frmFluxoAtualizarEdicao.ShowModal = mrOk then
+      begin
+      //  AtualizarLista;
+      end;
 
     finally
       frmFluxoAtualizarEdicao.Free;
@@ -328,67 +330,16 @@ end;
 
 procedure TFrameFluxo.LimparFrames();
 var
-  i: Integer;
-  AFrame: TFrameComponenteDespesaReceita;
+  i: integer;
 begin
-  OutputDebugString(PChar('LimparFrames: Iniciando limpeza de ' + IntToStr(Frames.Count) + ' frames.'));
-
-  // Desabilita o controle de rolagem para evitar recalculos durante a limpeza
-  scrBarraDeRolagem.Visible := False; // Torna invisível para evitar redraws
-  scrBarraDeRolagem.AutoScroll := False; // Desabilita o auto-scroll
 
   for i := Frames.Count - 1 downto 0 do
   begin
-    AFrame := Frames[i];
+    Frames[i].Free;
 
-    if Assigned(AFrame) then // Verifica se o ponteiro é válido antes de tentar acessar
-    begin
-      OutputDebugString(PChar('LimparFrames: Processando Frame ID ' + AFrame.lblId.Caption + ' (Desc: ' + AFrame.lblDescricao.Caption + ')'));
-
-      // Desvincula o frame do seu pai explicitamente
-      if Assigned(AFrame.Parent) then
-        AFrame.Parent := nil; // Remover do Parent antes de Free
-
-      // Tenta liberar o frame
-      try
-        AFrame.Free;
-        OutputDebugString(PChar('LimparFrames: Frame ID ' + AFrame.lblId.Caption + ' liberado com sucesso.'));
-      except
-        on E: Exception do
-        begin
-          OutputDebugString(PChar('LimparFrames: ERRO CRÍTICO ao liberar Frame ID ' + AFrame.lblId.Caption + ': ' + E.Message));
-          // Se um erro ocorre AQUI, é um problema sério no destrutor do frame.
-          // O objeto pode já estar corrompido ou em um estado inválido.
-        end;
-      end;
-    end;
-    Frames.Delete(i); // Remove da lista, independentemente se free deu erro ou não
   end;
-
-  Frames.Clear; // Garante que a lista esteja vazia
-  OutputDebugString(PChar('LimparFrames: Limpeza de frames concluída.'));
-
-  // Reabilita o controle de rolagem e força a atualização
-  scrBarraDeRolagem.Visible := True;
-  scrBarraDeRolagem.AutoScroll := True;
- // scrBarraDeRolagem.AlignControls;
-  scrBarraDeRolagem.Invalidate; // Força um redesenho completo
-  scrBarraDeRolagem.Repaint;
-  scrBarraDeRolagem.SetFocus; // Pode ajudar a redefinir o foco e a rolagem
+  Frames.Clear;
 end;
-// procedure TFrameFluxo.LimparFrames();
-// var
-// i: integer;
-// AFrame: TFrameComponenteDespesaReceita; // Variável auxiliar para o frame
-// begin
-// OutputDebugString(PChar('LimparFrames: Iniciando limpeza de ' + IntToStr(Frames.Count) + ' frames.'));
-// for i := Frames.Count - 1 downto 0 do
-// begin
-// Frames[i].Free;
-//
-// end;
-// Frames.Clear;
-// end;
 
 procedure TFrameFluxo.MostrarValorTotal();
 var
@@ -439,6 +390,11 @@ begin
       ShowMessage('Erro ao criar frame:  ' + E.Message);
   end;
 
+end;
+
+procedure TFrameFluxo.pnlFiltrarBotaoClick(Sender: TObject);
+begin
+  AtualizarLista;
 end;
 
 procedure TFrameFluxo.pnlReceitasClick(Sender: TObject);

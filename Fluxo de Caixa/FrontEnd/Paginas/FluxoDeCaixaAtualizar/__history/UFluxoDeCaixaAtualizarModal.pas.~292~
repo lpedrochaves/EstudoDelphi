@@ -11,6 +11,9 @@ uses
   UFluxoDeCaixa, UFluxoDeCaixaController, System.RegularExpressions, Utils;
 
 type
+
+ TOnFluxoAtualizadoEvent = TNotifyEvent;
+
   TOnFluxoAtualizado = procedure of object;
 
   TfrmFluxoDeCaixaAtualizarModal = class(TForm)
@@ -42,6 +45,9 @@ type
     pnlTipoPagamento: TPanel;
     selTipoPagamento: TComboBox;
     pnlValor: TPanel;
+
+
+
     procedure imgCategoriaClick(Sender: TObject);
     procedure btnCancelarClick(Sender: TObject);
     procedure CriarTiposDePagamento();
@@ -57,9 +63,12 @@ type
     procedure edtValorKeyPress(Sender: TObject; var Key: Char);
     procedure selDespesaReceitaKeyPress(Sender: TObject; var Key: Char);
 
+
+
     // procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
     FIdFluxo: Integer;
+    FOnAtualizarLista: TNotifyEvent;
     { Private declarations }
   public
     { Public declarations }
@@ -90,7 +99,6 @@ implementation
 // inherited Create(AOwner);
 // end;
 
-
 procedure TfrmFluxoDeCaixaAtualizarModal.btnAtualizarClick(Sender: TObject);
 var
   FluxoDeCaixaDto: TFluxoDeCaixaDTOPost;
@@ -98,6 +106,7 @@ var
   TipoPagamentoId: Integer;
   TextoValor: string;
   ValorConvertido: double;
+
 begin
 
   if not ValidarCampos(edtCategoria.Text, edtData.Text, selDespesaReceita.Text,
@@ -146,11 +155,12 @@ begin
 
     ShowMessage('Atualização concluída com sucesso!');
 
-//    if Assigned(OnFluxoAtualizado) then
-//    begin
-//      OnFluxoAtualizado;
-//    end;
-     ModalResult := mrOk;
+    // if Assigned(OnFluxoAtualizado) then
+    // begin
+    // OnFluxoAtualizado;
+    // end;
+  
+    ModalResult := mrOk;
 
   except
     on E: Exception do
@@ -177,15 +187,15 @@ begin
   inherited Create(AOwner);
 
   CriarTiposDePagamento();
-//  SelecionarTipoPagamentoPorNome(Pagamento);
-//
-//  memDescricao.Text := Descricao;
-//  edtCategoria.Text := IntToStr(Categoria);
+  SelecionarTipoPagamentoPorNome(Pagamento);
+
+  memDescricao.Text := Descricao;
+  edtCategoria.Text := IntToStr(Categoria);
   FIdFluxo := Id;
-//  selTipoPagamento.Text := Pagamento;
-//  selDespesaReceita.Text := Tipo;
-//  edtData.Text := Data;
-//  edtValor.Text := ConverterValorParaTexto(Valor);
+  selTipoPagamento.Text := Pagamento;
+  selDespesaReceita.Text := Tipo;
+  edtData.Text := Data;
+  edtValor.Text := ConverterValorParaTexto(Valor);
 
 end;
 
@@ -254,9 +264,6 @@ begin
   if not(Key in ['0' .. '9', #8]) then
     Key := #0;
 end;
-
-
-
 
 procedure TfrmFluxoDeCaixaAtualizarModal.FormCreate(Sender: TObject);
 begin
@@ -418,4 +425,5 @@ begin
 
   memDescricao.Text := '';
 end;
+
 end.
