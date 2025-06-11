@@ -47,6 +47,7 @@ type
     procedure CriarTiposDePagamento();
     procedure btnAtualizarClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
+    procedure LimparCampos;
 
     procedure btnCancelarMouseDown(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
@@ -55,6 +56,7 @@ type
     procedure edtValorChange(Sender: TObject);
     procedure edtValorKeyPress(Sender: TObject; var Key: Char);
     procedure selDespesaReceitaKeyPress(Sender: TObject; var Key: Char);
+
     // procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
     FIdFluxo: Integer;
@@ -68,6 +70,7 @@ type
     constructor Create(AOwner: TComponent; Descricao, Tipo: string;
       Data: string; Pagamento: string; Categoria, Id: Integer;
       Valor: double); overload;
+
     procedure SelecionarTipoPagamentoPorNome(const Nome: string);
     function ValidarCampos(CategoriaTexto, DataTexto, Pagamento, Valor,
       FormaPagamento: string): Boolean;
@@ -86,6 +89,7 @@ implementation
 // begin
 // inherited Create(AOwner);
 // end;
+
 
 procedure TfrmFluxoDeCaixaAtualizarModal.btnAtualizarClick(Sender: TObject);
 var
@@ -132,6 +136,7 @@ begin
       try
         // ShowMessage('Chamando controlador');
         FluxoDeCaixaController.Atualizar(FluxoDeCaixaDto);
+
       finally
         FluxoDeCaixaController.Free;
       end;
@@ -143,12 +148,10 @@ begin
 
 //    if Assigned(OnFluxoAtualizado) then
 //    begin
-//      ShowMessage('ENTROU NO IF');
 //      OnFluxoAtualizado;
 //    end;
+     ModalResult := mrOk;
 
-
-    ModalResult := mrOk;
   except
     on E: Exception do
       ShowMessage('Erro ao atualizar: ' + E.Message);
@@ -252,11 +255,8 @@ begin
     Key := #0;
 end;
 
-// procedure TfrmFluxoDeCaixaAtualizarModal.FormClose(Sender: TObject;
-// var Action: TCloseAction);
-// begin
-// Action := caHide;
-// end;
+
+
 
 procedure TfrmFluxoDeCaixaAtualizarModal.FormCreate(Sender: TObject);
 begin
@@ -393,4 +393,29 @@ begin
 
 end;
 
+procedure TfrmFluxoDeCaixaAtualizarModal.LimparCampos;
+begin
+  edtCategoria.Text := '';
+  lblDadoCategoria.Visible := False;
+  edtCategoria.Height := 25;
+
+  edtData.Text := '  /  /    ';
+  lblDadoData.Visible := False;
+  edtData.Height := 25;
+
+  selDespesaReceita.Text := '';
+  lblDadoTipoFluxo.Visible := False;
+  pnlTipoFluxo.Height := 25;
+
+  edtValor.Text := '';
+  lblDadoValor.Visible := False;
+  edtValor.Height := 25;
+
+  selTipoPagamento.ItemIndex := -1;
+  selTipoPagamento.Text := '';
+  lblDadoPagamento.Visible := False;
+  pnlTipoPagamento.Height := 25;
+
+  memDescricao.Text := '';
+end;
 end.

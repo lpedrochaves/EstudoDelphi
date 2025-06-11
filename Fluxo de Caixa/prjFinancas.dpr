@@ -40,7 +40,7 @@ uses
 begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
-//  Application.CreateForm(TfrmLogin, frmLogin);
+  Application.CreateForm(TfrmLogin, frmLogin);
   Application.CreateForm(TfrmInicio, frmInicio);
   Application.CreateForm(TfrmFluxoDeCaixaAtualizarModal, frmFluxoDeCaixaAtualizarModal);
   Application.CreateForm(TFormCategoria, FormCategoria);

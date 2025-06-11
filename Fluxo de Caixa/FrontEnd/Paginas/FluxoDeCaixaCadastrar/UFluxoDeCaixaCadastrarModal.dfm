@@ -303,7 +303,6 @@ object FormFluxoDeCaixaCadastrarModal: TFormFluxoDeCaixaCadastrarModal
       Text = '  /  /    '
       OnEnter = edtDataEnter
       OnMouseDown = edtDataMouseDown
-      ExplicitWidth = 60
     end
   end
   object pnlValor: TPanel

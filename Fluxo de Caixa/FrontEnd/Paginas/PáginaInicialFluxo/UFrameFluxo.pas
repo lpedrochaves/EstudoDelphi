@@ -54,6 +54,9 @@ type
     Panel5: TPanel;
     Panel6: TPanel;
     Panel7: TPanel;
+    pnlFiltrarBotao: TPanel;
+    lblFiltrar: TLabel;
+    pnlFiltrarBorda: TPanel;
     procedure pnlDespesasClick(Sender: TObject);
     procedure CriarFrameFluxoDeCaixa(CategoriaId, Id: integer;
       Descricao, Tipo: string; Data: string; Pagamento: string;
@@ -65,7 +68,8 @@ type
     procedure EditarFluxo(Sender: TObject);
     procedure btnCadastrarClick(Sender: TObject);
     procedure MostrarValorTotal();
-
+    procedure Button1Click(Sender: TObject);
+    procedure pnlFiltrarBotaoClick(Sender: TObject);
   private
     FPaginaAtual: integer;
     FTotalPaginas: integer;
@@ -95,88 +99,136 @@ var
   FluxoController: TFluxoDeCaixaController;
 
 begin
-  if FTipoSelecionado = tfDespesa then
-  begin
-    if Assigned(frameDespesasReceitas) then
+
+  // ShowMessage('ENTROU NO ATUALIZAR');
+  //
+  // if FTipoSelecionado = tfDespesa then
+  // begin
+  // if Assigned(frameDespesasReceitas) then
+  // begin
+  // LimparFrames();
+  // end;
+  //
+  // try
+  // FluxoController := TFluxoDeCaixaController.Create;
+  // Fluxos := FluxoController.ListarTodasDespesas();
+  // for FluxoDeCaixa in Fluxos do
+  // begin
+  // CriarFrameFluxoDeCaixa(FluxoDeCaixa.CategoriaId, FluxoDeCaixa.Id,
+  // FluxoDeCaixa.Descricao, FluxoDeCaixa.Tipo,
+  // DateToStr(FluxoDeCaixa.Data), FluxoDeCaixa.TipoPagamento,
+  // FluxoDeCaixa.Categoria, FluxoDeCaixa.Valor);
+  // end;
+  // MostrarValorTotal();
+  // Fluxos.Free;
+  // FluxoController.Free;
+  // except
+  // on E: Exception do
+  // ShowMessage('Erro ao criar frame:  ' + E.Message);
+  // end;
+  // end
+  //
+  // else if FTipoSelecionado = tfReceita then
+  // begin
+  // if Assigned(frameDespesasReceitas) then
+  // begin
+  // LimparFrames();
+  // end;
+  //
+  // try
+  // FluxoController := TFluxoDeCaixaController.Create;
+  // Fluxos := FluxoController.ListarTodasReceitas();
+  //
+  // for FluxoDeCaixa in Fluxos do
+  // begin
+  //
+  // CriarFrameFluxoDeCaixa(FluxoDeCaixa.CategoriaId, FluxoDeCaixa.Id,
+  // FluxoDeCaixa.Descricao, FluxoDeCaixa.Tipo,
+  // FormatDateTime('DD/MM/YYYY', FluxoDeCaixa.Data),
+  // FluxoDeCaixa.TipoPagamento, FluxoDeCaixa.Categoria,
+  // FluxoDeCaixa.Valor);
+  //
+  // end;
+  // MostrarValorTotal();
+  // Fluxos.Free;
+  // FluxoController.Free;
+  // except
+  // on E: Exception do
+  // ShowMessage('Erro ao criar frame:  ' + E.Message);
+  // end;
+  // end
+  // else if FTipoSelecionado = tfNenhum then
+  // begin
+  // if Assigned(frameDespesasReceitas) then
+  // begin
+  // LimparFrames();
+  // end;
+  // ShowMessage('ENTROU em nenhum');
+  // try
+  // FluxoController := TFluxoDeCaixaController.Create;
+  // Fluxos := FluxoController.FindAll();
+  //
+  // for FluxoDeCaixa in Fluxos do
+  // begin
+  // // ShowMessage('ID: ' + IntToStr(FluxoDeCaixa.Id));
+  // CriarFrameFluxoDeCaixa(FluxoDeCaixa.CategoriaId, FluxoDeCaixa.Id,
+  // FluxoDeCaixa.Descricao, FluxoDeCaixa.Tipo,
+  // FormatDateTime('DD/MM/YYYY', FluxoDeCaixa.Data),
+  // FluxoDeCaixa.TipoPagamento, FluxoDeCaixa.Categoria,
+  // FluxoDeCaixa.Valor);
+  // end;
+  // ShowMessage('SAIU DO FOR');
+  // MostrarValorTotal();
+  // Fluxos.Free;
+  // FluxoController.Free;
+  // except
+  // on E: Exception do
+  // ShowMessage('Erro ao criar frame:  ' + E.Message);
+  // end;
+  // end;
+
+  FluxoController := nil;
+  Fluxos := nil;
+
+  if Assigned(frameDespesasReceitas) then
+    LimparFrames();
+
+  try
+    FluxoController := TFluxoDeCaixaController.Create;
+
+    if FTipoSelecionado = tfDespesa then
+      Fluxos := FluxoController.ListarTodasDespesas()
+    else if FTipoSelecionado = tfReceita then
+      Fluxos := FluxoController.ListarTodasReceitas()
+    else if FTipoSelecionado = tfNenhum then
     begin
-      LimparFrames();
-    end;
 
-    try
-      FluxoController := TFluxoDeCaixaController.Create;
-      Fluxos := FluxoController.ListarTodasDespesas();
-      for FluxoDeCaixa in Fluxos do
-      begin
-        CriarFrameFluxoDeCaixa(FluxoDeCaixa.CategoriaId, FluxoDeCaixa.Id,
-          FluxoDeCaixa.Descricao, FluxoDeCaixa.Tipo,
-          DateToStr(FluxoDeCaixa.Data), FluxoDeCaixa.TipoPagamento,
-          FluxoDeCaixa.Categoria, FluxoDeCaixa.Valor);
-      end;
-      MostrarValorTotal();
-      Fluxos.Free;
-    except
-      on E: Exception do
-        ShowMessage('Erro ao criar frame:  ' + E.Message);
-    end;
-  end
-
-  else if FTipoSelecionado = tfReceita then
-  begin
-    if Assigned(frameDespesasReceitas) then
-    begin
-      LimparFrames();
-    end;
-
-    try
-      FluxoController := TFluxoDeCaixaController.Create;
-      Fluxos := FluxoController.ListarTodasReceitas();
-
-      for FluxoDeCaixa in Fluxos do
-      begin
-
-        CriarFrameFluxoDeCaixa(FluxoDeCaixa.CategoriaId, FluxoDeCaixa.Id,
-          FluxoDeCaixa.Descricao, FluxoDeCaixa.Tipo,
-          FormatDateTime('DD/MM/YYYY', FluxoDeCaixa.Data),
-          FluxoDeCaixa.TipoPagamento, FluxoDeCaixa.Categoria,
-          FluxoDeCaixa.Valor);
-
-      end;
-      MostrarValorTotal();
-      Fluxos.Free;
-    except
-      on E: Exception do
-        ShowMessage('Erro ao criar frame:  ' + E.Message);
-    end;
-  end
-  else if FTipoSelecionado = tfNenhum then
-  begin
-    if Assigned(frameDespesasReceitas) then
-    begin
-      LimparFrames();
-    end;
-
-    try
-      FluxoController := TFluxoDeCaixaController.Create;
       Fluxos := FluxoController.FindAll();
+    end;
 
+    if Assigned(Fluxos) then
+    begin
       for FluxoDeCaixa in Fluxos do
       begin
-
         CriarFrameFluxoDeCaixa(FluxoDeCaixa.CategoriaId, FluxoDeCaixa.Id,
           FluxoDeCaixa.Descricao, FluxoDeCaixa.Tipo,
           FormatDateTime('DD/MM/YYYY', FluxoDeCaixa.Data),
           FluxoDeCaixa.TipoPagamento, FluxoDeCaixa.Categoria,
           FluxoDeCaixa.Valor);
-
       end;
+
       MostrarValorTotal();
-      Fluxos.Free;
-    except
-      on E: Exception do
-        ShowMessage('Erro ao criar frame:  ' + E.Message);
     end;
+  except
+    on E: Exception do
+      ShowMessage('Erro ao criar frame: ' + E.Message);
   end;
 
+  // Liberar recursos com segurança
+  if Assigned(Fluxos) then
+    Fluxos.Free;
+  if Assigned(FluxoController) then
+    FluxoController.Free;
 end;
 
 procedure TFrameFluxo.btnCadastrarClick(Sender: TObject);
@@ -189,6 +241,11 @@ begin
   finally
     frmFluxoCadastrar.Free;
   end;
+end;
+
+procedure TFrameFluxo.Button1Click(Sender: TObject);
+begin
+  AtualizarLista;
 end;
 
 procedure TFrameFluxo.Inicializar;
@@ -215,12 +272,13 @@ begin
     end;
 
     Fluxos.Free;
+    FluxoController.Free;
   except
     on E: Exception do
       ShowMessage('Erro ao criar frame:  ' + E.Message);
   end;
 
-  AtualizarLista;
+  // AtualizarLista;
 end;
 
 destructor TFrameFluxo.Destroy;
@@ -235,6 +293,7 @@ var
   Control: TControl;
   Frame: TFrameComponenteDespesaReceita;
   Valor: double;
+  frmFluxoAtualizarEdicao: TfrmFluxoDeCaixaAtualizarModal;
 begin
 
   Control := Sender as TControl;
@@ -248,32 +307,32 @@ begin
     Valor := ConverterValorParaFloat(Frame.lblValorBanco.Caption);
 
     try
-
-      frmFluxoAtualizar := TfrmFluxoDeCaixaAtualizarModal.Create(Self,
+      frmFluxoAtualizarEdicao := TfrmFluxoDeCaixaAtualizarModal.Create(Self,
         Frame.lblDescricao.Caption, Frame.lblTipo.Caption,
         Frame.lblDataBanco.Caption, Frame.lblPagamentoBanco.Caption,
         StrToInt(Frame.lblCategoriaId.Caption),
         StrToInt(Frame.lblId.Caption), Valor);
 
-      // frmFluxoAtualizar.ShowModal;
-      // frmFluxoAtualizar.OnFluxoAtualizado := Self.AtualizarLista;
+      // frmFluxoAtualizarEdicao.OnFluxoAtualizado := AtualizarLista;
+      // frmFluxoAtualizarEdicao.ShowModal;
 
-
-      if frmFluxoAtualizar.ShowModal = mrOk then
+      if frmFluxoAtualizarEdicao.ShowModal = mrOk then
       begin
-        AtualizarLista;
+      //  AtualizarLista;
       end;
 
     finally
-      frmFluxoAtualizar.Free;
+      frmFluxoAtualizarEdicao.Free;
     end;
   end;
+
 end;
 
 procedure TFrameFluxo.LimparFrames();
 var
   i: integer;
 begin
+
   for i := Frames.Count - 1 downto 0 do
   begin
     Frames[i].Free;
@@ -331,6 +390,11 @@ begin
       ShowMessage('Erro ao criar frame:  ' + E.Message);
   end;
 
+end;
+
+procedure TFrameFluxo.pnlFiltrarBotaoClick(Sender: TObject);
+begin
+  AtualizarLista;
 end;
 
 procedure TFrameFluxo.pnlReceitasClick(Sender: TObject);
@@ -407,7 +471,6 @@ begin
 
   frameDespesasReceitas.pnlEditar.OnClick := EditarFluxo;
   frameDespesasReceitas.imgEditar.OnClick := EditarFluxo;
-
   Frames.Add(frameDespesasReceitas);
 end;
 

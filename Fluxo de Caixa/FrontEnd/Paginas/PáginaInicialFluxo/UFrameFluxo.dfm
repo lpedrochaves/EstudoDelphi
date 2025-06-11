@@ -46,6 +46,8 @@ object FrameFluxo: TFrameFluxo
       Color = clWindow
       ParentBackground = False
       TabOrder = 1
+      ExplicitLeft = 40
+      ExplicitTop = 32
       object lblTituloResultado: TLabel
         Left = 511
         Top = 126
@@ -170,7 +172,7 @@ object FrameFluxo: TFrameFluxo
       end
       object pnlReceitas: TPanel
         AlignWithMargins = True
-        Left = 524
+        Left = 548
         Top = 22
         Width = 133
         Height = 45
@@ -338,7 +340,7 @@ object FrameFluxo: TFrameFluxo
         end
       end
       object pnlSelecionarData: TPanel
-        Left = 21
+        Left = 109
         Top = 73
         Width = 523
         Height = 47
@@ -517,6 +519,58 @@ object FrameFluxo: TFrameFluxo
         Color = clBlack
         ParentBackground = False
         TabOrder = 5
+      end
+      object pnlFiltrarBotao: TPanel
+        AlignWithMargins = True
+        Left = 392
+        Top = 22
+        Width = 133
+        Height = 45
+        Cursor = crHandPoint
+        Margins.Left = 50
+        Margins.Top = 0
+        Margins.Right = 0
+        Margins.Bottom = 0
+        BevelKind = bkSoft
+        BevelOuter = bvNone
+        Color = clWindow
+        ParentBackground = False
+        TabOrder = 6
+        OnClick = pnlFiltrarBotaoClick
+        object lblFiltrar: TLabel
+          Left = 0
+          Top = 0
+          Width = 129
+          Height = 28
+          Cursor = crHandPoint
+          Align = alTop
+          Alignment = taCenter
+          Caption = 'Filtrar'
+          Color = clWindow
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -20
+          Font.Name = 'Segoe UI'
+          Font.Style = []
+          ParentColor = False
+          ParentFont = False
+          Layout = tlCenter
+          OnClick = pnlFiltrarBotaoClick
+          ExplicitWidth = 51
+        end
+        object pnlFiltrarBorda: TPanel
+          Left = 0
+          Top = 38
+          Width = 129
+          Height = 3
+          Cursor = crHandPoint
+          Align = alBottom
+          BevelOuter = bvNone
+          Color = clDarkblue
+          ParentBackground = False
+          TabOrder = 0
+          OnClick = pnlFiltrarBotaoClick
+        end
       end
     end
   end

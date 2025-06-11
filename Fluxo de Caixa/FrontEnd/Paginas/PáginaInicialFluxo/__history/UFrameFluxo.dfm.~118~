@@ -1,0 +1,629 @@
+object FrameFluxo: TFrameFluxo
+  Left = 0
+  Top = 0
+  Width = 868
+  Height = 616
+  Color = clWindow
+  ParentBackground = False
+  ParentColor = False
+  TabOrder = 0
+  object pnlContainer: TPanel
+    Left = 0
+    Top = 66
+    Width = 868
+    Height = 550
+    Margins.Left = 0
+    Margins.Top = 20
+    Margins.Right = 0
+    Margins.Bottom = 0
+    Align = alClient
+    AutoSize = True
+    BevelOuter = bvNone
+    Color = clBtnHighlight
+    ParentBackground = False
+    TabOrder = 0
+    object scrBarraDeRolagem: TScrollBox
+      AlignWithMargins = True
+      Left = 1
+      Top = 224
+      Width = 854
+      Height = 269
+      BevelInner = bvNone
+      BevelOuter = bvNone
+      BorderStyle = bsNone
+      Color = clWindow
+      ParentColor = False
+      TabOrder = 0
+      OnMouseWheel = scrBarraDeRolagemMouseWheel
+    end
+    object pnlBotaoDespesaReceita: TPanel
+      Left = 0
+      Top = 0
+      Width = 868
+      Height = 218
+      Align = alTop
+      BevelOuter = bvNone
+      Color = clWindow
+      ParentBackground = False
+      TabOrder = 1
+      ExplicitLeft = 40
+      ExplicitTop = 32
+      object lblTituloResultado: TLabel
+        Left = 511
+        Top = 126
+        Width = 80
+        Height = 21
+        Caption = 'Resultado : '
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -16
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        ParentFont = False
+      end
+      object lblValorResultado: TLabel
+        Left = 619
+        Top = 126
+        Width = 4
+        Height = 21
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -16
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        ParentFont = False
+      end
+      object lblTituloDespesas: TLabel
+        Left = 289
+        Top = 126
+        Width = 76
+        Height = 21
+        Caption = 'Despesas : '
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -16
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        ParentFont = False
+      end
+      object lblTituloReceitas: TLabel
+        Left = 74
+        Top = 126
+        Width = 68
+        Height = 21
+        Caption = 'Receitas : '
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -16
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        ParentFont = False
+      end
+      object lblValorReceita: TLabel
+        Left = 166
+        Top = 126
+        Width = 4
+        Height = 21
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -16
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        ParentFont = False
+      end
+      object lblValorDespesa: TLabel
+        Left = 387
+        Top = 126
+        Width = 4
+        Height = 21
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -16
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        ParentFont = False
+      end
+      object pnlDespesas: TPanel
+        Left = 698
+        Top = 22
+        Width = 130
+        Height = 45
+        Cursor = crHandPoint
+        BevelKind = bkSoft
+        BevelOuter = bvNone
+        Color = clWindow
+        ParentBackground = False
+        TabOrder = 0
+        OnClick = pnlDespesasClick
+        object lblDespesas: TLabel
+          Left = 0
+          Top = 0
+          Width = 126
+          Height = 28
+          Cursor = crHandPoint
+          Align = alTop
+          Alignment = taCenter
+          Caption = 'Despesas'
+          Color = clWindow
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -20
+          Font.Name = 'Segoe UI'
+          Font.Style = []
+          ParentColor = False
+          ParentFont = False
+          Layout = tlCenter
+          OnClick = pnlDespesasClick
+          ExplicitWidth = 80
+        end
+        object pnlDespesaBorda: TPanel
+          Left = 0
+          Top = 38
+          Width = 126
+          Height = 3
+          Cursor = crHandPoint
+          Align = alBottom
+          BevelOuter = bvNone
+          Color = clCrimson
+          ParentBackground = False
+          TabOrder = 0
+          OnClick = pnlDespesasClick
+        end
+      end
+      object pnlReceitas: TPanel
+        AlignWithMargins = True
+        Left = 548
+        Top = 22
+        Width = 133
+        Height = 45
+        Cursor = crHandPoint
+        Margins.Left = 50
+        Margins.Top = 0
+        Margins.Right = 0
+        Margins.Bottom = 0
+        BevelKind = bkSoft
+        BevelOuter = bvNone
+        Color = clWindow
+        ParentBackground = False
+        TabOrder = 1
+        OnClick = pnlReceitasClick
+        object lblReceitas: TLabel
+          Left = 0
+          Top = 0
+          Width = 129
+          Height = 28
+          Cursor = crHandPoint
+          Align = alTop
+          Alignment = taCenter
+          Caption = 'Receitas'
+          Color = clWindow
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -20
+          Font.Name = 'Segoe UI'
+          Font.Style = []
+          ParentColor = False
+          ParentFont = False
+          Layout = tlCenter
+          OnClick = pnlReceitasClick
+          ExplicitWidth = 70
+        end
+        object pnlReceitasBorda: TPanel
+          Left = 0
+          Top = 38
+          Width = 129
+          Height = 3
+          Cursor = crHandPoint
+          Align = alBottom
+          BevelOuter = bvNone
+          Color = clDarkgreen
+          ParentBackground = False
+          TabOrder = 0
+        end
+      end
+      object pnlCadastrar: TPanel
+        Left = 35
+        Top = 6
+        Width = 148
+        Height = 83
+        BevelOuter = bvNone
+        Color = clWhite
+        ParentBackground = False
+        TabOrder = 2
+        object btnCadastrar: TButton
+          AlignWithMargins = True
+          Left = 20
+          Top = 18
+          Width = 121
+          Height = 43
+          Margins.Left = 0
+          Margins.Top = 20
+          Margins.Right = 20
+          Margins.Bottom = 30
+          Caption = 'Cadastrar'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -19
+          Font.Name = 'Segoe UI'
+          Font.Style = []
+          ParentFont = False
+          TabOrder = 0
+          OnClick = btnCadastrarClick
+        end
+      end
+      object pnlNomeColuna: TPanel
+        Left = 0
+        Top = 177
+        Width = 868
+        Height = 41
+        Align = alBottom
+        BevelOuter = bvNone
+        TabOrder = 3
+        object pnlNomeColunaData: TPanel
+          AlignWithMargins = True
+          Left = 464
+          Top = 0
+          Width = 144
+          Height = 41
+          Margins.Left = 0
+          Margins.Top = 0
+          Margins.Right = 0
+          Margins.Bottom = 0
+          Align = alLeft
+          BevelOuter = bvNone
+          Caption = 'Valor (R$)'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -16
+          Font.Name = 'Segoe UI'
+          Font.Style = [fsBold]
+          ParentFont = False
+          TabOrder = 0
+        end
+        object Panel1: TPanel
+          AlignWithMargins = True
+          Left = 320
+          Top = 0
+          Width = 144
+          Height = 41
+          Margins.Left = 20
+          Margins.Top = 0
+          Margins.Right = 0
+          Margins.Bottom = 0
+          Align = alLeft
+          BevelOuter = bvNone
+          Caption = 'Categoria'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -16
+          Font.Name = 'Segoe UI'
+          Font.Style = [fsBold]
+          ParentFont = False
+          TabOrder = 1
+        end
+        object Panel2: TPanel
+          Left = 156
+          Top = 0
+          Width = 144
+          Height = 41
+          Align = alLeft
+          BevelOuter = bvNone
+          Caption = 'Pagamento'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -16
+          Font.Name = 'Segoe UI'
+          Font.Style = [fsBold]
+          ParentFont = False
+          TabOrder = 2
+        end
+        object Panel3: TPanel
+          AlignWithMargins = True
+          Left = 35
+          Top = 0
+          Width = 121
+          Height = 41
+          Margins.Left = 35
+          Margins.Top = 0
+          Margins.Right = 0
+          Margins.Bottom = 0
+          Align = alLeft
+          BevelOuter = bvNone
+          Caption = 'Data'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -16
+          Font.Name = 'Segoe UI'
+          Font.Style = [fsBold]
+          ParentFont = False
+          TabOrder = 3
+        end
+      end
+      object pnlSelecionarData: TPanel
+        Left = 109
+        Top = 73
+        Width = 523
+        Height = 47
+        BevelOuter = bvNone
+        TabOrder = 4
+        Visible = False
+        object Label1: TLabel
+          Left = 219
+          Top = 5
+          Width = 11
+          Height = 37
+          Caption = '-'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -27
+          Font.Name = 'Segoe UI'
+          Font.Style = []
+          ParentFont = False
+        end
+        object Label2: TLabel
+          Left = 20
+          Top = 15
+          Width = 60
+          Height = 21
+          Caption = 'Per'#237'odo: '
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -16
+          Font.Name = 'Segoe UI'
+          Font.Style = []
+          ParentFont = False
+        end
+        object dtInicial: TDateTimePicker
+          Left = 98
+          Top = 12
+          Width = 110
+          Height = 29
+          Date = 45797.000000000000000000
+          Time = 0.300790740737284100
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -16
+          Font.Name = 'Segoe UI'
+          Font.Style = []
+          ParentFont = False
+          TabOrder = 0
+        end
+        object dtFinal: TDateTimePicker
+          Left = 246
+          Top = 12
+          Width = 110
+          Height = 29
+          Date = 45797.000000000000000000
+          Time = 0.300790740737284100
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -16
+          Font.Name = 'Segoe UI'
+          Font.Style = []
+          ParentFont = False
+          TabOrder = 1
+        end
+        object pnlBordaSelecionarData: TPanel
+          Left = 0
+          Top = 46
+          Width = 523
+          Height = 1
+          Align = alBottom
+          BevelOuter = bvNone
+          Caption = 'pnlBordaSelecionarData'
+          Color = clBlack
+          ParentBackground = False
+          TabOrder = 2
+        end
+        object pnlFiltrar: TPanel
+          Left = 378
+          Top = 10
+          Width = 111
+          Height = 32
+          Cursor = crHandPoint
+          BevelOuter = bvNone
+          TabOrder = 3
+          object imgFiltrar: TImage
+            Left = 1
+            Top = 1
+            Width = 40
+            Height = 30
+            Align = alLeft
+            Center = True
+            Picture.Data = {
+              0954506E67496D61676589504E470D0A1A0A0000000D494844520000001E0000
+              001E08060000003B30AEA2000000017352474200AECE1CE9000000F249444154
+              78DA63641820C0386AF188B5F83E102B50C98E0740AC48ACC5FF69ED415C163B
+              00F17E247E238916D523B12D81F804B11683C072208E80B23700712091966E07
+              620F287B05104712150468E03B107340D99E40BC83807A0FA8C520F001880571
+              2924265523C7372710FFC0A18E03EA50A2CC26C6620506482A27A407D9818250
+              1F536431082400F17C28FB010366F640CE7E99403C839081A41420C781D802CA
+              06A5F20628BB1F880BA06C50EAB524C630524B2EE4C4A609659F27C73C728A4C
+              5C850B496691637103036A010102C8413F6AF1A8C5A3160F7E8B1518502B0D10
+              20582950C362AA80518B87BFC500B595311FA37596370000000049454E44AE42
+              6082}
+            ExplicitTop = 0
+          end
+          object Label3: TLabel
+            Left = 41
+            Top = 1
+            Width = 69
+            Height = 30
+            Align = alClient
+            Alignment = taCenter
+            Caption = 'Filtrar'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -16
+            Font.Name = 'Segoe UI'
+            Font.Style = []
+            ParentFont = False
+            Layout = tlCenter
+            ExplicitWidth = 41
+            ExplicitHeight = 21
+          end
+          object Panel4: TPanel
+            Left = 0
+            Top = 1
+            Width = 1
+            Height = 30
+            Align = alLeft
+            Caption = 'Panel4'
+            Color = clBlack
+            ParentBackground = False
+            TabOrder = 0
+          end
+          object Panel5: TPanel
+            Left = 0
+            Top = 0
+            Width = 111
+            Height = 1
+            Align = alTop
+            Caption = 'Panel5'
+            Color = clBlack
+            ParentBackground = False
+            TabOrder = 1
+          end
+          object Panel6: TPanel
+            Left = 110
+            Top = 1
+            Width = 1
+            Height = 30
+            Align = alRight
+            Caption = 'Panel6'
+            Color = clBlack
+            ParentBackground = False
+            TabOrder = 2
+          end
+          object Panel7: TPanel
+            Left = 0
+            Top = 31
+            Width = 111
+            Height = 1
+            Align = alBottom
+            Caption = 'Panel7'
+            Color = clBlack
+            ParentBackground = False
+            TabOrder = 3
+          end
+        end
+      end
+      object pnlResultados: TPanel
+        Left = 68
+        Top = 152
+        Width = 641
+        Height = 1
+        BevelOuter = bvNone
+        BorderWidth = 1
+        Caption = 'pnlBorda'
+        Color = clBlack
+        ParentBackground = False
+        TabOrder = 5
+      end
+      object pnlFiltrarBotao: TPanel
+        AlignWithMargins = True
+        Left = 392
+        Top = 22
+        Width = 133
+        Height = 45
+        Cursor = crHandPoint
+        Margins.Left = 50
+        Margins.Top = 0
+        Margins.Right = 0
+        Margins.Bottom = 0
+        BevelKind = bkSoft
+        BevelOuter = bvNone
+        Color = clWindow
+        ParentBackground = False
+        TabOrder = 6
+        OnClick = pnlFiltrarBotaoClick
+        object lblFiltrar: TLabel
+          Left = 0
+          Top = 0
+          Width = 129
+          Height = 28
+          Cursor = crHandPoint
+          Align = alTop
+          Alignment = taCenter
+          Caption = 'Filtrar'
+          Color = clWindow
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -20
+          Font.Name = 'Segoe UI'
+          Font.Style = []
+          ParentColor = False
+          ParentFont = False
+          Layout = tlCenter
+          OnClick = pnlFiltrarBotaoClick
+          ExplicitWidth = 51
+        end
+        object pnlFiltrarBorda: TPanel
+          Left = 0
+          Top = 38
+          Width = 129
+          Height = 3
+          Cursor = crHandPoint
+          Align = alBottom
+          BevelOuter = bvNone
+          Color = clDarkblue
+          ParentBackground = False
+          TabOrder = 0
+          OnClick = pnlFiltrarBotaoClick
+        end
+      end
+    end
+  end
+  object pnlHeaderFluxo: TPanel
+    Left = 0
+    Top = 0
+    Width = 868
+    Height = 66
+    Align = alTop
+    BevelOuter = bvNone
+    Color = clWindow
+    ParentBackground = False
+    TabOrder = 1
+    object pnlTitulo: TPanel
+      AlignWithMargins = True
+      Left = 0
+      Top = 0
+      Width = 868
+      Height = 53
+      Margins.Left = 0
+      Margins.Top = 0
+      Margins.Right = 0
+      Margins.Bottom = 30
+      Align = alTop
+      BevelOuter = bvNone
+      Color = clWindow
+      ParentBackground = False
+      TabOrder = 0
+      object lblTituloContainer: TLabel
+        Left = 0
+        Top = 0
+        Width = 868
+        Height = 47
+        Align = alTop
+        Alignment = taCenter
+        Caption = 'Fluxo de Caixa'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -35
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        ParentFont = False
+        ExplicitWidth = 223
+      end
+    end
+    object pnlContainerBorda: TPanel
+      Left = 0
+      Top = 63
+      Width = 860
+      Height = 3
+      Color = clBackground
+      ParentBackground = False
+      TabOrder = 1
+    end
+  end
+end
